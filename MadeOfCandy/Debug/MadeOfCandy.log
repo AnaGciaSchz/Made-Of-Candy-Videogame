@@ -1,6 +1,6 @@
 ﻿  Game.cpp
+  GameLayer.cpp
   Layer.cpp
   Main.cpp
-  SingletonGame.cpp
   Generando código...
-  MadeOfCandy.vcxproj -> C:\Users\anain\source\repos\MadeOfCandy\Debug\MadeOfCandy.exe
+  MadeOfCandy.vcxproj -> C:\Users\anain\Desktop\Made of Candy\Juego\Debug\MadeOfCandy.exe

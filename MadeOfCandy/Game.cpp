@@ -1,6 +1,19 @@
 
 #include "Game.h"
 
+Game* Game::game = nullptr;;
+
+Game* Game::getInstance() {
+	if (game == nullptr) {
+		game = new Game();
+	}
+	return game;
+}
+SDL_Renderer* Game::getRenderer() {
+	return renderer;
+}
+
+
 Game::Game() {
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
 		cout << "Error SDL_Init" << SDL_GetError() << endl;

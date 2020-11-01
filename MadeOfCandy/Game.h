@@ -22,16 +22,41 @@ class Game
 {
 public:
 	/**
-	* Constructor of the class
-	*/
-	Game();
-	/**
 	* Loop that initiates the game and only stops if something bad happened or ir the
 	* user wants to quit the game
 	*/
 	void loop();
+	/**
+	 * Singletons should not be cloneable.
+	 */
+	Game(Game& other) = delete;
+	/**
+	 * Singletons should not be assignable.
+	 */
+	void operator=(const Game&) = delete;
+
+	/**
+	 * Method to get the game
+	 */
+	static Game * getInstance();
+
+	/**
+	 * Method to render the game
+	 */
+	SDL_Renderer* getRenderer();
+
 
 private:
+	/**
+	* Constructor of the class
+	*/
+	Game();
+
+	/**
+	* Game instance to return
+	*/
+	static Game* game;
+
 	/**
 	* Window of the game
 	*/
@@ -41,7 +66,7 @@ private:
 	*/
 	SDL_Renderer* renderer;
 	/**
-	* Layer with the classic logic for the game
+	* Layer with the basic logic for the game
 	*/
 	Layer* gameLayer;
 	/**
