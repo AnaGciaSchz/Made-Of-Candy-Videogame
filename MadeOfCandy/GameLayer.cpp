@@ -6,6 +6,7 @@ GameLayer::GameLayer(Game* game) : Layer(game) {
 }
 
 void GameLayer::init() {
+	angel = new Angel(50, 50, getGame());
 }
 
 void GameLayer::processControls() {
@@ -16,6 +17,7 @@ void GameLayer::update() {
 }
 
 void GameLayer::draw() {
+	angel->draw();
 	SDL_RenderPresent(getGame()->getRenderer()); // Renderiza
 }
 

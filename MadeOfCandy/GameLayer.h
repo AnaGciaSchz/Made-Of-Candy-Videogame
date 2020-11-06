@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Layer.h"
+#include "Angel.h"
 
 
 /**
@@ -29,6 +30,12 @@ public:
 	* Method to draw the graphics of the game
 	*/
 	void draw() override;
+
+private:
+	/**
+	* The player
+	*/
+	Angel* angel;
 };
 
 
