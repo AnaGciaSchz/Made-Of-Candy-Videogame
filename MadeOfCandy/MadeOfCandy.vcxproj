@@ -154,6 +154,8 @@
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Angel.h" />
     <ClInclude Include="Background.h" />
+    <ClInclude Include="Blob.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameLayer.h" />
     <ClInclude Include="Layer.h" />
@@ -163,6 +165,8 @@
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Angel.cpp" />
     <ClCompile Include="Background.cpp" />
+    <ClCompile Include="Blob.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameLayer.cpp" />
     <ClCompile Include="Layer.cpp" />

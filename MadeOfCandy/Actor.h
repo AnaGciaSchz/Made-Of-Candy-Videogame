@@ -32,10 +32,12 @@ public:
 	void incrementX(float increment);
 	void incrementY(float increment);
 
-private:
-	SDL_Texture* texture;
+protected:
 	int x;
 	int y;
+
+private:
+	SDL_Texture* texture;
 	int width;
 	int height;
 	int fileWidth;

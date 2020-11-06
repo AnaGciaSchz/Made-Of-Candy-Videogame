@@ -1,9 +1,17 @@
 #pragma once
 
 #include "Layer.h"
+
+#include "Background.h"
+
 #include "Angel.h"
 #include "TheGirl.h"
-#include "Background.h"
+
+#include "Enemy.h"
+#include "Blob.h"
+
+#include <list>
+
 
 
 /**
@@ -56,10 +64,6 @@ private:
 	*/
 	Background* background;
 
-	/** To see if the user has touched a key
-	*/
-	bool keyDown;
-
 	/**
 	* Controls to move and interact
 	*/
@@ -67,6 +71,11 @@ private:
 	bool controlMoveElement = false;
 	int controlMoveY = 0;
 	int controlMoveX = 0;
+
+	/**
+	* Enemies of the level
+	*/
+	list<Enemy*> enemies;
 
 };
 

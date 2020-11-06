@@ -10,11 +10,22 @@ void Angel::update() {
 }
 
 void Angel::moveX(float axis) {
+
 	incrementX(axis*50);
 }
 
 void Angel::moveY(float axis) {
-	incrementY(axis*50);
+	int value;
+	if (y + axis * 50 - getHeight() / 2 <= 0) {
+		value = -axis * 50;
+	}
+	else if (y + axis * 50 + getHeight() / 2 >= HEIGHT) {
+		value = -axis * 50;
+	}
+	else {
+		value = axis * 50;
+	}
+	incrementY(value);
 	
 }
 

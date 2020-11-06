@@ -13,9 +13,18 @@ public:
 	void update();
 	void moveY();
 
+	void loseLife(int damage);
+	int getLife();
+	bool isDead();
+
 private:
 	//time to wait until the girl moves
 	int time;
 	int actualTime;
+
+	/**
+	* Lifes of the girl
+	*/
+	int lifes;
 };
 

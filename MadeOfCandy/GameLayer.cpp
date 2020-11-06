@@ -10,7 +10,10 @@ void GameLayer::init() {
 	girl = new TheGirl(50, 50, 60, getGame());
 	background = new Background("res/world/City.png", WIDTH * 0.5, HEIGHT * 0.5, getGame());
 
-	keyDown == false;;
+	enemies.clear(); 
+	enemies.push_back(new Blob(300, 50, getGame()));
+	enemies.push_back(new Blob(300, 200, getGame()));
+
 }
 
 void GameLayer::processControls() {
@@ -36,6 +39,11 @@ void GameLayer::processControls() {
 void GameLayer::update() {
 	angel->update();
 	girl->update();
+
+	for (auto const& enemy : enemies) {
+		enemy->update();
+	}
+
 	cout << "update GameLayer" << endl;
 }
 
@@ -44,6 +52,10 @@ void GameLayer::draw() {
 
 	angel->draw();
 	girl->draw();
+
+	for (auto const& enemy : enemies) {
+		enemy->draw();
+	}
 
 	SDL_RenderPresent(getGame()->getRenderer()); 
 }
