@@ -2,6 +2,7 @@
 
 #include "Layer.h"
 #include "Angel.h"
+#include "TheGirl.h"
 #include "Background.h"
 
 
@@ -44,6 +45,11 @@ private:
 	* The player
 	*/
 	Angel* angel;
+
+	/**
+	* The girl
+	*/
+	TheGirl* girl;
 
 	/**
 	* The background

@@ -1,2 +1,7 @@
-﻿  Angel.cpp
+﻿  Game.cpp
+  GameLayer.cpp
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(13,10): warning C4553: "==": el resultado de la expresión no se usa. ¿Quiso decir "="?
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(24,16): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(29,16): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+  Generando código...
   MadeOfCandy.vcxproj -> C:\Users\anain\Desktop\Made of Candy\Juego\Debug\MadeOfCandy.exe

@@ -54,6 +54,9 @@
     <ClCompile Include="Background.cpp">
       <Filter>Archivos de origen\Actors</Filter>
     </ClCompile>
+    <ClCompile Include="TheGirl.cpp">
+      <Filter>Archivos de origen\Actors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -72,6 +75,9 @@
       <Filter>Archivos de encabezado\Actors</Filter>
     </ClInclude>
     <ClInclude Include="Background.h">
+      <Filter>Archivos de encabezado\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="TheGirl.h">
       <Filter>Archivos de encabezado\Actors</Filter>
     </ClInclude>
   </ItemGroup>

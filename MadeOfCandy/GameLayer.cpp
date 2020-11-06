@@ -6,7 +6,8 @@ GameLayer::GameLayer(Game* game) : Layer(game) {
 }
 
 void GameLayer::init() {
-	angel = new Angel(50, 50, getGame());
+	angel = new Angel(100, 100, getGame());
+	girl = new TheGirl(50, 50, 60, getGame());
 	background = new Background("res/world/City.png", WIDTH * 0.5, HEIGHT * 0.5, getGame());
 
 	keyDown == false;;
@@ -34,6 +35,7 @@ void GameLayer::processControls() {
 
 void GameLayer::update() {
 	angel->update();
+	girl->update();
 	cout << "update GameLayer" << endl;
 }
 
@@ -41,6 +43,7 @@ void GameLayer::draw() {
 	background->draw();
 
 	angel->draw();
+	girl->draw();
 
 	SDL_RenderPresent(getGame()->getRenderer()); 
 }
