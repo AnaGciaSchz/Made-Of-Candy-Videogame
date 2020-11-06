@@ -11,7 +11,7 @@ public:
 	/**
 	* Constructor of the class
 	*/
-	Layer();
+	Layer(Game* game);
 	/**
 	* Method with the basic operations to initiate the layer
 	*/
@@ -21,5 +21,16 @@ public:
 	virtual void processControls() {};
 	virtual void update() {};
 	virtual void draw() {};
+
+	/**
+	* Method to return the game instance
+	*/
+	Game* getGame();
+
+private:
+	/**
+	* Game instance
+	*/
+	Game* game;
 };
 

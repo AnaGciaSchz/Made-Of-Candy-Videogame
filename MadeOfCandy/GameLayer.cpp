@@ -1,7 +1,7 @@
 
 #include "GameLayer.h"
 
-GameLayer::GameLayer() {
+GameLayer::GameLayer(Game* game) : Layer(game) {
 	init();
 }
 
@@ -16,7 +16,6 @@ void GameLayer::update() {
 }
 
 void GameLayer::draw() {
-	Game* game = Game::getInstance();
-	SDL_RenderPresent(game->getRenderer()); // Renderiza
+	SDL_RenderPresent(getGame()->getRenderer()); // Renderiza
 }
 

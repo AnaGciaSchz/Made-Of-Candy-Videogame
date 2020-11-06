@@ -12,7 +12,7 @@ public:
 	/**
 	* Constructor of the class
 	*/
-	GameLayer();
+	GameLayer(Game* game);
 	/**
 	* Method to iniciate the game
 	*/

@@ -1,14 +1,7 @@
 
 #include "Game.h"
+#include "GameLayer.h"
 
-Game* Game::game = nullptr;;
-
-Game* Game::getInstance() {
-	if (game == nullptr) {
-		game = new Game();
-	}
-	return game;
-}
 SDL_Renderer* Game::getRenderer() {
 	return renderer;
 }
@@ -25,7 +18,7 @@ Game::Game() {
 
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
 
-	gameLayer = new Layer();
+	gameLayer = new GameLayer(this);
 
 	loopActive = true;
 	loop();

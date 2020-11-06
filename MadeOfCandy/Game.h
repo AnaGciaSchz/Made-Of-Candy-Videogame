@@ -26,37 +26,18 @@ public:
 	* user wants to quit the game
 	*/
 	void loop();
-	/**
-	 * Singletons should not be cloneable.
-	 */
-	Game(Game& other) = delete;
-	/**
-	 * Singletons should not be assignable.
-	 */
-	void operator=(const Game&) = delete;
-
-	/**
-	 * Method to get the game
-	 */
-	static Game * getInstance();
 
 	/**
 	 * Method to render the game
 	 */
 	SDL_Renderer* getRenderer();
 
-
-private:
 	/**
 	* Constructor of the class
 	*/
 	Game();
 
-	/**
-	* Game instance to return
-	*/
-	static Game* game;
-
+private:
 	/**
 	* Window of the game
 	*/

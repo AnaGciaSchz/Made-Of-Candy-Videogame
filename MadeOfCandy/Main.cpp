@@ -5,6 +5,6 @@
 * Method to execute the game
 */
 int main() {
-	Game* game = Game::getInstance();
+	Game* game = new Game();
 	return 0;
 }
