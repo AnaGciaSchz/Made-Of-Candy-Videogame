@@ -40,12 +40,6 @@ int Actor::getX() {
 int Actor::getY() {
 	return this->y;
 }
-float Actor::getVx() {
-	return this->vx;
-}
-float Actor::getVy() {
-	return this->vy;
-}
 int Actor::getWidth() {
 	return this->width;
 }
@@ -60,4 +54,11 @@ int Actor::getFileHeight() {
 }
 Game* Actor::getGame() {
 	return this->game;
+}
+
+void Actor::incrementX(float increment) {
+	x = x + increment;
+}
+void Actor::incrementY(float increment) {
+	y = y + increment;
 }

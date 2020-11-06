@@ -1,8 +1,2 @@
-﻿  Actor.cpp
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\Actor.cpp(10,12): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\Actor.cpp(11,12): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-  Angel.cpp
-  Game.cpp
-  GameLayer.cpp
-  Generando código...
+﻿  Angel.cpp
   MadeOfCandy.vcxproj -> C:\Users\anain\Desktop\Made of Candy\Juego\Debug\MadeOfCandy.exe

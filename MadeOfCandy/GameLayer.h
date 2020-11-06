@@ -2,6 +2,7 @@
 
 #include "Layer.h"
 #include "Angel.h"
+#include "Background.h"
 
 
 /**
@@ -14,6 +15,8 @@ public:
 	* Constructor of the class
 	*/
 	GameLayer(Game* game);
+
+
 	/**
 	* Method to iniciate the game
 	*/
@@ -31,11 +34,34 @@ public:
 	*/
 	void draw() override;
 
+	/**
+	* Method to control the movement
+	*/
+	void keysToControls(SDL_Event event);
+
 private:
 	/**
 	* The player
 	*/
 	Angel* angel;
+
+	/**
+	* The background
+	*/
+	Background* background;
+
+	/** To see if the user has touched a key
+	*/
+	bool keyDown;
+
+	/**
+	* Controls to move and interact
+	*/
+	bool controlShoot = false;
+	bool controlMoveElement = false;
+	int controlMoveY = 0;
+	int controlMoveX = 0;
+
 };
 
 

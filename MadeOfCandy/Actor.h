@@ -19,26 +19,27 @@ public:
 	*/
 	Actor(string filename, float x, float y, int width, int height, Game* game);
 	virtual void draw();
+
 	int getX();
 	int getY();
-	float getVx();
-	float getVy();
 	int getWidth();
 	int getHeight();
 	int getFileWidth();
 	int getFileHeight();
+
 	Game* getGame();
+
+	void incrementX(float increment);
+	void incrementY(float increment);
 
 private:
 	SDL_Texture* texture;
 	int x;
 	int y;
-	float vx;
-	float vy;
 	int width;
 	int height;
 	int fileWidth;
 	int fileHeight;
-	Game* game; 
+	Game* game;
 };
 
