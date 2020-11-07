@@ -50,3 +50,7 @@ void Game::loop() {
 
 
 }
+
+void Game::stopGame() {
+	loopActive = false;
+}

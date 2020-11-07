@@ -37,6 +37,8 @@ public:
 	*/
 	Game();
 
+	void stopGame();
+
 private:
 	/**
 	* Window of the game

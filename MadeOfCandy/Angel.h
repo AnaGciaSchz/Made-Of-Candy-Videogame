@@ -19,6 +19,8 @@ public:
 	void moveY(float axis);
 	void cantShoot();
 
+	CelestialRay* getRay();
+
 private:
 	bool canShoot;
 	CelestialRay* ray;

@@ -72,10 +72,17 @@ void GameLayer::draw() {
 }
 
 void GameLayer::keysToControls(SDL_Event event) {
+	if (event.type == SDL_QUIT) {
+		getGame()->stopGame();
+	}
+
 	if (event.type == SDL_KEYDOWN) {
 		int code = event.key.keysym.sym;
 
 		switch (code) {
+		case SDLK_ESCAPE:
+			getGame()->stopGame();
+			break;
 		case SDLK_d: 
 			controlMoveX = 1;
 			break;
@@ -99,6 +106,7 @@ void GameLayer::keysToControls(SDL_Event event) {
 }
 
 void GameLayer::enemyColisions() {
+	//girl and enemy
 	for (auto const& enemy : enemies) {
 		if (girl->isOverlap(enemy)) {
 			init();
@@ -106,6 +114,29 @@ void GameLayer::enemyColisions() {
 		}
 	}
 
+	list<Enemy*> deleteEnemies;
+	//enemy and ray
+	if (angel->getRay() != nullptr) {
+		for (auto const& enemy : enemies) {
+			if (enemy->isOverlap(angel->getRay())) {
+				bool eInList = std::find(deleteEnemies.begin(),
+					deleteEnemies.end(),
+					enemy) != deleteEnemies.end();
+
+				if (!eInList) {
+					deleteEnemies.push_back(enemy);
+				}
+			}
+		}//for
+	}//if
+
+
+	for (auto const& delEnemy : deleteEnemies) {
+		enemies.remove(delEnemy);
+	}
+	deleteEnemies.clear();
+
 }
+
 
 

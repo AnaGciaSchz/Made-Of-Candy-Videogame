@@ -40,6 +40,10 @@ void Angel::shoot(bool shoot) {
 	}
 }
 
+CelestialRay* Angel::getRay() {
+	return ray;
+}
+
 void Angel::cantShoot() {
 	canShoot = false;
 }
