@@ -8,7 +8,7 @@
 class TheGirl : public Actor
 {
 public:
-	TheGirl(float x, float y, int time, Game* game);
+	TheGirl(float x, float y, int time, int v, Game* game);
 
 	void update();
 	void moveY();
@@ -26,5 +26,10 @@ private:
 	* Lifes of the girl
 	*/
 	int lifes;
+
+	/**
+	* velocity of the girl
+	*/
+	int v;
 };
 

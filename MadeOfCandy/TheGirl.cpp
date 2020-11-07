@@ -1,16 +1,18 @@
 #include "TheGirl.h"
 
-TheGirl::TheGirl(float x, float y, int time, Game* game)
+TheGirl::TheGirl(float x, float y, int time,int v, Game* game)
 	: Actor("res/characters/TheGirl/Anna.png", x, y, 23, 46, game) {
 	this->time = time;
 	this->actualTime = time;
 
 	this->lifes = 3;
+	
+	this->v = v;
 }
 
 void TheGirl::update() {
 	actualTime--;
-	x = x + 1;
+	incrementX(v);
 	if (actualTime <= 0) {
 		actualTime = time;
 		moveY();

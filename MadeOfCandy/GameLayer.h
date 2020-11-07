@@ -10,6 +10,7 @@
 #include "Enemy.h"
 #include "Blob.h"
 
+
 #include <list>
 
 
@@ -72,10 +73,10 @@ private:
 	/**
 	* Controls to move and interact
 	*/
-	bool controlShoot = false;
-	bool controlMoveElement = false;
-	int controlMoveY = 0;
-	int controlMoveX = 0;
+	bool controlShoot;
+	bool controlMoveElement;
+	int controlMoveY;
+	int controlMoveX;
 
 	/**
 	* Enemies of the level

@@ -3,10 +3,14 @@
 Angel::Angel(float x, float y, Game* game)
 	: Actor("res/characters/Angel/Robbie.png", x, y, 23, 46, game) {
 
+	canShoot = true;
+	ray = nullptr;
 }
 
 void Angel::update() {
-	
+	if (ray != nullptr) {
+		ray->update();
+	}
 }
 
 void Angel::moveX(float axis) {
@@ -27,6 +31,25 @@ void Angel::moveY(float axis) {
 	}
 	incrementY(value);
 	
+}
+
+void Angel::shoot(bool shoot) {
+	if (shoot && canShoot) {
+		cantShoot();
+		ray = new CelestialRay(x,y,getGame());
+	}
+}
+
+void Angel::cantShoot() {
+	canShoot = false;
+}
+
+void Angel::drawAngel() {
+	draw();
+	if (ray != nullptr) {
+		ray->draw();
+	}
+
 }
 
 

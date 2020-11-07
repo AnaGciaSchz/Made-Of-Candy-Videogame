@@ -7,8 +7,13 @@ GameLayer::GameLayer(Game* game) : Layer(game) {
 
 void GameLayer::init() {
 	angel = new Angel(100, 100, getGame());
-	girl = new TheGirl(50, 50, 60, getGame());
+	girl = new TheGirl(50, 50, 60,1, getGame());
 	background = new Background("res/world/City.png", WIDTH * 0.5, HEIGHT * 0.5, getGame());
+
+	controlShoot = false;
+	controlMoveElement = false;
+	controlMoveY = 0;
+	controlMoveX = 0;
 
 	enemies.clear(); 
 	enemies.push_back(new Blob(300, 50, getGame()));
@@ -25,7 +30,7 @@ void GameLayer::processControls() {
 	while (SDL_PollEvent(&event)) {
 		keysToControls(event);
 	}
-//	angel->shoot(controlShoot);
+	angel->shoot(controlShoot);
 //	angel->moveElement(controlMoveElement);
 	if (controlMoveX > 0 || controlMoveX < 0) {
 		angel->moveX(controlMoveX);
@@ -56,7 +61,7 @@ void GameLayer::update() {
 void GameLayer::draw() {
 	background->draw();
 
-	angel->draw();
+	angel->drawAngel();
 	girl->draw();
 
 	for (auto const& enemy : enemies) {
