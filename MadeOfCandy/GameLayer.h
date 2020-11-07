@@ -10,6 +10,7 @@
 #include "Enemy.h"
 #include "Blob.h"
 
+#include "Text.h"
 
 #include <list>
 
@@ -82,6 +83,13 @@ private:
 	* Enemies of the level
 	*/
 	list<Enemy*> enemies;
+
+	/**
+	* Icon and text for the lifes
+	*/
+	Actor* lifes;
+	Text* textLifes;
+
 
 };
 

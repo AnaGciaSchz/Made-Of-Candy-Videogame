@@ -20,6 +20,10 @@ Game::Game() {
 
 	gameLayer = new GameLayer(this);
 
+	TTF_Init();
+	changeFont(TTF_OpenFont("res/fonts/monogram.ttf", 24));
+
+
 	loopActive = true;
 	loop();
 }
@@ -53,4 +57,12 @@ void Game::loop() {
 
 void Game::stopGame() {
 	loopActive = false;
+}
+
+TTF_Font* Game::getFont() {
+	return font;
+}
+
+void Game::changeFont(TTF_Font* font) {
+	this->font = font;
 }

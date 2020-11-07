@@ -38,6 +38,8 @@ public:
 	Game();
 
 	void stopGame();
+	void changeFont(TTF_Font* font);
+	TTF_Font* getFont();
 
 private:
 	/**
@@ -61,5 +63,10 @@ private:
 	* FPS of the game
 	*/
 	const int FPS = 30;
+
+	/**
+	* Font to write
+	*/
+	TTF_Font* font;
 };
 

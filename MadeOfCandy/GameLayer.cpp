@@ -10,6 +10,11 @@ void GameLayer::init() {
 	girl = new TheGirl(50, 50, 60,1, getGame());
 	background = new Background("res/world/City.png", WIDTH * 0.5, HEIGHT * 0.5, getGame());
 
+	textLifes = new Text("", WIDTH * 0.92, HEIGHT * 0.04, getGame());
+	textLifes->content = to_string(girl->getLife());
+	lifes = new Actor("res/icons/heart.png",
+		WIDTH * 0.85, HEIGHT * 0.05, 24, 24, getGame());
+
 	controlShoot = false;
 	controlMoveElement = false;
 	controlMoveY = 0;
@@ -61,6 +66,9 @@ void GameLayer::update() {
 void GameLayer::draw() {
 	background->draw();
 
+	lifes->draw();
+	textLifes->draw();
+
 	angel->drawAngel();
 	girl->draw();
 
@@ -106,15 +114,28 @@ void GameLayer::keysToControls(SDL_Event event) {
 }
 
 void GameLayer::enemyColisions() {
+	list<Enemy*> deleteEnemies;
+
 	//girl and enemy
 	for (auto const& enemy : enemies) {
 		if (girl->isOverlap(enemy)) {
-			init();
-			return; 
+
+			girl->loseLife(enemy->getDamage());
+			textLifes->content = to_string(girl->getLife());
+			if (girl->isDead()) {
+				init();
+			}
+
+			bool eInList = std::find(deleteEnemies.begin(),
+				deleteEnemies.end(),
+				enemy) != deleteEnemies.end();
+
+			if (!eInList) {
+				deleteEnemies.push_back(enemy);
+			}
 		}
 	}
 
-	list<Enemy*> deleteEnemies;
 	//enemy and ray
 	if (angel->getRay() != nullptr) {
 		for (auto const& enemy : enemies) {
