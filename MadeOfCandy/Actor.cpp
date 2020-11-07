@@ -34,6 +34,18 @@ void Actor::draw() {
 		texture, &source, &destination, 0, NULL, SDL_FLIP_NONE);
 }
 
+bool Actor::isOverlap(Actor* actor) {
+	if (actor->x - actor->width / 2 <= x + width / 2
+		&& actor->x + actor->width / 2 >= x - width / 2
+		&& actor->y + actor->height / 2 >= y - height / 2
+		&& actor->y - actor->height / 2 <= y + height / 2) {
+
+		return true;
+	}
+	return false;
+}
+
+
 int Actor::getX() {
 	return this->x;
 }

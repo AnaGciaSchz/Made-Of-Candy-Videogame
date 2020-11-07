@@ -12,7 +12,11 @@ void GameLayer::init() {
 
 	enemies.clear(); 
 	enemies.push_back(new Blob(300, 50, getGame()));
+	enemies.push_back(new Blob(300, 100, getGame()));
+	enemies.push_back(new Blob(300, 150, getGame()));
 	enemies.push_back(new Blob(300, 200, getGame()));
+	enemies.push_back(new Blob(300, 250, getGame()));
+	enemies.push_back(new Blob(300, 300, getGame()));
 
 }
 
@@ -43,6 +47,8 @@ void GameLayer::update() {
 	for (auto const& enemy : enemies) {
 		enemy->update();
 	}
+
+	enemyColisions();
 
 	cout << "update GameLayer" << endl;
 }
@@ -85,6 +91,16 @@ void GameLayer::keysToControls(SDL_Event event) {
 			break;
 		}
 	}
+}
+
+void GameLayer::enemyColisions() {
+	for (auto const& enemy : enemies) {
+		if (girl->isOverlap(enemy)) {
+			init();
+			return; 
+		}
+	}
+
 }
 
 

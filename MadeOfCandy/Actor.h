@@ -19,6 +19,11 @@ public:
 	*/
 	Actor(string filename, float x, float y, int width, int height, Game* game);
 	virtual void draw();
+	/**
+	* Method to see if the actor that is passed as parameter is overlaping with the actual
+	* actor
+	*/
+	bool isOverlap(Actor* actor);
 
 	int getX();
 	int getY();

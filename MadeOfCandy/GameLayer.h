@@ -48,6 +48,11 @@ public:
 	*/
 	void keysToControls(SDL_Event event);
 
+	/**
+	* Method to control colisions with enemies
+	*/
+	void enemyColisions();
+
 private:
 	/**
 	* The player

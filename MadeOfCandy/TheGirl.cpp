@@ -10,6 +10,7 @@ TheGirl::TheGirl(float x, float y, int time, Game* game)
 
 void TheGirl::update() {
 	actualTime--;
+	x = x + 1;
 	if (actualTime <= 0) {
 		actualTime = time;
 		moveY();
