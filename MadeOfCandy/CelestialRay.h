@@ -8,11 +8,12 @@
 class CelestialRay : public Actor
 {
 public:
-	CelestialRay(float x, float y, Game* game);
+	CelestialRay(float pathX, float pathY,int time, Game* game);
 	void update();
 
 private:
-	int vx;
+	int time;
+	int actualTime;
 };
 
 

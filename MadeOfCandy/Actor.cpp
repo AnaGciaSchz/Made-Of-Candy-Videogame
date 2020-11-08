@@ -1,20 +1,23 @@
 
 #include "Actor.h"
 
-Actor::Actor(string filename, float x, float y, int width, int height, Game* game) {
+Actor::Actor(string filename, int width, int height,int pathX, int pathY, Game* game) {
 	this->game = game;
 
 	SDL_Surface* surface = IMG_Load(filename.c_str());
 	texture = SDL_CreateTextureFromSurface(game->getRenderer(), surface);
 
-	this->x = x;
-	this->y = y;
+	this->x = pathX*PATH_X;
+	this->y = pathY*PATH_Y;
 
 	this->fileWidth = width;
 	this->fileHeight = height;
 
 	this->width = width;
 	this->height = height;
+
+	this->pathX = pathX;
+	this->pathY = pathY;
 }
 
 void Actor::draw() {
@@ -35,14 +38,18 @@ void Actor::draw() {
 }
 
 bool Actor::isOverlap(Actor* actor) {
-	if (actor->x - actor->width / 2 <= x + width / 2
-		&& actor->x + actor->width / 2 >= x - width / 2
-		&& actor->y + actor->height / 2 >= y - height / 2
-		&& actor->y - actor->height / 2 <= y + height / 2) {
+	if (actor->getPathX() == getPathX() && actor->getPathY() == getPathY()) {
 
 		return true;
 	}
 	return false;
+}
+
+int Actor::getPathX() {
+	return pathX;
+}
+int Actor::getPathY() {
+	return pathY;
 }
 
 
@@ -69,8 +76,10 @@ Game* Actor::getGame() {
 }
 
 void Actor::incrementX(float increment) {
-	x = x + increment;
+	x = x + increment*PATH_X;
+	pathX = pathX +increment;
 }
 void Actor::incrementY(float increment) {
-	y = y + increment;
+	y = y + increment*PATH_Y;
+	pathY = pathY + increment;
 }

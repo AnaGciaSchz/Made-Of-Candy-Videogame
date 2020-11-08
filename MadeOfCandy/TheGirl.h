@@ -8,7 +8,7 @@
 class TheGirl : public Actor
 {
 public:
-	TheGirl(float x, float y, int time, int v, Game* game);
+	TheGirl( int timeY, int timeX, int v, int pathX, int pathY, Game* game);
 
 	void update();
 	void moveY();
@@ -18,9 +18,13 @@ public:
 	bool isDead();
 
 private:
-	//time to wait until the girl moves
-	int time;
-	int actualTime;
+	//time to wait until the girl moves in Y
+	int timeY;
+	int actualTimeY;
+
+	//time to wait until the girl moves in X
+	int timeX;
+	int actualTimeX;
 
 	/**
 	* Lifes of the girl

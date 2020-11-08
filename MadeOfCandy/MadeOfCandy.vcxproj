@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Angel.h" />
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="Blob.h" />
     <ClInclude Include="CelestialRay.h" />
@@ -166,6 +167,7 @@
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Angel.cpp" />
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Blob.cpp" />
     <ClCompile Include="CelestialRay.cpp" />

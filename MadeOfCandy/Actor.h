@@ -17,7 +17,7 @@ public:
 	* width, height size of the element in the game
 	* game instance of the game
 	*/
-	Actor(string filename, float x, float y, int width, int height, Game* game);
+	Actor(string filename, int width, int height, int pathX, int pathY, Game* game);
 	virtual void draw();
 	/**
 	* Method to see if the actor that is passed as parameter is overlaping with the actual
@@ -37,6 +37,9 @@ public:
 	void incrementX(float increment);
 	void incrementY(float increment);
 
+	int getPathX();
+	int getPathY();
+
 protected:
 	int x;
 	int y;
@@ -48,5 +51,10 @@ private:
 	int fileWidth;
 	int fileHeight;
 	Game* game;
+
+	/**In which paths is the actor?
+	*/
+	int pathX;
+	int pathY;
 };
 

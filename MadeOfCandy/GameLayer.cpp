@@ -6,8 +6,8 @@ GameLayer::GameLayer(Game* game) : Layer(game) {
 }
 
 void GameLayer::init() {
-	angel = new Angel(100, 100, getGame());
-	girl = new TheGirl(50, 50, 60,1, getGame());
+	angel = new Angel(PATHS_X, PATHS_Y / 2, getGame());
+	girl = new TheGirl(60,50,1,0,PATHS_Y/2, getGame());
 	background = new Background("res/world/City.png", WIDTH * 0.5, HEIGHT * 0.5, getGame());
 
 	textLifes = new Text("", WIDTH * 0.92, HEIGHT * 0.04, getGame());
@@ -21,12 +21,11 @@ void GameLayer::init() {
 	controlMoveX = 0;
 
 	enemies.clear(); 
-	enemies.push_back(new Blob(300, 50, getGame()));
-	enemies.push_back(new Blob(300, 100, getGame()));
-	enemies.push_back(new Blob(300, 150, getGame()));
-	enemies.push_back(new Blob(300, 200, getGame()));
-	enemies.push_back(new Blob(300, 250, getGame()));
-	enemies.push_back(new Blob(300, 300, getGame()));
+	enemies.push_back(new Blob(5, 1, getGame()));
+	enemies.push_back(new Blob(5, 2, getGame()));
+	enemies.push_back(new Blob(5, 3, getGame()));
+	enemies.push_back(new Blob(5, 4, getGame()));
+	enemies.push_back(new Blob(5, 5, getGame()));
 
 }
 
@@ -119,27 +118,28 @@ void GameLayer::enemyColisions() {
 	//girl and enemy
 	for (auto const& enemy : enemies) {
 		if (girl->isOverlap(enemy)) {
+				enemy->attack(girl, angel);
+				enemy->beShoot();
+				textLifes->content = to_string(girl->getLife());
+				if (girl->isDead()) {
+					init();
+				}
 
-			girl->loseLife(enemy->getDamage());
-			textLifes->content = to_string(girl->getLife());
-			if (girl->isDead()) {
-				init();
+				bool eInList = std::find(deleteEnemies.begin(),
+					deleteEnemies.end(),
+					enemy) != deleteEnemies.end();
+
+				if (!eInList) {
+					deleteEnemies.push_back(enemy);
+				}
 			}
-
-			bool eInList = std::find(deleteEnemies.begin(),
-				deleteEnemies.end(),
-				enemy) != deleteEnemies.end();
-
-			if (!eInList) {
-				deleteEnemies.push_back(enemy);
-			}
-		}
 	}
 
 	//enemy and ray
 	if (angel->getRay() != nullptr) {
 		for (auto const& enemy : enemies) {
 			if (enemy->isOverlap(angel->getRay())) {
+				enemy->beShoot();
 				bool eInList = std::find(deleteEnemies.begin(),
 					deleteEnemies.end(),
 					enemy) != deleteEnemies.end();
@@ -152,9 +152,9 @@ void GameLayer::enemyColisions() {
 	}//if
 
 
-	for (auto const& delEnemy : deleteEnemies) {
-		enemies.remove(delEnemy);
-	}
+//	for (auto const& delEnemy : deleteEnemies) {
+//		enemies.remove(delEnemy);
+//	}
 	deleteEnemies.clear();
 
 }

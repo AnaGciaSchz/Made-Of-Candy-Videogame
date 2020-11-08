@@ -9,7 +9,7 @@
 class Angel : public Actor
 {
 public:
-	Angel(float x, float y, Game* game);
+	Angel(float pathX, float pathY, Game* game);
 
 	void update();
 	void drawAngel ();

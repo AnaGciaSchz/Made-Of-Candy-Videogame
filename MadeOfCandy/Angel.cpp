@@ -1,7 +1,7 @@
 #include "Angel.h"
 
-Angel::Angel(float x, float y, Game* game)
-	: Actor("res/characters/Angel/Robbie.png", x, y, 23, 46, game) {
+Angel::Angel(float pathX, float pathY, Game* game)
+	: Actor("res/characters/Angel/Robbie.png", 23, 46,pathX, pathY, game) {
 
 	canShoot = true;
 	ray = nullptr;
@@ -14,29 +14,35 @@ void Angel::update() {
 }
 
 void Angel::moveX(float axis) {
-
-	incrementX(axis*50);
+	cout << getPathX() << "\n";
+	cout << getPathX() * PATHS_X <<"\n";
+	if (axis > 0 && getPathX() == PATHS_X) {
+		
+	}
+	else if (axis < 0 && getPathX() == 0) {
+		
+	}
+	else {
+		incrementX(axis);
+	}
+	
 }
 
 void Angel::moveY(float axis) {
-	int value;
-	if (y + axis * 50 - getHeight() / 2 <= 0) {
-		value = -axis * 50;
+	if (axis > 0 && getPathY() == PATHS_Y) {
 	}
-	else if (y + axis * 50 + getHeight() / 2 >= HEIGHT) {
-		value = -axis * 50;
+	else if (axis < 0 && getPathY() == 1) {
 	}
 	else {
-		value = axis * 50;
+		incrementY(axis);
 	}
-	incrementY(value);
 	
 }
 
 void Angel::shoot(bool shoot) {
 	if (shoot && canShoot) {
 		cantShoot();
-		ray = new CelestialRay(x,y,getGame());
+		ray = new CelestialRay(getPathX(),getPathY(),30,getGame());
 	}
 }
 

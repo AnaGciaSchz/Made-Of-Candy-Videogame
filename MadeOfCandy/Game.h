@@ -13,6 +13,22 @@ class Layer; //To find the Layer class and dont get errors
 // General values for the game
 #define WIDTH 480
 #define HEIGHT 320
+/**
+* Number of paths in Y
+*/
+#define PATHS_Y 5
+/**
+* Number of paths in X
+*/
+#define PATHS_X 12
+/**
+* Height of paths
+*/
+#define PATH_Y 60
+/**
+* Width of paths
+*/
+#define PATH_X 40
 
 /**
 *Class that represents the basic logic in the game (window, render and loop that initiates

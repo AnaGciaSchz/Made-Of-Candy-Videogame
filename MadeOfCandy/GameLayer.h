@@ -90,6 +90,11 @@ private:
 	Actor* lifes;
 	Text* textLifes;
 
+	/**
+	* Number of paths in the game
+	*/
+	int paths;
+
 
 };
 

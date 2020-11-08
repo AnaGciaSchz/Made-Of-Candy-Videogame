@@ -1,9 +1,12 @@
 #include "TheGirl.h"
 
-TheGirl::TheGirl(float x, float y, int time,int v, Game* game)
-	: Actor("res/characters/TheGirl/Anna.png", x, y, 23, 46, game) {
-	this->time = time;
-	this->actualTime = time;
+TheGirl::TheGirl(int timeY, int timeX,int v, int pathX, int pathY, Game* game)
+	: Actor("res/characters/TheGirl/Anna.png", 23, 46,pathX,pathY, game) {
+	this->timeY = timeY;
+	this->actualTimeY = timeY;
+
+	this->timeX = timeX;
+	this->actualTimeX = timeX;
 
 	this->lifes = 3;
 	
@@ -11,27 +14,33 @@ TheGirl::TheGirl(float x, float y, int time,int v, Game* game)
 }
 
 void TheGirl::update() {
-	actualTime--;
-	incrementX(v);
-	if (actualTime <= 0) {
-		actualTime = time;
-		moveY();
+	actualTimeY--;
+	if (actualTimeY <= 0) {
+		actualTimeY = timeY;
+		if (rand() > RAND_MAX / 2) {
+			moveY();
+		}
+	}
+
+	actualTimeX--;
+	if (actualTimeX <= 0) {
+		actualTimeX = timeX;
+		incrementX(1);
 	}
 
 }
 void TheGirl::moveY() {
 	int value;
-	if (y -50 - getHeight() / 2 <= 0){ 
-		value = 50;
+	if (getPathY()<=1){ 
+		incrementY(1);
 	}
-	else if (y +50 + getHeight() / 2 >= HEIGHT) {
-		value = -50;
+	else if (getPathY() >= PATHS_Y) {
+		incrementY(-1);
 	}
 	else {
-		value = (rand() > RAND_MAX / 2) ? -50 : 50;
+		incrementY((rand() > RAND_MAX / 2) ? 1 : -1);
 	}
 
-	incrementY(value);
 }
 
 void TheGirl::loseLife(int damage) {

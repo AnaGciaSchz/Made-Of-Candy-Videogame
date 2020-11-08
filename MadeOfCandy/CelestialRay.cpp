@@ -1,11 +1,16 @@
 #include "CelestialRay.h"
 
-CelestialRay::CelestialRay(float x, float y, Game* game) :
-	Actor("res/world/CelestialRay.png", x, y, 27, 19, game) {
-	vx = -9;
+CelestialRay::CelestialRay(float pathX, float pathY,int time, Game* game) :
+	Actor("res/world/CelestialRay.png", 27, 19,pathX,pathY, game) {
+	time = time;
+	actualTime = 0;
 }
 
 void CelestialRay::update() {
-	x = x + vx;
+	actualTime--;
+	if (actualTime <= 0) {
+		actualTime = time;
+		incrementX(-1);
+	}
 }
 
