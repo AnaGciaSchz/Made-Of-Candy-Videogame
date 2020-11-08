@@ -6,7 +6,7 @@ GameLayer::GameLayer(Game* game) : Layer(game) {
 }
 
 void GameLayer::init() {
-	angel = new Angel(PATHS_X, PATHS_Y / 2, getGame());
+	angel = new Angel(PATHS_X-1, PATHS_Y / 2, getGame());
 	girl = new TheGirl(60,0.2,0,PATHS_Y/2, getGame());
 	background = new Background("res/world/City.png", WIDTH * 0.5, HEIGHT * 0.5,-1, getGame());
 
@@ -72,7 +72,7 @@ void GameLayer::draw() {
 	lifes->draw();
 	textLifes->draw();
 
-	angel->drawAngel();
+	angel->draw();
 	girl->draw();
 
 	for (auto const& enemy : enemies) {

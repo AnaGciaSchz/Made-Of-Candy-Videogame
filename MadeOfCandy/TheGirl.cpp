@@ -1,7 +1,7 @@
 #include "TheGirl.h"
 
 TheGirl::TheGirl(int timeY,float v, int pathX, int pathY, Game* game)
-	: Actor("res/characters/TheGirl/Anna.png", 23, 46,pathX,pathY, game) {
+	: Actor("", 30, 46,pathX,pathY, game) {
 	this->timeY = timeY;
 	this->actualTimeY = timeY;
 
@@ -13,9 +13,15 @@ TheGirl::TheGirl(int timeY,float v, int pathX, int pathY, Game* game)
 	this->timeStop = 100;
 
 	audioDamage = new Audio("res/music/effects/GirlDamage.wav", false);
+
+	aRight = new Animation("res/characters/TheGirl/Anna/Anna_right.png", getWidth(), getHeight(),
+		96, 50, 6, 3, game);
+
 }
 
 void TheGirl::update() {
+	aRight->update();
+
 	actualTimeY--;
 	if (actualTimeY <= 0) {
 		actualTimeY = timeY;
@@ -39,6 +45,11 @@ void TheGirl::update() {
 			}
 		}
 }
+
+void TheGirl::draw() {
+	aRight->draw(x, y);
+}
+
 void TheGirl::moveY() {
 	int value;
 	if (getPathY()<=1){ 
@@ -48,7 +59,12 @@ void TheGirl::moveY() {
 		incrementY(-1);
 	}
 	else {
-		incrementY((rand() > RAND_MAX / 2) ? 1 : -1);
+		if (rand() > RAND_MAX / 2) {
+			incrementY(1);
+		}
+		else {
+			incrementY(-1);
+		}
 	}
 
 }
@@ -69,3 +85,4 @@ bool TheGirl::isDead() {
 	}
 	return false;
 }
+

@@ -64,6 +64,7 @@ public:
 	map<string, SDL_Texture*> mapTextures; // map - cache
 
 
+
 private:
 	/**
 	* Window of the game

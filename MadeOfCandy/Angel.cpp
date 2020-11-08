@@ -1,15 +1,30 @@
 #include "Angel.h"
 
 Angel::Angel(float pathX, float pathY, Game* game)
-	: Actor("res/characters/Angel/Robbie.png", 23, 46,pathX, pathY, game) {
+	: Actor("res/characters/Angel/Robbie/Robbie.png", 30, 46,pathX, pathY, game) {
+
 
 	canShoot = true;
 	ray = nullptr;
 
 	audioRay = new Audio("res/music/effects/Ray.wav", false);
+
+	aLeft= new Animation("res/characters/Angel/Robbie/Robbie_left.png", getWidth(), getHeight(),
+		96, 50, 6, 3, game);
+
+	aLeftUp= new Animation("res/characters/Angel/Robbie/Robbie_leftUp.png", getWidth(), getHeight(),
+		96, 50, 6, 3, game);
+
+	aRight = new Animation("res/characters/Angel/Robbie/Robbie_right.png", getWidth(), getHeight(),
+		96, 50, 6, 3, game);
+	aRightUp = new Animation("res/characters/Angel/Robbie/Robbie_rightUp.png", getWidth(), getHeight(),
+		96, 50, 6, 3, game);
+	animation = aLeft;
 }
 
 void Angel::update() {
+	animation->update();
+
 	if (ray != nullptr) {
 		ray->update();
 		deleteRay();
@@ -17,13 +32,20 @@ void Angel::update() {
 }
 
 void Angel::moveX(float axis) {
-	if (axis > 0 && getPathX() == PATHS_X) {
+	if (axis > 0 && getPathX() == PATHS_X-1) {
 		
 	}
-	else if (axis < 0 && getPathX() == 0) {
+	else if (axis < 0 && getPathX() == 1) {
 		
 	}
 	else {
+		if (axis < 0) {
+			animation = aLeft;
+		}
+		else {
+			animation = aRight;
+		}
+
 		incrementX(axis);
 	}
 	
@@ -35,6 +57,14 @@ void Angel::moveY(float axis) {
 	else if (axis < 0 && getPathY() == 1) {
 	}
 	else {
+		if (axis < 0) {
+			if (animation == aRight || animation == aRightUp) {
+				animation = aRightUp;
+			}
+			else {
+				animation = aLeftUp;
+			}
+		}
 		incrementY(axis);
 	}
 	
@@ -63,8 +93,8 @@ void Angel::deleteRay() {
 	}
 }
 
-void Angel::drawAngel() {
-	draw();
+void Angel::draw() {
+	animation->draw(x, y);
 	if (ray != nullptr) {
 		ray->draw();
 	}
