@@ -1,5 +1,5 @@
-
 #include "GameLayer.h"
+
 
 GameLayer::GameLayer(Game* game) : Layer(game) {
 	init();
@@ -26,6 +26,9 @@ void GameLayer::init() {
 	enemies.push_back(new Blob(5, 3, getGame()));
 	enemies.push_back(new Blob(5, 4, getGame()));
 	enemies.push_back(new Blob(5, 5, getGame()));
+
+	audioBackground = new Audio("res/music/Candy.mp3", true);
+	audioBackground->play();
 
 }
 

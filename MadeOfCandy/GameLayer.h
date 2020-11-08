@@ -11,6 +11,7 @@
 #include "Blob.h"
 
 #include "Text.h"
+#include "Audio.h" 
 
 #include <list>
 
@@ -94,6 +95,8 @@ private:
 	* Number of paths in the game
 	*/
 	int paths;
+
+	Audio* audioBackground;
 
 
 };

@@ -11,6 +11,8 @@ TheGirl::TheGirl(int timeY, int timeX,int v, int pathX, int pathY, Game* game)
 	this->lifes = 3;
 	
 	this->v = v;
+
+	audioDamage = new Audio("res/music/effects/GirlDamage.wav", false);
 }
 
 void TheGirl::update() {
@@ -44,6 +46,7 @@ void TheGirl::moveY() {
 }
 
 void TheGirl::loseLife(int damage) {
+	audioDamage->play();
 	lifes -= damage;
 }
 

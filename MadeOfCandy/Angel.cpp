@@ -5,6 +5,8 @@ Angel::Angel(float pathX, float pathY, Game* game)
 
 	canShoot = true;
 	ray = nullptr;
+
+	audioRay = new Audio("res/music/effects/Ray.wav", false);
 }
 
 void Angel::update() {
@@ -41,6 +43,7 @@ void Angel::moveY(float axis) {
 
 void Angel::shoot(bool shoot) {
 	if (shoot && canShoot) {
+		audioRay->play();
 		cantShoot();
 		ray = new CelestialRay(getPathX(),getPathY(),30,getGame());
 	}

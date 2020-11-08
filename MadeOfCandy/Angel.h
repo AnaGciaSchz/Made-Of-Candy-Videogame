@@ -2,6 +2,7 @@
 
 #include "Actor.h"
 #include "CelestialRay.h"
+#include "Audio.h"
 
 /**
 * Class that represents the Angel (the player)
@@ -24,4 +25,6 @@ public:
 private:
 	bool canShoot;
 	CelestialRay* ray;
+
+	Audio* audioRay;
 };

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Actor.h"
+#include "Audio.h"
 
 /**
 	* Class that represents the Girl that has to be protected
@@ -35,5 +36,7 @@ private:
 	* velocity of the girl
 	*/
 	int v;
+
+	Audio* audioDamage;
 };
 
