@@ -6,9 +6,11 @@ GameLayer::GameLayer(Game* game) : Layer(game) {
 }
 
 void GameLayer::init() {
-	angel = new Angel(PATHS_X-1, PATHS_Y / 2, getGame());
-	girl = new TheGirl(60,0.2,0,PATHS_Y/2, getGame());
+	//angel = new Angel(PATHS_X-1, PATHS_Y / 2, getGame());
+	//girl = new TheGirl(60,0.2,0,PATHS_Y/2, getGame());
 	background = new Background("res/world/City.png", WIDTH * 0.5, HEIGHT * 0.5,-1, getGame());
+
+	loadMap("res/world/maps/0.txt");
 
 	textLifes = new Text("", WIDTH * 0.92, HEIGHT * 0.04, getGame());
 	textLifes->content = to_string(girl->getLife());
@@ -20,12 +22,13 @@ void GameLayer::init() {
 	controlMoveY = 0;
 	controlMoveX = 0;
 
+	tiles.clear();
 	enemies.clear(); 
-	enemies.push_back(new Blob(5, 1, getGame()));
-	enemies.push_back(new Blob(5, 2, getGame()));
-	enemies.push_back(new Blob(5, 3, getGame()));
-	enemies.push_back(new Blob(5, 4, getGame()));
-	enemies.push_back(new Blob(5, 5, getGame()));
+	//enemies.push_back(new Blob(5, 1, getGame()));
+	//enemies.push_back(new Blob(5, 2, getGame()));
+	//enemies.push_back(new Blob(5, 3, getGame()));
+	//enemies.push_back(new Blob(5, 4, getGame()));
+	//enemies.push_back(new Blob(5, 5, getGame()));
 
 	audioBackground = new Audio("res/music/Candy.mp3", true);
 	audioBackground->play();
@@ -72,6 +75,10 @@ void GameLayer::draw() {
 
 	angel->draw();
 	girl->draw();
+
+	for (auto const& tile : tiles) {
+		tile->draw();
+	}
 
 	for (auto const& enemy : enemies) {
 		enemy->draw();
@@ -161,6 +168,56 @@ void GameLayer::enemyColisions() {
 	deleteEnemies.clear();
 
 }
+
+
+void GameLayer::loadMap(string name) {
+	char character;
+	string line;
+	ifstream streamFile(name.c_str());
+	if (!streamFile.is_open()) {
+		cout << "Error opening map" << endl;
+		return;
+	}
+	else {
+
+		for (int i = 0; getline(streamFile, line); i++) {
+			istringstream streamLine(line);
+			mapWidth = line.length() * PATH_X;
+
+			for (int j = 0; !streamLine.eof(); j++) {
+				streamLine >> character; 
+				loadMapObject(character, j+1, i+1);
+			}
+		}
+	}
+	streamFile.close();
+}
+
+
+void GameLayer::loadMapObject(char character, float x, float y)
+{
+	switch (character) {
+	case '1': {
+		girl = new TheGirl(60, 0.2, x, y, getGame());
+		break;
+	}
+	case '2': {
+		angel = new Angel(x, y, getGame());
+		break;
+	}
+//	case '#': {
+//		Tile* tile = new Tile("res/bloque_tierra.png", x, y, game);
+//		// modificación para empezar a contar desde el suelo.
+//		tile->y = tile->y - tile->height / 2;
+//		tiles.push_back(tile);
+//		break;
+//	}
+	}
+}
+
+
+
+
 
 
 

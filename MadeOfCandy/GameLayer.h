@@ -11,11 +11,12 @@
 #include "Blob.h"
 
 #include "Text.h"
-#include "Audio.h" 
+#include "Audio.h"
+#include "Tile.h"
 
 #include <list>
-
-
+#include <fstream> 
+#include <sstream> 
 
 /**
 * Layer for the execution of the game
@@ -55,6 +56,10 @@ public:
 	* Method to control colisions with enemies
 	*/
 	void enemyColisions();
+
+	void loadMap(string name);
+	void loadMapObject(char character, float x, float y);
+
 
 private:
 	/**
@@ -97,6 +102,9 @@ private:
 	int paths;
 
 	Audio* audioBackground;
+
+	int mapWidth;
+	list<Tile*> tiles;
 
 
 };
