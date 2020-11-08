@@ -4,6 +4,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
+#include <map> 
 
 using namespace std;
 
@@ -24,11 +25,13 @@ class Layer; //To find the Layer class and dont get errors
 /**
 * Height of paths
 */
-#define PATH_Y 60
+#define PATH_Y 40
 /**
 * Width of paths
 */
 #define PATH_X 40
+
+#define LIMIT_Y 90
 
 /**
 *Class that represents the basic logic in the game (window, render and loop that initiates
@@ -56,6 +59,10 @@ public:
 	void stopGame();
 	void changeFont(TTF_Font* font);
 	TTF_Font* getFont();
+
+	SDL_Texture* getTexture(string filename);
+	map<string, SDL_Texture*> mapTextures; // map - cache
+
 
 private:
 	/**

@@ -18,12 +18,17 @@ public:
 	* game instance of the game
 	*/
 	Actor(string filename, int width, int height, int pathX, int pathY, Game* game);
+	~Actor(); //destructor
 	virtual void draw();
 	/**
 	* Method to see if the actor that is passed as parameter is overlaping with the actual
 	* actor
 	*/
 	bool isOverlap(Actor* actor);
+	/**
+	* We need to know if the actor is in the screen
+	*/
+	bool isInRender();
 
 	int getX();
 	int getY();

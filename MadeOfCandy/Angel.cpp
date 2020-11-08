@@ -12,12 +12,11 @@ Angel::Angel(float pathX, float pathY, Game* game)
 void Angel::update() {
 	if (ray != nullptr) {
 		ray->update();
+		deleteRay();
 	}
 }
 
 void Angel::moveX(float axis) {
-	cout << getPathX() << "\n";
-	cout << getPathX() * PATHS_X <<"\n";
 	if (axis > 0 && getPathX() == PATHS_X) {
 		
 	}
@@ -55,6 +54,13 @@ CelestialRay* Angel::getRay() {
 
 void Angel::cantShoot() {
 	canShoot = false;
+}
+
+void Angel::deleteRay() {
+	if (ray->isInRender()==false) {
+		delete ray;
+		ray = nullptr;
+	}
 }
 
 void Angel::drawAngel() {

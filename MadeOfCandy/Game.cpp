@@ -66,3 +66,17 @@ TTF_Font* Game::getFont() {
 void Game::changeFont(TTF_Font* font) {
 	this->font = font;
 }
+
+SDL_Texture* Game::getTexture(string filename) {
+	if (mapTextures.find(filename) != mapTextures.end()) {
+		cout << "Cached: " << filename << endl;
+	}
+	else {
+		cout << "Not cached: " << filename << endl;
+		SDL_Surface* surface = IMG_Load(filename.c_str());
+		SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+		mapTextures[filename] = texture;
+	}
+
+	return mapTextures[filename];
+}

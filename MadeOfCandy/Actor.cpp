@@ -4,11 +4,10 @@
 Actor::Actor(string filename, int width, int height,int pathX, int pathY, Game* game) {
 	this->game = game;
 
-	SDL_Surface* surface = IMG_Load(filename.c_str());
-	texture = SDL_CreateTextureFromSurface(game->getRenderer(), surface);
+	texture = game->getTexture(filename);
 
 	this->x = pathX*PATH_X;
-	this->y = pathY*PATH_Y;
+	this->y = LIMIT_Y+pathY*PATH_Y;
 
 	this->fileWidth = width;
 	this->fileHeight = height;
@@ -40,6 +39,14 @@ void Actor::draw() {
 bool Actor::isOverlap(Actor* actor) {
 	if (actor->getPathX() == getPathX() && actor->getPathY() == getPathY()) {
 
+		return true;
+	}
+	return false;
+}
+
+bool Actor::isInRender() {
+	if (x - width / 2 <= WIDTH && x + width / 2 >= 0 &&
+		y - height / 2 <= HEIGHT && y + height / 2 >= 0) {
 		return true;
 	}
 	return false;
@@ -83,3 +90,8 @@ void Actor::incrementY(float increment) {
 	y = y + increment*PATH_Y;
 	pathY = pathY + increment;
 }
+
+Actor::~Actor() {
+	
+}
+

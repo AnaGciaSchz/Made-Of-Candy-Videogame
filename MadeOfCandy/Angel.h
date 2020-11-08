@@ -19,6 +19,7 @@ public:
 	void moveX(float axis);
 	void moveY(float axis);
 	void cantShoot();
+	void deleteRay();
 
 	CelestialRay* getRay();
 
