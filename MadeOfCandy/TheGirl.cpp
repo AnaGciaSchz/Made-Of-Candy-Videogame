@@ -21,7 +21,6 @@ TheGirl::TheGirl(int timeY,float v, int pathX, int pathY, Game* game)
 
 void TheGirl::update() {
 	aRight->update();
-
 	actualTimeY--;
 	if (actualTimeY <= 0) {
 		actualTimeY = timeY;

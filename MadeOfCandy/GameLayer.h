@@ -12,7 +12,6 @@
 
 #include "Text.h"
 #include "Audio.h"
-#include "Tile.h"
 
 #include <list>
 #include <fstream> 
@@ -104,7 +103,6 @@ private:
 	Audio* audioBackground;
 
 	int mapWidth;
-	list<Tile*> tiles;
 
 
 };

@@ -6,10 +6,9 @@ GameLayer::GameLayer(Game* game) : Layer(game) {
 }
 
 void GameLayer::init() {
-	//angel = new Angel(PATHS_X-1, PATHS_Y / 2, getGame());
-	//girl = new TheGirl(60,0.2,0,PATHS_Y/2, getGame());
 	background = new Background("res/world/City.png", WIDTH * 0.5, HEIGHT * 0.5,-1, getGame());
 
+	enemies.clear();
 	loadMap("res/world/maps/0.txt");
 
 	textLifes = new Text("", WIDTH * 0.92, HEIGHT * 0.04, getGame());
@@ -21,14 +20,6 @@ void GameLayer::init() {
 	controlMoveElement = false;
 	controlMoveY = 0;
 	controlMoveX = 0;
-
-	tiles.clear();
-	enemies.clear(); 
-	//enemies.push_back(new Blob(5, 1, getGame()));
-	//enemies.push_back(new Blob(5, 2, getGame()));
-	//enemies.push_back(new Blob(5, 3, getGame()));
-	//enemies.push_back(new Blob(5, 4, getGame()));
-	//enemies.push_back(new Blob(5, 5, getGame()));
 
 	audioBackground = new Audio("res/music/Candy.mp3", true);
 	audioBackground->play();
@@ -75,10 +66,6 @@ void GameLayer::draw() {
 
 	angel->draw();
 	girl->draw();
-
-	for (auto const& tile : tiles) {
-		tile->draw();
-	}
 
 	for (auto const& enemy : enemies) {
 		enemy->draw();
@@ -132,6 +119,7 @@ void GameLayer::enemyColisions() {
 				textLifes->content = to_string(girl->getLife());
 				if (girl->isDead()) {
 					init();
+					break;
 				}
 			}
 		bool eInList = std::find(deleteEnemies.begin(),
@@ -194,8 +182,7 @@ void GameLayer::loadMap(string name) {
 }
 
 
-void GameLayer::loadMapObject(char character, float x, float y)
-{
+void GameLayer::loadMapObject(char character, float x, float y) {
 	switch (character) {
 	case '1': {
 		girl = new TheGirl(60, 0.2, x, y, getGame());
@@ -205,13 +192,10 @@ void GameLayer::loadMapObject(char character, float x, float y)
 		angel = new Angel(x, y, getGame());
 		break;
 	}
-//	case '#': {
-//		Tile* tile = new Tile("res/bloque_tierra.png", x, y, game);
-//		// modificación para empezar a contar desde el suelo.
-//		tile->y = tile->y - tile->height / 2;
-//		tiles.push_back(tile);
-//		break;
-//	}
+	case 'b': {
+		enemies.push_back(new Blob(x, y, getGame()));
+		break;
+	}
 	}
 }
 

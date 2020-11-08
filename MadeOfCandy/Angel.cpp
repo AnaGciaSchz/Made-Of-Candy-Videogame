@@ -65,6 +65,15 @@ void Angel::moveY(float axis) {
 				animation = aLeftUp;
 			}
 		}
+		else {
+			if (animation == aRightUp || animation == aRight) {
+				animation = aRight;
+			}
+			else {
+				animation = aLeft;
+			}
+
+		}
 		incrementY(axis);
 	}
 	
