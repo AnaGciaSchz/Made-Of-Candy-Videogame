@@ -18,6 +18,7 @@ public:
 	* game instance of the game
 	*/
 	Actor(string filename, int width, int height, int pathX, int pathY, Game* game);
+	Actor(string filename, int x, int y,int width, int height, int pathX, int pathY, Game* game);
 	~Actor(); //destructor
 	virtual void draw();
 	/**
@@ -46,8 +47,12 @@ public:
 	int getPathY();
 
 protected:
-	int x;
+	float x;
 	int y;
+	/**In which paths is the actor?
+	*/
+	int pathX;
+	int pathY;
 
 private:
 	SDL_Texture* texture;
@@ -57,9 +62,5 @@ private:
 	int fileHeight;
 	Game* game;
 
-	/**In which paths is the actor?
-	*/
-	int pathX;
-	int pathY;
 };
 

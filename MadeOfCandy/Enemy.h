@@ -18,6 +18,7 @@ public:
 	virtual void beShoot() {};
 	bool isDead();
 	int getDamage();
+	void move();
 
 protected:
 	int damage;

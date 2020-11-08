@@ -9,7 +9,7 @@
 class TheGirl : public Actor
 {
 public:
-	TheGirl( int timeY, int timeX, int v, int pathX, int pathY, Game* game);
+	TheGirl( int timeY, float v, int pathX, int pathY, Game* game);
 
 	void update();
 	void moveY();
@@ -23,10 +23,6 @@ private:
 	int timeY;
 	int actualTimeY;
 
-	//time to wait until the girl moves in X
-	int timeX;
-	int actualTimeX;
-
 	/**
 	* Lifes of the girl
 	*/
@@ -35,8 +31,11 @@ private:
 	/**
 	* velocity of the girl
 	*/
-	int v;
+	float v;
 
 	Audio* audioDamage;
+
+	bool stop;
+	int timeStop;
 };
 

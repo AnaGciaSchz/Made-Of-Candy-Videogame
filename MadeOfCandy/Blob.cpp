@@ -22,6 +22,7 @@ void Blob::beShoot() {
 
 void Blob::update() {
 	animation->update();
+	move();
 }
 
 void Blob::draw() {

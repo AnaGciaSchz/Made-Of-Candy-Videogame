@@ -19,6 +19,24 @@ Actor::Actor(string filename, int width, int height,int pathX, int pathY, Game* 
 	this->pathY = pathY;
 }
 
+Actor::Actor(string filename, int x, int y, int width, int height, int pathX, int pathY, Game* game) {
+	this->game = game;
+
+	texture = game->getTexture(filename);
+
+	this->x = x;
+	this->y = y;
+
+	this->fileWidth = width;
+	this->fileHeight = height;
+
+	this->width = width;
+	this->height = height;
+
+	this->pathX = pathX;
+	this->pathY = pathY;
+}
+
 void Actor::draw() {
 	SDL_Rect source;
 	source.x = 0;

@@ -14,5 +14,11 @@ bool Enemy::isDead() {
 int Enemy::getDamage() {
 	return damage;
 }
+void Enemy::move() {
+	x = x - 1;
+	if (x < getPathX() * PATH_X) {
+		pathX--;
+	}
+}
 
 

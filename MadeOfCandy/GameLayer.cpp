@@ -7,13 +7,13 @@ GameLayer::GameLayer(Game* game) : Layer(game) {
 
 void GameLayer::init() {
 	angel = new Angel(PATHS_X, PATHS_Y / 2, getGame());
-	girl = new TheGirl(60,50,1,0,PATHS_Y/2, getGame());
-	background = new Background("res/world/City.png", WIDTH * 0.5, HEIGHT * 0.5, getGame());
+	girl = new TheGirl(60,0.2,0,PATHS_Y/2, getGame());
+	background = new Background("res/world/City.png", WIDTH * 0.5, HEIGHT * 0.5,-1, getGame());
 
 	textLifes = new Text("", WIDTH * 0.92, HEIGHT * 0.04, getGame());
 	textLifes->content = to_string(girl->getLife());
 	lifes = new Actor("res/icons/heart.png",
-		WIDTH * 0.85, HEIGHT * 0.05, 24, 24, getGame());
+		WIDTH * 0.85, HEIGHT * 0.05, 24, 24,0,0, getGame());
 
 	controlShoot = false;
 	controlMoveElement = false;
@@ -53,6 +53,7 @@ void GameLayer::processControls() {
 }
 
 void GameLayer::update() {
+	background->update();
 	angel->update();
 	girl->update();
 
