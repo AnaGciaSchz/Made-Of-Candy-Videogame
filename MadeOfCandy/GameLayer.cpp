@@ -62,8 +62,6 @@ void GameLayer::update() {
 	}
 
 	enemyColisions();
-
-	cout << "update GameLayer" << endl;
 }
 
 void GameLayer::draw() {
@@ -128,15 +126,14 @@ void GameLayer::enemyColisions() {
 				if (girl->isDead()) {
 					init();
 				}
-
-				bool eInList = std::find(deleteEnemies.begin(),
-					deleteEnemies.end(),
-					enemy) != deleteEnemies.end();
-
-				if (!eInList) {
-					deleteEnemies.push_back(enemy);
-				}
 			}
+		bool eInList = std::find(deleteEnemies.begin(),
+			deleteEnemies.end(),
+			enemy) != deleteEnemies.end();
+
+		if (!eInList) {
+			deleteEnemies.push_back(enemy);
+		}
 	}
 
 	//enemy and ray
@@ -144,21 +141,23 @@ void GameLayer::enemyColisions() {
 		for (auto const& enemy : enemies) {
 			if (enemy->isOverlap(angel->getRay())) {
 				enemy->beShoot();
-				bool eInList = std::find(deleteEnemies.begin(),
-					deleteEnemies.end(),
-					enemy) != deleteEnemies.end();
+			}
+			bool eInList = std::find(deleteEnemies.begin(),
+				deleteEnemies.end(),
+				enemy) != deleteEnemies.end();
 
-				if (!eInList) {
-					deleteEnemies.push_back(enemy);
-				}
+			if (!eInList) {
+				deleteEnemies.push_back(enemy);
 			}
 		}//for
 	}//if
 
 
-//	for (auto const& delEnemy : deleteEnemies) {
-//		enemies.remove(delEnemy);
-//	}
+	for (auto const& delEnemy : deleteEnemies) {
+		if (delEnemy->beDeleted()) {
+			enemies.remove(delEnemy);
+		}
+	}
 	deleteEnemies.clear();
 
 }

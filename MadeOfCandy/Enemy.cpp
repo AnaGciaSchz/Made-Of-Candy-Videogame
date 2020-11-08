@@ -5,6 +5,8 @@ Enemy::Enemy(string filename, int damage, int width, int height, int pathX, int 
 
 	this->damage = damage;
 	this->dead = false;
+
+	this->canBeDeleted = false;
 }
 
 bool Enemy::isDead() {
@@ -19,6 +21,10 @@ void Enemy::move() {
 	if (x < getPathX() * PATH_X) {
 		pathX--;
 	}
+}
+
+bool Enemy::beDeleted() {
+	return this->canBeDeleted;
 }
 
 

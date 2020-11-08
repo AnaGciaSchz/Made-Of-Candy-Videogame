@@ -15,7 +15,7 @@ TheGirl::TheGirl(int timeY,float v, int pathX, int pathY, Game* game)
 	audioDamage = new Audio("res/music/effects/GirlDamage.wav", false);
 
 	aRight = new Animation("res/characters/TheGirl/Anna/Anna_right.png", getWidth(), getHeight(),
-		96, 50, 6, 3, game);
+		96, 50, 6, 3, true, game);
 
 }
 

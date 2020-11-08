@@ -2,9 +2,11 @@
 
 Animation::Animation(string filename, float actorWidth, float actorHeight,
 	float fileWidth, float fileHeight,
-	int updateFrecuence, int totalFrames, Game* game) {
+	int updateFrecuence, int totalFrames, bool loop, Game* game) {
 
 	texture = game->getTexture(filename);
+
+	this->loop = loop;
 
 	this->actorWidth = actorWidth;
 	this->actorHeight = actorHeight;
@@ -36,7 +38,13 @@ bool Animation::update() {
 
 		if (currentFrame >= totalFrames) {
 
-			currentFrame = 0;
+			if (loop == false) {
+				return true;
+			}
+			else {
+				currentFrame = 0;
+			}
+
 		}
 	}
 

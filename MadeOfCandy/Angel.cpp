@@ -10,15 +10,15 @@ Angel::Angel(float pathX, float pathY, Game* game)
 	audioRay = new Audio("res/music/effects/Ray.wav", false);
 
 	aLeft= new Animation("res/characters/Angel/Robbie/Robbie_left.png", getWidth(), getHeight(),
-		96, 50, 6, 3, game);
+		96, 50, 6, 3, true,game);
 
 	aLeftUp= new Animation("res/characters/Angel/Robbie/Robbie_leftUp.png", getWidth(), getHeight(),
-		96, 50, 6, 3, game);
+		96, 50, 6, 3, true, game);
 
 	aRight = new Animation("res/characters/Angel/Robbie/Robbie_right.png", getWidth(), getHeight(),
-		96, 50, 6, 3, game);
+		96, 50, 6, 3, true, game);
 	aRightUp = new Animation("res/characters/Angel/Robbie/Robbie_rightUp.png", getWidth(), getHeight(),
-		96, 50, 6, 3, game);
+		96, 50, 6, 3, true, game);
 	animation = aLeft;
 }
 
@@ -74,7 +74,12 @@ void Angel::shoot(bool shoot) {
 	if (shoot && canShoot) {
 		audioRay->play();
 		cantShoot();
-		ray = new CelestialRay(getPathX(),getPathY(),30,getGame());
+		if (animation == aLeft || animation == aLeftUp) {
+			ray = new CelestialRay(getPathX(), getPathY(), 30,true, getGame());
+		}
+		else {
+			ray = new CelestialRay(getPathX(), getPathY(), 30,false, getGame());
+		}
 	}
 }
 

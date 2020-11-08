@@ -20,9 +20,13 @@ public:
 	int getDamage();
 	void move();
 
+	bool beDeleted();
+
 protected:
 	int damage;
 	bool dead;
+
+	bool canBeDeleted;
 
 
 };
