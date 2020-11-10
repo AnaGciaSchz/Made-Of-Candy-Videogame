@@ -21,16 +21,10 @@ void CelestialRay::update() {
 	if (actualTime <= 0) {
 		actualTime = time;
 		if (left) {
-			this->x = x - 9;
-			if (x < getPathX() * PATH_X) {
-				pathX--;
-			}
+			incrementX(-0.2);
 		}
 		else {
-			this->x = x + 9;
-			if (x > getPathX() * PATH_X) {
-				pathX++;
-			}
+			incrementX(0.2);
 		}
 	}
 }

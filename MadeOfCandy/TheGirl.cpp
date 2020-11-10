@@ -5,7 +5,7 @@ TheGirl::TheGirl(int timeY,float v, int pathX, int pathY, Game* game)
 	this->timeY = timeY;
 	this->actualTimeY = timeY;
 
-	this->lifes = 5;
+	this->lifes = 3;
 	
 	this->v = v;
 
@@ -39,7 +39,7 @@ void TheGirl::update() {
 		else {
 			timeStop--;
 			if (timeStop <= 0) {
-				timeStop = 100;
+				timeStop = 50;
 				stop = false;
 			}
 		}

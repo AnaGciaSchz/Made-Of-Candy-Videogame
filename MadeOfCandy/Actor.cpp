@@ -59,7 +59,7 @@ bool Actor::isOverlap(Actor* actor) {
 		&& actor->x + actor->width / 2 >= x - width / 2
 		&& actor->y + actor->height / 2 >= y - height / 2
 		&& actor->y - actor->height / 2 <= y + height / 2) {
-		if (actor->getPathX() == getPathX() && actor->getPathY() == getPathY()) {
+		if (actor->getPathY() == getPathY()) {
 			return true;
 		}
 	}
