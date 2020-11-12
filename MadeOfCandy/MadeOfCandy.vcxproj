@@ -160,10 +160,12 @@
     <ClInclude Include="CelestialRay.h" />
     <ClInclude Include="Cookie.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="FinalOfLevel.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameLayer.h" />
     <ClInclude Include="Layer.h" />
     <ClInclude Include="Movable.h" />
+    <ClInclude Include="Recolectable.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="TheGirl.h" />
   </ItemGroup>
@@ -177,11 +179,13 @@
     <ClCompile Include="CelestialRay.cpp" />
     <ClCompile Include="Cookie.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="FinalOfLevel.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameLayer.cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Movable.cpp" />
+    <ClCompile Include="Recolectable.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="TheGirl.cpp" />
   </ItemGroup>

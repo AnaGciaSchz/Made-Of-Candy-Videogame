@@ -67,8 +67,8 @@ void TheGirl::moveY() {
 	}
 
 }
-void TheGirl::getOneLife() {
-	lifes++;
+void TheGirl::addLife(int life) {
+	lifes+=life;
 }
 
 void TheGirl::loseLife(int damage) {

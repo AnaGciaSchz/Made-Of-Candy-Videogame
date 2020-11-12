@@ -37,6 +37,12 @@
     <Filter Include="Archivos de origen\Actors\Enemies">
       <UniqueIdentifier>{1a87d15a-73fb-4ca1-9dd4-d9700d8eb147}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\Actors\Items">
+      <UniqueIdentifier>{8184c6fb-9184-493f-a769-1b26e6234cbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Actors\Items">
+      <UniqueIdentifier>{688c0afb-4cdc-44b9-b4df-312cd9972e0b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -72,20 +78,26 @@
     <ClCompile Include="CelestialRay.cpp">
       <Filter>Archivos de origen\Actors</Filter>
     </ClCompile>
-    <ClCompile Include="Text.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="Cookie.cpp">
+      <Filter>Archivos de origen\Actors\Items</Filter>
     </ClCompile>
     <ClCompile Include="Animation.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\Basic</Filter>
     </ClCompile>
     <ClCompile Include="Audio.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Archivos de origen\Basic</Filter>
     </ClCompile>
     <ClCompile Include="Movable.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Cookie.cpp">
       <Filter>Archivos de origen\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="Recolectable.cpp">
+      <Filter>Archivos de origen\Actors\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="FinalOfLevel.cpp">
+      <Filter>Archivos de origen\Actors\Items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -119,20 +131,26 @@
     <ClInclude Include="CelestialRay.h">
       <Filter>Archivos de encabezado\Actors</Filter>
     </ClInclude>
-    <ClInclude Include="Text.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="Cookie.h">
+      <Filter>Archivos de encabezado\Actors\Items</Filter>
     </ClInclude>
     <ClInclude Include="Animation.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\Basic</Filter>
     </ClInclude>
     <ClInclude Include="Audio.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Archivos de encabezado\Basic</Filter>
     </ClInclude>
     <ClInclude Include="Movable.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Cookie.h">
       <Filter>Archivos de encabezado\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="Recolectable.h">
+      <Filter>Archivos de encabezado\Actors\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="FinalOfLevel.h">
+      <Filter>Archivos de encabezado\Actors\Items</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -11,6 +11,7 @@
 #include "Blob.h"
 
 #include "Cookie.h"
+#include "Recolectable.h"
 
 #include "Text.h"
 #include "Audio.h"
@@ -107,6 +108,12 @@ private:
 	list<Movable*> movables;
 
 	/**
+	* List of recolectables
+	*/
+	list<bool> gainedRecolectables = { false,false,false,false,false };
+	int numberOfGainedRecolectables = 0;
+
+	/**
 	* Icon and text for the lifes
 	*/
 	Actor* lifes;
@@ -120,6 +127,8 @@ private:
 	Audio* audioBackground;
 
 	int mapWidth;
+
+	
 
 
 };

@@ -246,6 +246,10 @@ void GameLayer::loadMapObject(char character, float x, float y) {
 		movables.push_back(cookie);
 		break;
 	}
+	case 'R': {
+		//Si aun no se tiene el recolectable del nivel, se dibuja el correspondiente
+		//Si ya se tiene, no se dibuja nada
+	}
 	}
 }
 

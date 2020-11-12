@@ -10,7 +10,7 @@ void Cookie::update() {
 	}
 }
 void Cookie::addLife(TheGirl* girl) {
-	girl->getOneLife();
+	girl->addLife(1);
 }
 void Cookie::move() {
 	x = x - 1;
