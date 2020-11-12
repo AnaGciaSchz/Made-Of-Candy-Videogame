@@ -26,7 +26,9 @@ void Blob::update() {
 	if (animation->update()) {
 		canBeDeleted = true;
 	}
-	//move();
+	if (!getIsMoving()) {
+		move();
+	}
 }
 
 void Blob::draw() {

@@ -120,12 +120,12 @@ void Angel::deleteRay() {
 
 void Angel::moveElement(bool move, list<Movable*> movables) {
 	if (move && !isMoving) {
-			isMoving = true;
 			findMovedElement(movables);
 	}
 
 	else if (move && isMoving) {
 			isMoving = false;
+			movedElement->moveObject(false);
 			movedElement = nullptr;
 	}
 }
@@ -143,19 +143,20 @@ void Angel::findMovedElement(list<Movable*> movables) {
 	for (auto const& movable : movables) {
 		if (movable->getPathY() == pathY) {
 			if (movable->getPathX() == pathX) {
-				cout << "mismo X";
 				movedElement = movable;
-				return;
+				isMoving = true;
+				break;
 			}
 			else if (movable->getPathX() == pathX + orientation) {
 				movedElement = movable;
+				isMoving = true;
 			}
 		}
 
 	}//for
 
-	if (movedElement == nullptr) {
-		isMoving = false;
+	if (isMoving) {
+		movedElement->moveObject(true);
 	}
 }
 
