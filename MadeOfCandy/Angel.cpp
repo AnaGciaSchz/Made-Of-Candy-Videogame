@@ -7,6 +7,10 @@ Angel::Angel(float pathX, float pathY, Game* game)
 	canShoot = true;
 	ray = nullptr;
 
+
+	isMoving = false;
+	movedElement = nullptr;
+
 	audioRay = new Audio("res/music/effects/Ray.wav", false);
 
 	aLeft= new Animation("res/characters/Angel/Robbie/Robbie_left.png", getWidth(), getHeight(),
@@ -47,6 +51,9 @@ void Angel::moveX(float axis) {
 		}
 
 		incrementX(axis);
+		if (isMoving) {
+			movedElement->move(axis, 0);
+		}
 	}
 	
 }
@@ -75,6 +82,10 @@ void Angel::moveY(float axis) {
 
 		}
 		incrementY(axis);
+
+		if(isMoving) {
+			movedElement->move(0, axis);
+		}
 	}
 	
 }
@@ -104,6 +115,47 @@ void Angel::deleteRay() {
 	if (ray->isInRender()==false) {
 		delete ray;
 		ray = nullptr;
+	}
+}
+
+void Angel::moveElement(bool move, list<Movable*> movables) {
+	if (move && !isMoving) {
+			isMoving = true;
+			findMovedElement(movables);
+	}
+
+	else if (!move && isMoving) {
+			isMoving = false;
+			movedElement = nullptr;
+	}
+}
+
+void Angel::findMovedElement(list<Movable*> movables) {
+	int pathX = getPathX();
+	int pathY = getPathY();
+	int orientation = 0;
+	if (animation == aRight || animation == aRightUp) {
+		orientation = 1;
+	}
+	else {
+		orientation = -1;
+	}
+	for (auto const& movable : movables) {
+		if (movable->getPathY() == pathY) {
+			if (movable->getPathX() == pathX) {
+				cout << "mismo X";
+				movedElement = movable;
+				return;
+			}
+			else if (movable->getPathX() == pathX + orientation) {
+				movedElement = movable;
+			}
+		}
+
+	}//for
+
+	if (movedElement == nullptr) {
+		isMoving = false;
 	}
 }
 

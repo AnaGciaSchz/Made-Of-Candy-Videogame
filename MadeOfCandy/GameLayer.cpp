@@ -9,6 +9,7 @@ void GameLayer::init() {
 	background = new Background("res/world/City.png", WIDTH * 0.5, HEIGHT * 0.5,-1, getGame());
 
 	enemies.clear();
+	movables.clear();
 	loadMap("res/world/maps/0.txt");
 
 	textLifes = new Text("", WIDTH * 0.92, HEIGHT * 0.04, getGame());
@@ -32,7 +33,7 @@ void GameLayer::processControls() {
 		keysToControls(event);
 	}
 	angel->shoot(controlShoot);
-//	angel->moveElement(controlMoveElement);
+	angel->moveElement(controlMoveElement, movables);
 	if (controlMoveX > 0 || controlMoveX < 0) {
 		angel->moveX(controlMoveX);
 		controlMoveX = 0;
@@ -102,7 +103,7 @@ void GameLayer::keysToControls(SDL_Event event) {
 			controlShoot = true;
 			break;
 		case SDLK_LSHIFT:
-			controlMoveElement = true;
+			controlMoveElement = !controlMoveElement;
 			break;
 		}
 	}
@@ -193,7 +194,9 @@ void GameLayer::loadMapObject(char character, float x, float y) {
 		break;
 	}
 	case 'b': {
-		enemies.push_back(new Blob(x, y, getGame()));
+		Enemy* enemy = new Blob(x, y, getGame());
+		enemies.push_back(enemy);
+		movables.push_back(enemy);
 		break;
 	}
 	}

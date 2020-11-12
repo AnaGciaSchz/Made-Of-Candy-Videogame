@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Actor.h"
+#include "Movable.h"
 #include "TheGirl.h"
 #include "Angel.h"
 
@@ -9,7 +9,7 @@
 /**
 * Class that represent an enemy
 */
-class Enemy : public Actor
+class Enemy : public Movable
 {
 public:
 	Enemy(string filename, int damage, int width, int height,int pathX, int pathY, Game* game);

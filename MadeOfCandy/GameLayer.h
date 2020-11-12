@@ -13,7 +13,6 @@
 #include "Text.h"
 #include "Audio.h"
 
-#include <list>
 #include <fstream> 
 #include <sstream> 
 
@@ -88,6 +87,11 @@ private:
 	* Enemies of the level
 	*/
 	list<Enemy*> enemies;
+
+	/**
+	* Movable items of the level
+	*/
+	list<Movable*> movables;
 
 	/**
 	* Icon and text for the lifes

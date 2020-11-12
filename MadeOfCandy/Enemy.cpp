@@ -1,7 +1,7 @@
 #include "Enemy.h"
 
 Enemy::Enemy(string filename, int damage, int width, int height, int pathX, int pathY, Game* game)
-	: Actor(filename, width, height, pathX, pathY, game) {
+	: Movable(filename, width, height, pathX, pathY, game) {
 
 	this->damage = damage;
 	this->dead = false;
