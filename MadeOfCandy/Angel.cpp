@@ -124,7 +124,7 @@ void Angel::moveElement(bool move, list<Movable*> movables) {
 			findMovedElement(movables);
 	}
 
-	else if (!move && isMoving) {
+	else if (move && isMoving) {
 			isMoving = false;
 			movedElement = nullptr;
 	}

@@ -33,7 +33,10 @@ void GameLayer::processControls() {
 		keysToControls(event);
 	}
 	angel->shoot(controlShoot);
-	angel->moveElement(controlMoveElement, movables);
+	if (controlMoveElement) {
+		angel->moveElement(controlMoveElement, movables);
+		controlMoveElement = false;
+	}
 	if (controlMoveX > 0 || controlMoveX < 0) {
 		angel->moveX(controlMoveX);
 		controlMoveX = 0;
@@ -103,7 +106,7 @@ void GameLayer::keysToControls(SDL_Event event) {
 			controlShoot = true;
 			break;
 		case SDLK_LSHIFT:
-			controlMoveElement = !controlMoveElement;
+			controlMoveElement = true;
 			break;
 		}
 	}
