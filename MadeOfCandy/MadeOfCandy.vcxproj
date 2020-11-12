@@ -158,6 +158,7 @@
     <ClInclude Include="Background.h" />
     <ClInclude Include="Blob.h" />
     <ClInclude Include="CelestialRay.h" />
+    <ClInclude Include="Cookie.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameLayer.h" />
@@ -174,6 +175,7 @@
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Blob.cpp" />
     <ClCompile Include="CelestialRay.cpp" />
+    <ClCompile Include="Cookie.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameLayer.cpp" />

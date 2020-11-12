@@ -84,6 +84,9 @@
     <ClCompile Include="Movable.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="Cookie.cpp">
+      <Filter>Archivos de origen\Actors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -127,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="Movable.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Cookie.h">
+      <Filter>Archivos de encabezado\Actors</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

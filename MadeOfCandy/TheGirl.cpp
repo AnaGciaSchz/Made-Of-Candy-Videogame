@@ -67,6 +67,9 @@ void TheGirl::moveY() {
 	}
 
 }
+void TheGirl::getOneLife() {
+	lifes++;
+}
 
 void TheGirl::loseLife(int damage) {
 	audioDamage->play();

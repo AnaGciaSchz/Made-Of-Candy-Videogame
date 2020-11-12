@@ -17,6 +17,7 @@ public:
 	void moveY();
 
 	void loseLife(int damage);
+	void getOneLife();
 	int getLife();
 	bool isDead();
 

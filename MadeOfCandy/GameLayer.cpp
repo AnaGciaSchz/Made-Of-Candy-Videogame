@@ -10,6 +10,7 @@ void GameLayer::init() {
 
 	enemies.clear();
 	movables.clear();
+	cookies.clear();
 	loadMap("res/world/maps/0.txt");
 
 	textLifes = new Text("", WIDTH * 0.92, HEIGHT * 0.04, getGame());
@@ -59,7 +60,12 @@ void GameLayer::update() {
 		enemy->update();
 	}
 
+	for (auto const& cookie : cookies) {
+		cookie->update();
+	}
+
 	enemyColisions();
+	cookieColisions();
 }
 
 void GameLayer::draw() {
@@ -73,6 +79,10 @@ void GameLayer::draw() {
 
 	for (auto const& enemy : enemies) {
 		enemy->draw();
+	}
+
+	for (auto const& cookie : cookies) {
+		cookie->draw();
 	}
 
 	SDL_RenderPresent(getGame()->getRenderer()); 
@@ -161,6 +171,34 @@ void GameLayer::enemyColisions() {
 
 }
 
+void GameLayer::cookieColisions() {
+	list<Cookie*> deleteCookies;
+
+	//girl and cookie
+	for (auto const& cookie : cookies) {
+		if (girl->isOverlap(cookie)) {
+			cookie->addLife(girl);
+			textLifes->content = to_string(girl->getLife());
+
+			bool eInList = std::find(deleteCookies.begin(),
+				deleteCookies.end(),
+				cookie) != deleteCookies.end();
+
+			if (!eInList) {
+				deleteCookies.push_back(cookie);
+			}
+		}
+	}
+
+
+	for (auto const& delCookie : deleteCookies) {
+			cookies.remove(delCookie);
+			delete delCookie;
+	}
+	deleteCookies.clear();
+
+}
+
 
 void GameLayer::loadMap(string name) {
 	char character;
@@ -200,6 +238,12 @@ void GameLayer::loadMapObject(char character, float x, float y) {
 		Enemy* enemy = new Blob(x, y, getGame());
 		enemies.push_back(enemy);
 		movables.push_back(enemy);
+		break;
+	}
+	case 'C':{
+		Cookie* cookie = new Cookie(x, y, getGame());
+		cookies.push_back(cookie);
+		movables.push_back(cookie);
 		break;
 	}
 	}

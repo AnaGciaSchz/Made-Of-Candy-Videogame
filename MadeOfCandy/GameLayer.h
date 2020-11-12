@@ -10,6 +10,8 @@
 #include "Enemy.h"
 #include "Blob.h"
 
+#include "Cookie.h"
+
 #include "Text.h"
 #include "Audio.h"
 
@@ -55,6 +57,12 @@ public:
 	*/
 	void enemyColisions();
 
+
+	/**
+	* Method to control colisions with cookies
+	*/
+	void cookieColisions();
+
 	void loadMap(string name);
 	void loadMapObject(char character, float x, float y);
 
@@ -87,6 +95,11 @@ private:
 	* Enemies of the level
 	*/
 	list<Enemy*> enemies;
+
+	/**
+	* Cookies of the level
+	*/
+	list<Cookie*> cookies;
 
 	/**
 	* Movable items of the level
