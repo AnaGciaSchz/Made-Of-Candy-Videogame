@@ -18,6 +18,10 @@ void GameLayer::init() {
 	lifes = new Actor("res/icons/heart.png",
 		WIDTH * 0.85, HEIGHT * 0.05, 24, 24,0,0, getGame());
 
+	rayIcon = new Actor("res/icons/CelestialRayIcon.png",
+		WIDTH * 0.05, HEIGHT * 0.05, 34, 31, 0, 0, getGame());
+
+
 	controlShoot = false;
 	controlMoveElement = false;
 	controlMoveY = 0;
@@ -33,7 +37,12 @@ void GameLayer::processControls() {
 	while (SDL_PollEvent(&event)) {
 		keysToControls(event);
 	}
-	angel->shoot(controlShoot);
+	if (controlShoot) {
+		rayIcon = new Actor("res/icons/NoCelestialRayIcon.png",
+			WIDTH * 0.05, HEIGHT * 0.05, 34, 31, 0, 0, getGame());
+		angel->shoot(controlShoot);
+		controlShoot = false;
+	}
 	if (controlMoveElement) {
 		angel->moveElement(controlMoveElement, movables);
 		controlMoveElement = false;
@@ -73,6 +82,8 @@ void GameLayer::draw() {
 
 	lifes->draw();
 	textLifes->draw();
+
+	rayIcon->draw();
 
 	angel->draw();
 	girl->draw();

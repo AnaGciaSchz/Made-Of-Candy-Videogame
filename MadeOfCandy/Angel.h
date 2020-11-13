@@ -21,6 +21,8 @@ public:
 	void moveElement(bool move, list<Movable*> movables);
 	void moveX(float axis);
 	void moveY(float axis);
+	int getOrientation();
+	bool emptySlotForElement(list<Movable*> movables);
 	void cantShoot();
 	void deleteRay();
 

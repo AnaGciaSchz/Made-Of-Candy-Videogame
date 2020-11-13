@@ -120,6 +120,12 @@ private:
 	Text* textLifes;
 
 	/**
+	* Icon for the ray
+	*/
+	Actor* rayIcon;
+
+
+	/**
 	* Number of paths in the game
 	*/
 	int paths;

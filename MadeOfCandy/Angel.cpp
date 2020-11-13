@@ -65,7 +65,7 @@ void Angel::moveY(float axis) {
 	}
 	else {
 		if (axis < 0) {
-			if (animation == aRight || animation == aRightUp) {
+			if (getOrientation() == 1) {
 				animation = aRightUp;
 			}
 			else {
@@ -73,7 +73,7 @@ void Angel::moveY(float axis) {
 			}
 		}
 		else {
-			if (animation == aRightUp || animation == aRight) {
+			if (getOrientation() == 1) {
 				animation = aRight;
 			}
 			else {
@@ -94,7 +94,7 @@ void Angel::shoot(bool shoot) {
 	if (shoot && canShoot) {
 		audioRay->play();
 		cantShoot();
-		if (animation == aLeft || animation == aLeftUp) {
+		if (getOrientation() == -1) {
 			ray = new CelestialRay(getPathX(), getPathY(), 30,true, getGame());
 		}
 		else {
@@ -124,36 +124,41 @@ void Angel::moveElement(bool move, list<Movable*> movables) {
 	}
 
 	else if (move && isMoving) {
+		if (emptySlotForElement(movables)) {
 			isMoving = false;
 			movedElement->moveObject(false);
 			movedElement = nullptr;
+		}
 	}
 }
 
-void Angel::findMovedElement(list<Movable*> movables) {
-	int pathX = getPathX();
-	int pathY = getPathY();
-	int orientation = 0;
-	if (animation == aRight || animation == aRightUp) {
-		orientation = 1;
-	}
-	else {
-		orientation = -1;
-	}
+bool Angel::emptySlotForElement(list<Movable*> movables) {
 	for (auto const& movable : movables) {
-		if (movable->getPathY() == pathY) {
-			if (movable->getPathX() == pathX) {
+			if (movedElement->isOverlap(movable) && movable != movedElement) {
+				return false;
+			}
+	}
+	return true;
+}
+
+int Angel::getOrientation() {
+	if (animation == aRight || animation == aRightUp) {
+		return 1;
+	}
+	return -1;
+}
+
+void Angel::findMovedElement(list<Movable*> movables) {
+	int x = 100;
+	for (auto const& movable : movables) {
+		if(isOverlap(movable) && abs(movable->getX()-getX())<x){
 				movedElement = movable;
+				x = abs(movable->getX() - getX());
 				isMoving = true;
 				break;
-			}
-			else if (movable->getPathX() == pathX + orientation) {
-				movedElement = movable;
-				isMoving = true;
-			}
 		}
 
-	}//for
+	}
 
 	if (isMoving) {
 		movedElement->moveObject(true);
