@@ -13,6 +13,7 @@ TheGirl::TheGirl(int timeY,float v, int pathX, int pathY, Game* game)
 	this->timeStop = 100;
 
 	audioDamage = new Audio("res/music/effects/GirlDamage.wav", false);
+	audioAddLife = new Audio("res/music/effects/GirlAddLife.wav", false);
 
 	aRight = new Animation("res/characters/TheGirl/Anna/Anna_right.png", getWidth(), getHeight(),
 		96, 50, 6, 3, true, game);
@@ -68,6 +69,7 @@ void TheGirl::moveY() {
 
 }
 void TheGirl::addLife(int life) {
+	audioAddLife->play();
 	lifes+=life;
 }
 

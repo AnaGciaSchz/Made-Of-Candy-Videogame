@@ -39,6 +39,7 @@ private:
 	Animation* aRight;
 
 	Audio* audioDamage;
+	Audio* audioAddLife;
 
 	bool stop;
 	int timeStop;
