@@ -20,6 +20,7 @@
 
 #include <fstream> 
 #include <sstream> 
+#include <vector>
 
 /**
 * Layer for the execution of the game
@@ -118,8 +119,9 @@ private:
 	/**
 	* List of recolectables
 	*/
-	list<bool> gainedRecolectables = { false,false,false,false,false };
+	vector<bool> gainedRecolectables = { false,false,false,false,false };
 	int numberOfGainedRecolectables = 0;
+	Recolectable* currentRecolectable;
 
 	/**
 	* Icon and text for the lifes

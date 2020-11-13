@@ -80,6 +80,17 @@ void GameLayer::update() {
 		f->update();
 	}
 
+	if (currentRecolectable != nullptr) {
+		currentRecolectable->update();
+		if (girl->isOverlap(currentRecolectable)) {
+			numberOfGainedRecolectables++;
+			gainedRecolectables[getGame()->getCurrentLevel()] = true;
+			delete currentRecolectable;
+			currentRecolectable = nullptr;
+		}
+	}
+
+
 	enemyColisions();
 	cookieColisions();
 	finalOfLevelCollision();
@@ -106,6 +117,10 @@ void GameLayer::draw() {
 
 	for (auto const& f : finals) {
 		f->draw();
+	}
+
+	if (currentRecolectable != nullptr) {
+		currentRecolectable->draw();
 	}
 
 	SDL_RenderPresent(getGame()->getRenderer()); 
@@ -287,8 +302,13 @@ void GameLayer::loadMapObject(char character, float x, float y) {
 		break;
 	}
 	case 'R': {
-		//Si aun no se tiene el recolectable del nivel, se dibuja el correspondiente
-		//Si ya se tiene, no se dibuja nada
+		if (gainedRecolectables[getGame()->getCurrentLevel()] == false) {
+			currentRecolectable = new Recolectable("res/recolectables/recolectable_" + to_string(getGame()->getCurrentLevel()) + ".png", x, y, getGame());
+			movables.push_back(currentRecolectable);
+		}
+		else {
+			currentRecolectable = nullptr;
+		}
 	}
 	case 'F': {
 		finals.push_back(new FinalOfLevel(x,y,getGame()));

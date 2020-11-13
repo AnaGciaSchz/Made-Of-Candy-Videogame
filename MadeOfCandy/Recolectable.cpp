@@ -1,7 +1,7 @@
 #include "Recolectable.h"
 
 Recolectable::Recolectable(string filename,int pathX, int pathY, Game* game)
-	: Movable(filename, 15, 16, pathX, pathY, game) {
+	: Movable(filename, 16, 16, pathX, pathY, game) {
 
 }
 void Recolectable::update() {
