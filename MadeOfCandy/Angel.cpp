@@ -149,11 +149,9 @@ int Angel::getOrientation() {
 }
 
 void Angel::findMovedElement(list<Movable*> movables) {
-	int x = 100;
 	for (auto const& movable : movables) {
-		if(isOverlap(movable) && abs(movable->getX()-getX())<x){
+		if(isOverlap(movable)){
 				movedElement = movable;
-				x = abs(movable->getX() - getX());
 				isMoving = true;
 				break;
 		}

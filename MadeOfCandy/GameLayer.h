@@ -13,6 +13,8 @@
 #include "Cookie.h"
 #include "Recolectable.h"
 
+#include "FinalOfLevel.h"
+
 #include "Text.h"
 #include "Audio.h"
 
@@ -58,6 +60,7 @@ public:
 	*/
 	void enemyColisions();
 
+	void finalOfLevelCollision();
 
 	/**
 	* Method to control colisions with cookies
@@ -106,6 +109,11 @@ private:
 	* Movable items of the level
 	*/
 	list<Movable*> movables;
+
+	/**
+	* final of the level
+	*/
+	list<FinalOfLevel*> finals;
 
 	/**
 	* List of recolectables

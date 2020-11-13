@@ -8,15 +8,11 @@ GameLayer::GameLayer(Game* game) : Layer(game) {
 void GameLayer::init() {
 	background = new Background("res/world/City.png", WIDTH * 0.5, HEIGHT * 0.5,-1, getGame());
 
+	finals.clear();
 	enemies.clear();
 	movables.clear();
 	cookies.clear();
-	loadMap("res/world/maps/0.txt");
-
-	textLifes = new Text("", WIDTH * 0.92, HEIGHT * 0.04, getGame());
-	textLifes->content = to_string(girl->getLife());
-	lifes = new Actor("res/icons/heart.png",
-		WIDTH * 0.85, HEIGHT * 0.05, 24, 24,0,0, getGame());
+	loadMap("res/world/maps/" + to_string(getGame()->getCurrentLevel()) + ".txt");
 
 	rayIcon = new Actor("res/icons/CelestialRayIcon.png",
 		WIDTH * 0.05, HEIGHT * 0.05, 34, 31, 0, 0, getGame());
@@ -26,9 +22,16 @@ void GameLayer::init() {
 	controlMoveElement = false;
 	controlMoveY = 0;
 	controlMoveX = 0;
+	if (getGame()->getCurrentLevel() == 0) {
+		textLifes = new Text("", WIDTH * 0.92, HEIGHT * 0.04, getGame());
+		lifes = new Actor("res/icons/heart.png",
+			WIDTH * 0.85, HEIGHT * 0.05, 24, 24, 0, 0, getGame());
 
-	audioBackground = new Audio("res/music/Candy.mp3", true);
-	audioBackground->play();
+		audioBackground = new Audio("res/music/Candy.mp3", true);
+		audioBackground->play();
+	}
+
+	textLifes->content = to_string(girl->getLife());
 
 }
 
@@ -73,8 +76,13 @@ void GameLayer::update() {
 		cookie->update();
 	}
 
+	for (auto const& f : finals) {
+		f->update();
+	}
+
 	enemyColisions();
 	cookieColisions();
+	finalOfLevelCollision();
 }
 
 void GameLayer::draw() {
@@ -94,6 +102,10 @@ void GameLayer::draw() {
 
 	for (auto const& cookie : cookies) {
 		cookie->draw();
+	}
+
+	for (auto const& f : finals) {
+		f->draw();
 	}
 
 	SDL_RenderPresent(getGame()->getRenderer()); 
@@ -210,6 +222,23 @@ void GameLayer::cookieColisions() {
 
 }
 
+void GameLayer::finalOfLevelCollision() {
+
+	for (auto const& f : finals) {
+		if (girl->isOverlap(f)) {
+			int newLevel = getGame()->getCurrentLevel() + 1;
+			getGame()->setCurrentLevel(newLevel);
+			if (newLevel == LEVELS) {
+				cout << "Finished game\n";
+			}
+				init();
+				return;
+		}
+	}
+
+
+}
+
 
 void GameLayer::loadMap(string name) {
 	char character;
@@ -260,6 +289,10 @@ void GameLayer::loadMapObject(char character, float x, float y) {
 	case 'R': {
 		//Si aun no se tiene el recolectable del nivel, se dibuja el correspondiente
 		//Si ya se tiene, no se dibuja nada
+	}
+	case 'F': {
+		finals.push_back(new FinalOfLevel(x,y,getGame()));
+		break;
 	}
 	}
 }

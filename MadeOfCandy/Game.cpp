@@ -23,6 +23,7 @@ Game::Game() {
 	TTF_Init();
 	changeFont(TTF_OpenFont("res/fonts/monogram.ttf", 24));
 
+	currentLevel = 0;
 
 	loopActive = true;
 	loop();
@@ -53,6 +54,13 @@ void Game::loop() {
 	}
 
 
+}
+
+int Game::getCurrentLevel() {
+	return currentLevel;
+}
+void Game::setCurrentLevel(int level) {
+	this->currentLevel = level;
 }
 
 void Game::stopGame() {

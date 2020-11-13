@@ -34,6 +34,8 @@ class Layer; //To find the Layer class and dont get errors
 
 #define LIMIT_Y 90
 
+#define LEVELS 5
+
 /**
 *Class that represents the basic logic in the game (window, render and loop that initiates
 * the game)
@@ -57,6 +59,9 @@ public:
 	*/
 	Game();
 
+	int getCurrentLevel();
+	void setCurrentLevel(int level);
+
 	void stopGame();
 	void changeFont(TTF_Font* font);
 	TTF_Font* getFont();
@@ -71,6 +76,9 @@ private:
 	* Window of the game
 	*/
 	SDL_Window* window;
+
+	int currentLevel;
+
 	/**
 	* Render of the game
 	*/
