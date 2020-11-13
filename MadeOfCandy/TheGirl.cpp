@@ -6,6 +6,7 @@ TheGirl::TheGirl(int timeY,float v, int pathX, int pathY, Game* game)
 	this->actualTimeY = timeY;
 
 	this->lifes = 3;
+	this->invulnerableTime = 0;
 	
 	this->v = v;
 
@@ -44,10 +45,21 @@ void TheGirl::update() {
 				stop = false;
 			}
 		}
+
+		if (invulnerableTime > 0) {
+			invulnerableTime--;
+		}
 }
 
 void TheGirl::draw() {
-	aRight->draw(x, y);
+	if (invulnerableTime == 0) {
+		aRight->draw(x, y);
+	}
+	else {
+		if (invulnerableTime % 10 >= 0 && invulnerableTime % 10 <= 5) {
+			aRight->draw(x, y);
+		}
+	}
 }
 
 void TheGirl::moveY() {
@@ -74,9 +86,12 @@ void TheGirl::addLife(int life) {
 }
 
 void TheGirl::loseLife(int damage) {
-	audioDamage->play();
-	lifes -= damage;
-	stop = true;
+	if (invulnerableTime <= 0) {
+		audioDamage->play();
+		lifes -= damage;
+		stop = true;
+		invulnerableTime = 100;
+	}
 }
 
 int TheGirl::getLife() {

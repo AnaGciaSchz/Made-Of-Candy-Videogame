@@ -31,6 +31,8 @@ private:
 	*/
 	int lifes;
 
+	int invulnerableTime;
+
 	/**
 	* velocity of the girl
 	*/
