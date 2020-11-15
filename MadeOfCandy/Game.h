@@ -68,6 +68,9 @@ public:
 	int getInputType();
 	void setInputType(int input);
 
+	void setLayer(Layer* layer);
+	Layer* getGameLayer();
+
 	void stopGame();
 	void changeFont(TTF_Font* font);
 	TTF_Font* getFont();
@@ -93,6 +96,9 @@ private:
 	* Layer with the basic logic for the game
 	*/
 	Layer* gameLayer;
+
+	Layer* layer;
+	Layer* menuLayer;
 	/**
 	* Boolean to execute the game until it need to be quitted
 	*/

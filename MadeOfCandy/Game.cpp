@@ -1,6 +1,7 @@
 
 #include "Game.h"
 #include "GameLayer.h"
+#include "MenuLayer.h"
 
 SDL_Renderer* Game::getRenderer() {
 	return renderer;
@@ -19,6 +20,9 @@ Game::Game() {
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
 
 	gameLayer = new GameLayer(this);
+	menuLayer = new MenuLayer(this);
+
+	layer = menuLayer;
 
 	TTF_Init();
 	changeFont(TTF_OpenFont("res/fonts/monogram.ttf", 24));
@@ -27,6 +31,13 @@ Game::Game() {
 
 	loopActive = true;
 	loop();
+}
+
+void Game::setLayer(Layer* layer) {
+	this->layer = layer;
+}
+Layer* Game::getGameLayer() {
+	return gameLayer;
 }
 
 void Game::loop() {
@@ -38,11 +49,11 @@ void Game::loop() {
 		initTick = SDL_GetTicks();
 
 		// get the controls 
-		gameLayer->processControls();
+		layer->processControls();
 		// update elements
-		gameLayer->update();
+		layer->update();
 		// draw
-		gameLayer->draw();
+		layer->draw();
 
 		endTick = SDL_GetTicks();
 		differenceTick = endTick - initTick;
