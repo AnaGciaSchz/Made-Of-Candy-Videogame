@@ -22,15 +22,24 @@ void GameLayer::init() {
 	controlMoveElement = false;
 	controlMoveY = 0;
 	controlMoveX = 0;
+
+	bool elementCaught = false; 
 	if (getGame()->getCurrentLevel() == 0) {
 		textLifes = new Text("", WIDTH * 0.92, HEIGHT * 0.04, getGame());
 		lifes = new Actor("res/icons/heart.png",
 			WIDTH * 0.85, HEIGHT * 0.05, 24, 24, 0, 0, getGame());
 
+		recolectableIcon = new Actor("res/icons/recolectableIcon.png",
+			WIDTH * 0.13, HEIGHT * 0.05, 25, 25, 0, 0, getGame());
+		textRecolectable= new Text("", WIDTH * 0.18, HEIGHT * 0.04, getGame());
+
+		textCaught = new Text("Element caught", WIDTH * 0.50, HEIGHT * 0.04, getGame());
+
 		audioBackground = new Audio("res/music/Candy.mp3", true);
 		audioBackground->play();
 	}
 
+	textRecolectable->content = "x" + to_string(numberOfGainedRecolectables);
 	textLifes->content = to_string(girl->getLife());
 
 }
@@ -47,7 +56,7 @@ void GameLayer::processControls() {
 		controlShoot = false;
 	}
 	if (controlMoveElement) {
-		angel->moveElement(controlMoveElement, movables);
+		elementCaught = angel->moveElement(controlMoveElement, movables);
 		controlMoveElement = false;
 	}
 	if (controlMoveX > 0 || controlMoveX < 0) {
@@ -82,8 +91,9 @@ void GameLayer::update() {
 
 	if (currentRecolectable != nullptr) {
 		currentRecolectable->update();
-		if (girl->isOverlap(currentRecolectable)) {
+		if (girl->isOverlap(currentRecolectable) && !currentRecolectable->getIsMoving()) {
 			numberOfGainedRecolectables++;
+			textRecolectable->content = "x" + to_string(numberOfGainedRecolectables);
 			gainedRecolectables[getGame()->getCurrentLevel()] = true;
 			delete currentRecolectable;
 			currentRecolectable = nullptr;
@@ -103,6 +113,13 @@ void GameLayer::draw() {
 	textLifes->draw();
 
 	rayIcon->draw();
+
+	recolectableIcon->draw();
+	textRecolectable->draw();
+
+	if (elementCaught) {
+		textCaught->draw();
+	}
 
 	angel->draw();
 	girl->draw();
@@ -214,7 +231,7 @@ void GameLayer::cookieColisions() {
 
 	//girl and cookie
 	for (auto const& cookie : cookies) {
-		if (girl->isOverlap(cookie)) {
+		if (girl->isOverlap(cookie) && !cookie->getIsMoving()) {
 			cookie->addLife(girl);
 			textLifes->content = to_string(girl->getLife());
 
@@ -241,6 +258,7 @@ void GameLayer::finalOfLevelCollision() {
 
 	for (auto const& f : finals) {
 		if (girl->isOverlap(f)) {
+			cout << "next level game\n";
 			int newLevel = getGame()->getCurrentLevel() + 1;
 			getGame()->setCurrentLevel(newLevel);
 			if (newLevel == LEVELS) {

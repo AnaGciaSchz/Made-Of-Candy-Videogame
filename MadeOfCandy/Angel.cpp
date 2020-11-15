@@ -118,7 +118,7 @@ void Angel::deleteRay() {
 	}
 }
 
-void Angel::moveElement(bool move, list<Movable*> movables) {
+bool Angel::moveElement(bool move, list<Movable*> movables) {
 	if (move && !isMoving) {
 			findMovedElement(movables);
 	}
@@ -130,6 +130,7 @@ void Angel::moveElement(bool move, list<Movable*> movables) {
 			movedElement = nullptr;
 		}
 	}
+	return isMoving;
 }
 
 bool Angel::emptySlotForElement(list<Movable*> movables) {

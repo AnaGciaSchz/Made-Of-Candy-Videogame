@@ -110,6 +110,8 @@ private:
 	* Movable items of the level
 	*/
 	list<Movable*> movables;
+	bool elementCaught;
+	Text* textCaught;
 
 	/**
 	* final of the level
@@ -122,6 +124,11 @@ private:
 	vector<bool> gainedRecolectables = { false,false,false,false,false };
 	int numberOfGainedRecolectables = 0;
 	Recolectable* currentRecolectable;
+	/**
+* Icon for the recolectable
+*/
+	Actor* recolectableIcon;
+	Text* textRecolectable;
 
 	/**
 	* Icon and text for the lifes

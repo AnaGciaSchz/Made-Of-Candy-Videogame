@@ -18,7 +18,7 @@ public:
 	void update();
 	void draw() override;
 	void shoot(bool shoot);
-	void moveElement(bool move, list<Movable*> movables);
+	bool moveElement(bool move, list<Movable*> movables);
 	void moveX(float axis);
 	void moveY(float axis);
 	int getOrientation();
