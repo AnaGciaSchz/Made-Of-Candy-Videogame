@@ -17,6 +17,8 @@ Actor::Actor(string filename, int width, int height,int pathX, int pathY, Game* 
 
 	this->pathX = pathX;
 	this->pathY = pathY;
+
+	clicked = false;
 }
 
 Actor::Actor(string filename, int x, int y, int width, int height, int pathX, int pathY, Game* game) {
@@ -73,6 +75,18 @@ bool Actor::isInRender() {
 	}
 	return false;
 }
+
+bool Actor::containsPoint(int pointX, int pointY) {
+	if (pointY >= y - height / 2 &&
+		pointY <= y + height / 2 &&
+		pointX <= x + width / 2 &&
+		pointX >= x - width / 2) {
+		return true;
+	}
+	return false;
+}
+
+
 
 int Actor::getPathX() {
 	return pathX;

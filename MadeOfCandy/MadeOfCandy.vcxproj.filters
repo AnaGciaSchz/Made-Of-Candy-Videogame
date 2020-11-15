@@ -99,6 +99,9 @@
     <ClCompile Include="FinalOfLevel.cpp">
       <Filter>Archivos de origen\Actors\Items</Filter>
     </ClCompile>
+    <ClCompile Include="Pad.cpp">
+      <Filter>Archivos de origen\Actors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -151,6 +154,9 @@
     </ClInclude>
     <ClInclude Include="FinalOfLevel.h">
       <Filter>Archivos de encabezado\Actors\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Pad.h">
+      <Filter>Archivos de encabezado\Actors</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

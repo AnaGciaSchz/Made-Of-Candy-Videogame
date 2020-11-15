@@ -8,6 +8,10 @@ GameLayer::GameLayer(Game* game) : Layer(game) {
 void GameLayer::init() {
 	background = new Background("res/world/City.png", WIDTH * 0.5, HEIGHT * 0.5,-1, getGame());
 
+	buttonGrab = new Actor("res/interface/grab_button.png", WIDTH * 0.75, HEIGHT * 0.85,80,80,0, 0, getGame());
+	buttonShoot = new Actor("res/interface/shoot_button.png", WIDTH * 0.91, HEIGHT * 0.74,80,80, 0, 0, getGame());
+	pad = new Pad(WIDTH * 0.15, HEIGHT * 0.80, getGame());
+
 	finals.clear();
 	enemies.clear();
 	movables.clear();
@@ -47,7 +51,21 @@ void GameLayer::init() {
 void GameLayer::processControls() {
 	SDL_Event event;
 	while (SDL_PollEvent(&event)) {
-		keysToControls(event);
+		if (event.type == SDL_QUIT) {
+			getGame()->stopGame();
+		}
+		if (event.type == SDL_KEYDOWN) {
+			getGame()->setInputType(INPUTKEYBOARD);
+		}
+		if (event.type == SDL_MOUSEBUTTONDOWN) {
+			getGame()->setInputType(INPUTMOUSE);
+		}
+		if (getGame()->getInputType() == INPUTKEYBOARD) {
+			keysToControls(event);
+		}
+		if (getGame()->getInputType() == INPUTMOUSE) {
+			mouseToControls(event);
+		}
 	}
 	if (controlShoot) {
 		rayIcon = new Actor("res/icons/NoCelestialRayIcon.png",
@@ -109,14 +127,6 @@ void GameLayer::update() {
 void GameLayer::draw() {
 	background->draw();
 
-	lifes->draw();
-	textLifes->draw();
-
-	rayIcon->draw();
-
-	recolectableIcon->draw();
-	textRecolectable->draw();
-
 	if (elementCaught) {
 		textCaught->draw();
 	}
@@ -140,13 +150,24 @@ void GameLayer::draw() {
 		currentRecolectable->draw();
 	}
 
+	lifes->draw();
+	textLifes->draw();
+
+	rayIcon->draw();
+
+	recolectableIcon->draw();
+	textRecolectable->draw();
+
+	if (getGame()->getInputType() == INPUTMOUSE) {
+		buttonGrab->draw();
+		buttonShoot->draw();
+		pad->draw();
+	}
+
 	SDL_RenderPresent(getGame()->getRenderer()); 
 }
 
 void GameLayer::keysToControls(SDL_Event event) {
-	if (event.type == SDL_QUIT) {
-		getGame()->stopGame();
-	}
 
 	if (event.type == SDL_KEYDOWN) {
 		int code = event.key.keysym.sym;
@@ -176,6 +197,81 @@ void GameLayer::keysToControls(SDL_Event event) {
 		}
 	}
 }
+
+
+void GameLayer::mouseToControls(SDL_Event event) {
+
+	float motionX = event.motion.x;
+	float motionY = event.motion.y;
+	if (event.type == SDL_MOUSEBUTTONDOWN) {
+		if (buttonShoot->containsPoint(motionX, motionY)) {
+			controlShoot = true;
+		}
+		if (buttonGrab->containsPoint(motionX, motionY)) {
+			controlMoveElement = true;
+		}
+		if (pad->containsPoint(motionX, motionY)) {
+			pad->clicked = true;
+			//Y
+			controlMoveY = pad->getOrientationY(motionY);
+			cout << controlMoveY;
+			if (controlMoveY > -20 && controlMoveY < 20) {
+				controlMoveY = 0;
+			}
+			else if (controlMoveY > 0) {
+				controlMoveY = 1;
+			}
+			else {
+				controlMoveY = -1;
+			}
+			//X
+			controlMoveX = pad->getOrientationX(motionX);
+			if (controlMoveX > -20 && controlMoveX < 20) {
+				controlMoveX = 0;
+			}
+			else if (controlMoveX > 0) {
+				controlMoveX = 1;
+			}
+			else {
+				controlMoveX = -1;
+			}
+		}
+
+	}
+	else if(event.type == SDL_MOUSEMOTION){
+		if (pad->clicked && pad->containsPoint(motionX, motionY)) {
+			//Y
+			controlMoveY = pad->getOrientationY(motionY);
+			if (controlMoveY > -20 && controlMoveY < 20) {
+				controlMoveY = 0;
+			}
+			else if (controlMoveY > 0) {
+				controlMoveY = 1;
+			}
+			else {
+				controlMoveY = -1;
+			}
+			//X
+			controlMoveX = pad->getOrientationX(motionX);
+
+			if (controlMoveX > -20 && controlMoveX < 20) {
+				controlMoveX = 0;
+			}
+			else if (controlMoveX > 0) {
+				controlMoveX = 1;
+			}
+			else {
+				controlMoveX = -1;
+			}
+		}//if contains point
+	}
+		else {
+		pad->clicked = false; // han sacado el ratón del pad
+			controlMoveX = 0;
+		}
+}
+
+
 
 void GameLayer::enemyColisions() {
 	list<Enemy*> deleteEnemies;

@@ -17,6 +17,7 @@
 
 #include "Text.h"
 #include "Audio.h"
+#include "Pad.h"
 
 #include <fstream> 
 #include <sstream> 
@@ -52,9 +53,14 @@ public:
 	void draw() override;
 
 	/**
-	* Method to control the movement
+	* Method to control the movement with the keyboard
 	*/
 	void keysToControls(SDL_Event event);
+
+	/**
+	* Method to control the movement with the mouse
+	*/
+	void mouseToControls(SDL_Event event);
 
 	/**
 	* Method to control colisions with enemies
@@ -95,6 +101,13 @@ private:
 	bool controlMoveElement;
 	int controlMoveY;
 	int controlMoveX;
+	/**
+	*Interface elements
+	*/
+	Actor* buttonGrab;
+	Actor* buttonShoot;
+	Pad* pad;
+
 
 	/**
 	* Enemies of the level

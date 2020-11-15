@@ -165,6 +165,7 @@
     <ClInclude Include="GameLayer.h" />
     <ClInclude Include="Layer.h" />
     <ClInclude Include="Movable.h" />
+    <ClInclude Include="Pad.h" />
     <ClInclude Include="Recolectable.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="TheGirl.h" />
@@ -185,6 +186,7 @@
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Movable.cpp" />
+    <ClCompile Include="Pad.cpp" />
     <ClCompile Include="Recolectable.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="TheGirl.cpp" />

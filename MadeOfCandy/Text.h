@@ -16,6 +16,7 @@ public:
 	int width;
 	int height;
 	Game* game; 
+
 };
 
 

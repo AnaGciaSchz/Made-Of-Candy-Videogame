@@ -53,7 +53,14 @@ void Game::loop() {
 		}
 	}
 
+}
 
+void Game::setInputType(int input) {
+	this->input = input;
+}
+
+int Game::getInputType() {
+	return input;
 }
 
 int Game::getCurrentLevel() {

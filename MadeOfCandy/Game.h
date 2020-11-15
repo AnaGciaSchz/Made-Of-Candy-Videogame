@@ -36,6 +36,9 @@ class Layer; //To find the Layer class and dont get errors
 
 #define LEVELS 5
 
+#define INPUTKEYBOARD  1
+#define INPUTMOUSE  2
+
 /**
 *Class that represents the basic logic in the game (window, render and loop that initiates
 * the game)
@@ -61,6 +64,9 @@ public:
 
 	int getCurrentLevel();
 	void setCurrentLevel(int level);
+
+	int getInputType();
+	void setInputType(int input);
 
 	void stopGame();
 	void changeFont(TTF_Font* font);
@@ -101,5 +107,7 @@ private:
 	* Font to write
 	*/
 	TTF_Font* font;
+
+	int input;
 };
 

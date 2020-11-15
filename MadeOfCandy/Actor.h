@@ -31,6 +31,9 @@ public:
 	*/
 	bool isInRender();
 
+	bool containsPoint(int pointX, int pointY);
+	bool clicked;
+
 	int getX();
 	int getY();
 	int getWidth();
