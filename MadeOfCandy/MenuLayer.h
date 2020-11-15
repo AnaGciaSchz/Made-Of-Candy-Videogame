@@ -16,11 +16,14 @@ public:
 	void mouseToControls(SDL_Event event);
 
 private:
-	Background* background;
+	Background* backgroundMenu;
+	Background* backgroundEdit;
 	Actor* playButton;
 	Actor* editButton;
 	Actor* exitButton;
+	Actor* backButton;
 	bool controlContinue;
+	bool editMode;
 };
 
 

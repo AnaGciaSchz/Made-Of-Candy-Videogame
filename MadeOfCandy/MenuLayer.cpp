@@ -7,10 +7,16 @@ MenuLayer::MenuLayer(Game* game)
 
 void MenuLayer::init() {
 
-	background = new Background("res/interface/Menu.png", WIDTH * 0.5, HEIGHT * 0.5, getGame());
+	backgroundMenu = new Background("res/interface/Menu.png", WIDTH * 0.5, HEIGHT * 0.5, getGame());
 	playButton = new Actor("res/interface/Menu_playButton.png", WIDTH * 0.5, HEIGHT * 0.4, 106, 54, 0,0,getGame());
 	editButton = new Actor("res/interface/Menu_editButton.png", WIDTH * 0.5, HEIGHT * 0.6, 106, 54, 0,0,getGame());
 	exitButton = new Actor("res/interface/Menu_exitButton.png", WIDTH * 0.5, HEIGHT * 0.8, 106, 54, 0,0,getGame());
+	backButton = new Actor("res/interface/Menu_editBackButton.png", WIDTH * 0.7, HEIGHT * 0.8, 106, 54, 0, 0, getGame());
+
+	backgroundEdit = new Background("res/interface/Menu_edit.png", WIDTH * 0.5, HEIGHT * 0.5, getGame());
+
+	editMode = false;
+	controlContinue = false;
 }
 
 
@@ -47,19 +53,36 @@ void MenuLayer::processControls() {
 void MenuLayer::keysToControls(SDL_Event event) {
 	if (event.type == SDL_KEYDOWN) {
 		int code = event.key.keysym.sym;
-		switch (code) {
-		case SDLK_ESCAPE: 
-			getGame()->stopGame();
-			break;
-		case SDLK_SPACE: 
-			controlContinue = true;
-			break;
-		case SDLK_p:
-			controlContinue = true;
-			break;
-		case SDLK_x:
-			getGame()->stopGame();
-			break;
+		if (!editMode) {
+			switch (code) {
+			case SDLK_ESCAPE:
+				getGame()->stopGame();
+				break;
+			case SDLK_SPACE:
+				controlContinue = true;
+				break;
+			case SDLK_p:
+				controlContinue = true;
+				break;
+			case SDLK_x:
+				getGame()->stopGame();
+				break;
+			case SDLK_e:
+				editMode = true;
+				break;
+			}
+		}else{//editMode
+			switch (code) {
+			case SDLK_ESCAPE:
+				getGame()->stopGame();
+				break;
+			case SDLK_SPACE:
+				editMode = false;
+				break;
+			case SDLK_b:
+				editMode = false;
+				break;
+			}
 		}
 	}
 }
@@ -69,11 +92,21 @@ void MenuLayer::mouseToControls(SDL_Event event) {
 	float motionY = event.motion.y;
 
 	if (event.type == SDL_MOUSEBUTTONDOWN) {
-		if (playButton->containsPoint(motionX, motionY)) {
-			controlContinue = true;
+		if (!editMode) {
+			if (playButton->containsPoint(motionX, motionY)) {
+				controlContinue = true;
+			}
+			if (exitButton->containsPoint(motionX, motionY)) {
+				getGame()->stopGame();
+			}
+			if (editButton->containsPoint(motionX, motionY)) {
+				editMode = true;
+			}
 		}
-		if (exitButton->containsPoint(motionX, motionY)) {
-			getGame()->stopGame();
+		else {//editMode
+			if (backButton->containsPoint(motionX, motionY)) {
+				editMode = false;
+			}
 		}
 	}
 }
@@ -84,10 +117,16 @@ void MenuLayer::mouseToControls(SDL_Event event) {
 
 
 void MenuLayer::draw() {
-	background->draw();
-	playButton->draw();
-	editButton->draw();
-	exitButton->draw();
+	if (!editMode) {
+		backgroundMenu->draw();
+		playButton->draw();
+		editButton->draw();
+		exitButton->draw();
+	}
+	else {
+		backgroundEdit->draw();
+		backButton->draw();
+	}
 
 	SDL_RenderPresent(getGame()->getRenderer());
 }
