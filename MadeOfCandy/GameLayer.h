@@ -161,6 +161,7 @@ private:
 	int paths;
 
 	Audio* audioBackground;
+	Audio* audiogetRecolectable;
 
 	int mapWidth;
 

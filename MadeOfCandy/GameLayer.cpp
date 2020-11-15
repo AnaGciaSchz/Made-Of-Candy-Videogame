@@ -40,6 +40,7 @@ void GameLayer::init() {
 		textCaught = new Text("Element caught", WIDTH * 0.50, HEIGHT * 0.04, getGame());
 
 		audioBackground = new Audio("res/music/Candy.mp3", true);
+		audiogetRecolectable = new Audio("res/music/effects/GirlAddLife.wav", false);
 		audioBackground->play();
 	}
 
@@ -110,6 +111,8 @@ void GameLayer::update() {
 	if (currentRecolectable != nullptr) {
 		currentRecolectable->update();
 		if (girl->isOverlap(currentRecolectable) && !currentRecolectable->getIsMoving()) {
+			audiogetRecolectable->play();
+
 			numberOfGainedRecolectables++;
 			textRecolectable->content = "x" + to_string(numberOfGainedRecolectables);
 			gainedRecolectables[getGame()->getCurrentLevel()] = true;
