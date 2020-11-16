@@ -428,6 +428,7 @@ void GameLayer::loadMapObject(char character, float x, float y) {
 		else {
 			currentRecolectable = nullptr;
 		}
+		break;
 	}
 	case 'F': {
 		finals.push_back(new FinalOfLevel(x,y,getGame()));
