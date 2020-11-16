@@ -2,6 +2,24 @@
 
 
 GameLayer::GameLayer(Game* game) : Layer(game) {
+	textLifes = new Text("", WIDTH * 0.92, HEIGHT * 0.04, getGame());
+	lifes = new Actor("res/icons/heart.png",
+		WIDTH * 0.85, HEIGHT * 0.05, 24, 24, 0, 0, getGame());
+
+	recolectableIcon = new Actor("res/icons/recolectableIcon.png",
+		WIDTH * 0.13, HEIGHT * 0.05, 25, 25, 0, 0, getGame());
+	textRecolectable = new Text("", WIDTH * 0.18, HEIGHT * 0.04, getGame());
+
+	textCaught = new Text("Element caught", WIDTH * 0.50, HEIGHT * 0.04, getGame());
+
+	audioBackground = new Audio("res/music/Candy.mp3", true);
+	audiogetRecolectable = new Audio("res/music/effects/Recolectable.wav", false);
+	audioReturnToMenu = new Audio("res/music/effects/Cancel.wav", false);
+	audioBackground->play();
+
+	pause = true;
+	message = new Actor("res/interface/howToPlay.png", WIDTH * 0.5, HEIGHT * 0.5,
+		WIDTH, HEIGHT,0,0, game);
 	init();
 }
 
@@ -30,22 +48,6 @@ void GameLayer::init() {
 	controlMoveX = 0;
 
 	bool elementCaught = false; 
-	if (getGame()->getCurrentLevel() == 0) {
-		textLifes = new Text("", WIDTH * 0.92, HEIGHT * 0.04, getGame());
-		lifes = new Actor("res/icons/heart.png",
-			WIDTH * 0.85, HEIGHT * 0.05, 24, 24, 0, 0, getGame());
-
-		recolectableIcon = new Actor("res/icons/recolectableIcon.png",
-			WIDTH * 0.13, HEIGHT * 0.05, 25, 25, 0, 0, getGame());
-		textRecolectable= new Text("", WIDTH * 0.18, HEIGHT * 0.04, getGame());
-
-		textCaught = new Text("Element caught", WIDTH * 0.50, HEIGHT * 0.04, getGame());
-
-		audioBackground = new Audio("res/music/Candy.mp3", true);
-		audiogetRecolectable = new Audio("res/music/effects/Recolectable.wav", false);
-		audioReturnToMenu = new Audio("res/music/effects/Cancel.wav", false);
-		audioBackground->play();
-	}
 
 	textRecolectable->content = "x" + to_string(numberOfGainedRecolectables);
 	textLifes->content = to_string(girl->getLife());
@@ -71,6 +73,12 @@ void GameLayer::processControls() {
 			mouseToControls(event);
 		}
 	}
+
+	if (controlContinue) {
+		pause = false;
+		controlContinue = false;
+	}
+
 	if (controlShoot) {
 		rayIcon = new Actor("res/icons/NoCelestialRayIcon.png",
 			WIDTH * 0.05, HEIGHT * 0.05, 34, 31, 0, 0, getGame());
@@ -95,6 +103,10 @@ void GameLayer::processControls() {
 }
 
 void GameLayer::update() {
+	if (pause) {
+		return;
+	}
+
 	background->update();
 	angel->update();
 	girl->update();
@@ -164,10 +176,14 @@ void GameLayer::draw() {
 	recolectableIcon->draw();
 	textRecolectable->draw();
 
-	if (getGame()->getInputType() == INPUTMOUSE) {
+	if (getGame()->getInputType() == INPUTMOUSE && !pause) {
 		buttonGrab->draw();
 		buttonShoot->draw();
 		pad->draw();
+	}
+
+	if (pause) {
+		message->draw();
 	}
 
 	SDL_RenderPresent(getGame()->getRenderer()); 
@@ -176,6 +192,7 @@ void GameLayer::draw() {
 void GameLayer::keysToControls(SDL_Event event) {
 
 	if (event.type == SDL_KEYDOWN) {
+		controlContinue = true;
 		int code = event.key.keysym.sym;
 
 		switch (code) {
@@ -211,6 +228,7 @@ void GameLayer::mouseToControls(SDL_Event event) {
 	float motionX = event.motion.x;
 	float motionY = event.motion.y;
 	if (event.type == SDL_MOUSEBUTTONDOWN) {
+		controlContinue = true;
 		if (buttonShoot->containsPoint(motionX, motionY)) {
 			controlShoot = true;
 		}

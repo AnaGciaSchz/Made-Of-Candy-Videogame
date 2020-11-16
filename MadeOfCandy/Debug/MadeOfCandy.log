@@ -1,47 +1,49 @@
 ﻿  GameLayer.cpp
 C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\Audio.h(7,10): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(13,79): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(13,64): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(14,81): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(14,66): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(24,24): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(24,9): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(34,67): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(36,25): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(36,10): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(39,25): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(39,10): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(40,73): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(42,82): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(76,25): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(76,10): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(85,16): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(90,16): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(212,16): warning C4244: 'inicializando': conversión de 'Sint32' a 'float'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(213,16): warning C4244: 'inicializando': conversión de 'Sint32' a 'float'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(215,43): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(215,34): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(218,42): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(218,33): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(221,35): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(221,26): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(224,39): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(236,39): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(250,51): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(250,42): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(252,39): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(263,39): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(396,36): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(396,31): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(407,45): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(407,42): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(407,58): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(415,30): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(415,27): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(421,34): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(421,31): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(428,132): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(428,129): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(437,39): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(437,37): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(5,66): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(7,24): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(7,9): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(10,24): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(10,9): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(11,73): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(13,81): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(21,73): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(21,59): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(31,79): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(31,64): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(32,81): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(32,66): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(42,24): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(42,9): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(84,25): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(84,10): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(93,16): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(98,16): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(228,16): warning C4244: 'inicializando': conversión de 'Sint32' a 'float'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(229,16): warning C4244: 'inicializando': conversión de 'Sint32' a 'float'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(232,43): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(232,34): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(235,42): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(235,33): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(238,35): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(238,26): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(241,39): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(253,39): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(267,51): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(267,42): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(269,39): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(280,39): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(413,36): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(413,31): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(424,45): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(424,42): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(424,58): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(432,30): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(432,27): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(438,34): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(438,31): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(445,132): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(445,129): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(454,39): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\anain\Desktop\Made of Candy\Juego\MadeOfCandy\GameLayer.cpp(454,37): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
   MadeOfCandy.vcxproj -> C:\Users\anain\Desktop\Made of Candy\Juego\Debug\MadeOfCandy.exe

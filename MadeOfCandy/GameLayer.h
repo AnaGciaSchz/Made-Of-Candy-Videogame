@@ -181,6 +181,10 @@ private:
 
 	int mapWidth;
 
+	Actor* message;
+	bool pause;
+	bool controlContinue = false;
+
 };
 
 
