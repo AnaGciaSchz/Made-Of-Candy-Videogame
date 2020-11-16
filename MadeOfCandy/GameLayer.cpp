@@ -42,7 +42,8 @@ void GameLayer::init() {
 		textCaught = new Text("Element caught", WIDTH * 0.50, HEIGHT * 0.04, getGame());
 
 		audioBackground = new Audio("res/music/Candy.mp3", true);
-		audiogetRecolectable = new Audio("res/music/effects/GirlAddLife.wav", false);
+		audiogetRecolectable = new Audio("res/music/effects/Recolectable.wav", false);
+		audioReturnToMenu = new Audio("res/music/effects/Cancel.wav", false);
 		audioBackground->play();
 	}
 
@@ -179,6 +180,7 @@ void GameLayer::keysToControls(SDL_Event event) {
 
 		switch (code) {
 		case SDLK_ESCAPE:
+			audioReturnToMenu->play();
 			getGame()->setLayer(menuLayer);
 			break;
 		case SDLK_d: 

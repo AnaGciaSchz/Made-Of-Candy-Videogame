@@ -3,8 +3,12 @@
 #include "Layer.h"
 #include "GameLayer.h"
 class GameLayer;
+
 #include "Actor.h"
+
 #include "Background.h"
+
+#include "Audio.h"
 
 class MenuLayer : public Layer
 {
@@ -36,6 +40,10 @@ private:
 	Actor* editAngel3;
 
 	GameLayer* gameLayer;
+
+	Audio* confirm;
+	Audio* cancel;
+	Audio* select;
 
 
 	bool controlContinue;

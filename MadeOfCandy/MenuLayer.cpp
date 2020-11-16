@@ -18,6 +18,11 @@ void MenuLayer::init() {
 
 	this->gameLayer = (GameLayer*)(getGame()->getGameLayer());
 
+
+	confirm = new Audio("res/music/effects/Confirm.wav", false);
+	cancel = new Audio("res/music/effects/Cancel.wav", false);
+	select = new Audio("res/music/effects/Select.wav", false);
+
 	selectGirl(1);
 	selectAngel(1);
 
@@ -69,15 +74,18 @@ void MenuLayer::keysToControls(SDL_Event event) {
 				getGame()->stopGame();
 				break;
 			case SDLK_SPACE:
+				confirm->play();
 				controlContinue = true;
 				break;
 			case SDLK_p:
+				confirm->play();
 				controlContinue = true;
 				break;
 			case SDLK_x:
 				getGame()->stopGame();
 				break;
 			case SDLK_e:
+				confirm->play();
 				editMode = true;
 				break;
 			}
@@ -87,27 +95,35 @@ void MenuLayer::keysToControls(SDL_Event event) {
 				getGame()->stopGame();
 				break;
 			case SDLK_SPACE:
+				confirm->play();
 				editMode = false;
 				break;
 			case SDLK_k:
+				cancel->play();
 				editMode = false;
 				break;
 			case SDLK_1:
+				select->play();
 				selectGirl(1);
 				break;
 			case SDLK_2:
+				select->play();
 				selectGirl(2);
 				break;
 			case SDLK_3:
+				select->play();
 				selectGirl(3);
 				break;
 			case SDLK_a:
+				select->play();
 				selectAngel(1);
 				break;
 			case SDLK_b:
+				select->play();
 				selectAngel(2);
 				break;
 			case SDLK_c:
+				select->play();
 				selectAngel(3);
 				break;
 			}
@@ -164,41 +180,50 @@ void MenuLayer::mouseToControls(SDL_Event event) {
 	if (event.type == SDL_MOUSEBUTTONDOWN) {
 		if (!editMode) {
 			if (playButton->containsPoint(motionX, motionY)) {
+				confirm->play();
 				controlContinue = true;
 			}
 			if (exitButton->containsPoint(motionX, motionY)) {
 				getGame()->stopGame();
 			}
 			if (editButton->containsPoint(motionX, motionY)) {
+				confirm->play();
 				editMode = true;
 			}
 		}
 		else {//editMode
 			if (backButton->containsPoint(motionX, motionY)) {
+				cancel->play();
 				editMode = false;
 			}
 
 			if (editGirl1->containsPoint(motionX, motionY)) {
+				select->play();
 				selectGirl(1);
 			}
 
 			if (editGirl2->containsPoint(motionX, motionY)) {
+				select->play();
 				selectGirl(2);
 			}
 
 			if (editGirl3->containsPoint(motionX, motionY)) {
+				select->play();
 				selectGirl(3);
 			}
 
 			if (editAngel1->containsPoint(motionX, motionY)) {
+				select->play();
 				selectAngel(1);
 			}
 
 			if (editAngel2->containsPoint(motionX, motionY)) {
+				select->play();
 				selectAngel(2);
 			}
 
 			if (editAngel3->containsPoint(motionX, motionY)) {
+				select->play();
 				selectAngel(3);
 			}
 		}

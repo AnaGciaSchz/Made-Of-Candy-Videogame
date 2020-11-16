@@ -177,6 +177,7 @@ private:
 
 	Audio* audioBackground;
 	Audio* audiogetRecolectable;
+	Audio* audioReturnToMenu;
 
 	int mapWidth;
 
