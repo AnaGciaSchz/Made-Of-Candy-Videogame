@@ -10,7 +10,7 @@
 class TheGirl : public Actor
 {
 public:
-	TheGirl( int timeY, float v, int pathX, int pathY, Game* game);
+	TheGirl(int numberGirl, int timeY, float v, int pathX, int pathY, Game* game);
 
 	void update();
 	void draw() override; 

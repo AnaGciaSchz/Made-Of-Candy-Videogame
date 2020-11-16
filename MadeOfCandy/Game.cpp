@@ -1,6 +1,5 @@
 
 #include "Game.h"
-#include "GameLayer.h"
 #include "MenuLayer.h"
 
 SDL_Renderer* Game::getRenderer() {
@@ -38,6 +37,9 @@ void Game::setLayer(Layer* layer) {
 }
 Layer* Game::getGameLayer() {
 	return gameLayer;
+}
+Layer* Game::getMenuLayer() {
+	return menuLayer;
 }
 
 void Game::loop() {

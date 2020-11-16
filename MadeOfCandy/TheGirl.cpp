@@ -1,6 +1,6 @@
 #include "TheGirl.h"
 
-TheGirl::TheGirl(int timeY,float v, int pathX, int pathY, Game* game)
+TheGirl::TheGirl(int numberGirl,int timeY,float v, int pathX, int pathY, Game* game)
 	: Actor("", 30, 46,pathX,pathY, game) {
 	this->timeY = timeY;
 	this->actualTimeY = timeY;
@@ -16,7 +16,17 @@ TheGirl::TheGirl(int timeY,float v, int pathX, int pathY, Game* game)
 	audioDamage = new Audio("res/music/effects/GirlDamage.wav", false);
 	audioAddLife = new Audio("res/music/effects/GirlAddLife.wav", false);
 
-	aRight = new Animation("res/characters/TheGirl/Anna/Anna_right.png", getWidth(), getHeight(),
+	string animation = "";
+	if (numberGirl == 1) {
+		animation = "Anna";
+	}
+	else if (numberGirl == 2) {
+		animation = "Emma";
+	}
+	else {
+		animation = "Serenna";
+	}
+	aRight = new Animation("res/characters/TheGirl/" + animation + "/" + animation + "_right.png", getWidth(), getHeight(),
 		96, 50, 6, 3, true, game);
 
 }

@@ -70,6 +70,7 @@ public:
 
 	void setLayer(Layer* layer);
 	Layer* getGameLayer();
+	Layer* getMenuLayer();
 
 	void stopGame();
 	void changeFont(TTF_Font* font);

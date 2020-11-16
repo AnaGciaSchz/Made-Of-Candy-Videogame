@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Layer.h"
+#include "MenuLayer.h"
+class MenuLayer;
 
 #include "Background.h"
 
@@ -74,11 +76,24 @@ public:
 	*/
 	void cookieColisions();
 
+	void setNumberGirl(int numberGirl);
+	void setNumberAngel(int numberAngel);
+	int getNumberGirl();
+	int getNumberAngel();
+
 	void loadMap(string name);
 	void loadMapObject(char character, float x, float y);
 
 
 private:
+	/**
+	* Type of girl
+	*/
+	int numberGirl = 1;
+	/**
+	* Type of angel
+	*/
+	int numberAngel=1;
 	/**
 	* The player
 	*/
@@ -108,6 +123,7 @@ private:
 	Actor* buttonShoot;
 	Pad* pad;
 
+	MenuLayer* menuLayer;
 
 	/**
 	* Enemies of the level
@@ -154,7 +170,6 @@ private:
 	*/
 	Actor* rayIcon;
 
-
 	/**
 	* Number of paths in the game
 	*/
@@ -164,9 +179,6 @@ private:
 	Audio* audiogetRecolectable;
 
 	int mapWidth;
-
-	
-
 
 };
 

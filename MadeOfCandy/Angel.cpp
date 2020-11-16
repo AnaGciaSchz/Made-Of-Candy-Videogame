@@ -1,6 +1,6 @@
 #include "Angel.h"
 
-Angel::Angel(float pathX, float pathY, Game* game)
+Angel::Angel(int numberAngel,float pathX, float pathY, Game* game)
 	: Actor("res/characters/Angel/Robbie/Robbie.png", 30, 46,pathX, pathY, game) {
 
 
@@ -12,16 +12,27 @@ Angel::Angel(float pathX, float pathY, Game* game)
 	movedElement = nullptr;
 
 	audioRay = new Audio("res/music/effects/Ray.wav", false);
+	string animationS = "";
 
-	aLeft= new Animation("res/characters/Angel/Robbie/Robbie_left.png", getWidth(), getHeight(),
+	if (numberAngel == 1) {
+		animationS = "Robbie";
+	}
+	else if (numberAngel == 2) {
+		animationS = "Max";
+	}
+	else {
+		animationS = "Kentin";
+	}
+
+	aLeft= new Animation("res/characters/Angel/"+ animationS +"/"+ animationS +"_left.png", getWidth(), getHeight(),
 		96, 50, 6, 3, true,game);
 
-	aLeftUp= new Animation("res/characters/Angel/Robbie/Robbie_leftUp.png", getWidth(), getHeight(),
+	aLeftUp= new Animation("res/characters/Angel/"+ animationS +"/" + animationS + "_leftUp.png", getWidth(), getHeight(),
 		96, 50, 6, 3, true, game);
 
-	aRight = new Animation("res/characters/Angel/Robbie/Robbie_right.png", getWidth(), getHeight(),
+	aRight = new Animation("res/characters/Angel/" + animationS + "/" + animationS + "_right.png", getWidth(), getHeight(),
 		96, 50, 6, 3, true, game);
-	aRightUp = new Animation("res/characters/Angel/Robbie/Robbie_rightUp.png", getWidth(), getHeight(),
+	aRightUp = new Animation("res/characters/Angel/" + animationS + "/" + animationS + "_rightUp.png", getWidth(), getHeight(),
 		96, 50, 6, 3, true, game);
 	animation = aLeft;
 }

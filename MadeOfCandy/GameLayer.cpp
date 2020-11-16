@@ -8,6 +8,8 @@ GameLayer::GameLayer(Game* game) : Layer(game) {
 void GameLayer::init() {
 	background = new Background("res/world/City.png", WIDTH * 0.5, HEIGHT * 0.5,-1, getGame());
 
+	menuLayer = (MenuLayer*)(getGame()->getMenuLayer());
+
 	buttonGrab = new Actor("res/interface/grab_button.png", WIDTH * 0.75, HEIGHT * 0.85,80,80,0, 0, getGame());
 	buttonShoot = new Actor("res/interface/shoot_button.png", WIDTH * 0.91, HEIGHT * 0.74,80,80, 0, 0, getGame());
 	pad = new Pad(WIDTH * 0.15, HEIGHT * 0.80, getGame());
@@ -177,7 +179,7 @@ void GameLayer::keysToControls(SDL_Event event) {
 
 		switch (code) {
 		case SDLK_ESCAPE:
-			getGame()->stopGame();
+			getGame()->setLayer(menuLayer);
 			break;
 		case SDLK_d: 
 			controlMoveX = 1;
@@ -399,11 +401,11 @@ void GameLayer::loadMap(string name) {
 void GameLayer::loadMapObject(char character, float x, float y) {
 	switch (character) {
 	case '1': {
-		girl = new TheGirl(60, 0.2, x, y, getGame());
+		girl = new TheGirl(numberGirl,60, 0.2, x, y, getGame());
 		break;
 	}
 	case '2': {
-		angel = new Angel(x, y, getGame());
+		angel = new Angel(numberAngel,x, y, getGame());
 		break;
 	}
 	case 'b': {
@@ -432,6 +434,20 @@ void GameLayer::loadMapObject(char character, float x, float y) {
 		break;
 	}
 	}
+}
+
+void GameLayer::setNumberGirl(int numberGirl) {
+	this->numberGirl = numberGirl;
+}
+void GameLayer::setNumberAngel(int numberAngel) {
+	this->numberAngel = numberAngel;
+}
+
+int GameLayer::getNumberGirl() {
+	return numberGirl;
+}
+int GameLayer::getNumberAngel() {
+	return numberAngel;
 }
 
 
