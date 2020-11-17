@@ -150,8 +150,8 @@ private:
 	/**
 	* List of recolectables
 	*/
-	vector<bool> gainedRecolectables = { false,false,false,false,false };
-	int numberOfGainedRecolectables = 0;
+	vector<bool> gainedRecolectables;
+	int numberOfGainedRecolectables;
 	Recolectable* currentRecolectable;
 	/**
 * Icon for the recolectable
@@ -183,7 +183,13 @@ private:
 
 	Actor* message;
 	bool pause;
-	bool controlContinue = false;
+	bool controlContinue;
+
+	int countMessages;
+	bool canProcess;
+	int canProcessTime = 15;
+
+	bool controlFinish;
 
 };
 

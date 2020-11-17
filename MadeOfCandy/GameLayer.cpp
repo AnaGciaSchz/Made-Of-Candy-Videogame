@@ -17,13 +17,33 @@ GameLayer::GameLayer(Game* game) : Layer(game) {
 	audioReturnToMenu = new Audio("res/music/effects/Cancel.wav", false);
 	audioBackground->play();
 
+	gainedRecolectables = { false,false,false,false,false };
+	numberOfGainedRecolectables = 0;
+
 	pause = true;
+	controlContinue = false;
+	canProcess = false;
+	countMessages = 1;
 	message = new Actor("res/interface/howToPlay.png", WIDTH * 0.5, HEIGHT * 0.5,
 		WIDTH, HEIGHT,0,0, game);
+	controlFinish = false;
 	init();
 }
 
 void GameLayer::init() {
+	if (controlFinish) {
+		controlFinish = false;
+		controlContinue = false;
+		getGame()->setCurrentLevel(0);
+		pause = true;
+		canProcess = false;
+		gainedRecolectables = { false,false,false,false,false };
+		numberOfGainedRecolectables = 0;
+		countMessages = 1;
+		message = new Actor("res/interface/howToPlay.png", WIDTH * 0.5, HEIGHT * 0.5,
+			WIDTH, HEIGHT, 0, 0, getGame());
+		getGame()->setLayer(getGame()->getMenuLayer());
+	}
 	background = new Background("res/world/City.png", WIDTH * 0.5, HEIGHT * 0.5,-1, getGame());
 
 	menuLayer = (MenuLayer*)(getGame()->getMenuLayer());
@@ -41,6 +61,7 @@ void GameLayer::init() {
 	rayIcon = new Actor("res/icons/CelestialRayIcon.png",
 		WIDTH * 0.05, HEIGHT * 0.05, 34, 31, 0, 0, getGame());
 
+	controlFinish = false;
 
 	controlShoot = false;
 	controlMoveElement = false;
@@ -52,57 +73,117 @@ void GameLayer::init() {
 	textRecolectable->content = "x" + to_string(numberOfGainedRecolectables);
 	textLifes->content = to_string(girl->getLife());
 
+	if (getGame()->getCurrentLevel() == 1 && countMessages == 3) {
+	message = new Actor("res/interface/EnemyMessage/JasperMessage.png", WIDTH * 0.5, HEIGHT * 0.5,
+		WIDTH, HEIGHT, 0, 0, getGame());
+	countMessages++;
+	controlContinue = false;
+		}
+	else if (getGame()->getCurrentLevel() == 2 && countMessages == 4) {
+	message = new Actor("res/interface/EnemyMessage/HalloweenMessage.png", WIDTH * 0.5, HEIGHT * 0.5,
+		WIDTH, HEIGHT, 0, 0, getGame());
+	countMessages++;
+	controlContinue = false;
+		}
+	else if (getGame()->getCurrentLevel() == 3 && countMessages == 5) {
+	message = new Actor("res/interface/EnemyMessage/ChristmasMessage.png", WIDTH * 0.5, HEIGHT * 0.5,
+		WIDTH, HEIGHT, 0, 0, getGame());
+	countMessages++;
+	controlContinue = false;
+		}
+	else if (getGame()->getCurrentLevel() == 4 && countMessages == 6) {
+	message = new Actor("res/interface/EnemyMessage/BlobMinionMessage.png", WIDTH * 0.5, HEIGHT * 0.5,
+		WIDTH, HEIGHT, 0, 0, getGame());
+	countMessages++;
+	controlContinue = false;
+		}
+
 }
 
 void GameLayer::processControls() {
-	SDL_Event event;
-	while (SDL_PollEvent(&event)) {
-		if (event.type == SDL_QUIT) {
-			getGame()->stopGame();
+	if (canProcess) {
+		SDL_Event event;
+		while (SDL_PollEvent(&event)) {
+			if (event.type == SDL_QUIT) {
+				getGame()->stopGame();
+			}
+			if (event.type == SDL_KEYDOWN) {
+				getGame()->setInputType(INPUTKEYBOARD);
+			}
+			if (event.type == SDL_MOUSEBUTTONDOWN) {
+				getGame()->setInputType(INPUTMOUSE);
+			}
+			if (getGame()->getInputType() == INPUTKEYBOARD) {
+				keysToControls(event);
+			}
+			if (getGame()->getInputType() == INPUTMOUSE) {
+				mouseToControls(event);
+			}
 		}
-		if (event.type == SDL_KEYDOWN) {
-			getGame()->setInputType(INPUTKEYBOARD);
+
+		if (controlContinue) {
+			if (getGame()->getCurrentLevel() == 0) {
+				if (countMessages == 1) {
+					message = new Actor("res/interface/EnemyMessage/ObstacleMessage.png", WIDTH * 0.5, HEIGHT * 0.5,
+						WIDTH, HEIGHT, 0, 0, getGame());
+					countMessages++;
+					controlContinue = false;
+				}
+				else if (countMessages == 2) {
+					message = new Actor("res/interface/EnemyMessage/BlobMessage.png", WIDTH * 0.5, HEIGHT * 0.5,
+						WIDTH, HEIGHT, 0, 0, getGame());
+					countMessages++;
+					controlContinue = false;
+				}
+				else {
+					pause = false;
+					controlContinue = false;
+				}
+			}
+			else if (countMessages == 8) {
+				controlFinish = true;
+				pause = false;
+				controlContinue = false;
+				init();
+			}
+			else {
+				pause = false;
+				controlContinue = false;
+			}
 		}
-		if (event.type == SDL_MOUSEBUTTONDOWN) {
-			getGame()->setInputType(INPUTMOUSE);
+
+		if (controlShoot) {
+			rayIcon = new Actor("res/icons/NoCelestialRayIcon.png",
+				WIDTH * 0.05, HEIGHT * 0.05, 34, 31, 0, 0, getGame());
+			angel->shoot(controlShoot);
+			controlShoot = false;
 		}
-		if (getGame()->getInputType() == INPUTKEYBOARD) {
-			keysToControls(event);
+		if (controlMoveElement) {
+			elementCaught = angel->moveElement(controlMoveElement, movables);
+			controlMoveElement = false;
 		}
-		if (getGame()->getInputType() == INPUTMOUSE) {
-			mouseToControls(event);
+		if (controlMoveX > 0 || controlMoveX < 0) {
+			angel->moveX(controlMoveX);
+			controlMoveX = 0;
 		}
-	}
 
-	if (controlContinue) {
-		pause = false;
-		controlContinue = false;
-	}
+		if (controlMoveY > 0 || controlMoveY < 0) {
+			angel->moveY(controlMoveY);
+			controlMoveY = 0;
+		}
 
-	if (controlShoot) {
-		rayIcon = new Actor("res/icons/NoCelestialRayIcon.png",
-			WIDTH * 0.05, HEIGHT * 0.05, 34, 31, 0, 0, getGame());
-		angel->shoot(controlShoot);
-		controlShoot = false;
-	}
-	if (controlMoveElement) {
-		elementCaught = angel->moveElement(controlMoveElement, movables);
-		controlMoveElement = false;
-	}
-	if (controlMoveX > 0 || controlMoveX < 0) {
-		angel->moveX(controlMoveX);
-		controlMoveX = 0;
-	}
-
-	if (controlMoveY > 0 || controlMoveY < 0) {
-		angel->moveY(controlMoveY);
-		controlMoveY = 0;
-	}
-
-
+	}//canProcess
 }
 
 void GameLayer::update() {
+
+	if (canProcess == false && canProcessTime !=0) {
+		canProcessTime--;
+	}
+	else if (canProcess == false && canProcessTime == 0) {
+		canProcess = true;
+		canProcessTime = 15;
+	}
 	if (pause) {
 		return;
 	}
@@ -192,7 +273,9 @@ void GameLayer::draw() {
 void GameLayer::keysToControls(SDL_Event event) {
 
 	if (event.type == SDL_KEYDOWN) {
-		controlContinue = true;
+		if (pause) {
+			controlContinue = true;
+		}
 		int code = event.key.keysym.sym;
 
 		switch (code) {
@@ -228,7 +311,9 @@ void GameLayer::mouseToControls(SDL_Event event) {
 	float motionX = event.motion.x;
 	float motionY = event.motion.y;
 	if (event.type == SDL_MOUSEBUTTONDOWN) {
-		controlContinue = true;
+		if (pause) {
+			controlContinue = true;
+		}
 		if (buttonShoot->containsPoint(motionX, motionY)) {
 			controlShoot = true;
 		}
@@ -379,11 +464,21 @@ void GameLayer::finalOfLevelCollision() {
 
 	for (auto const& f : finals) {
 		if (girl->isOverlap(f)) {
-			cout << "next level game\n";
+			pause = true;
+			canProcess = false;
 			int newLevel = getGame()->getCurrentLevel() + 1;
 			getGame()->setCurrentLevel(newLevel);
 			if (newLevel == LEVELS) {
-				cout << "Finished game\n";
+				if (numberOfGainedRecolectables == 5) {
+					message = new Actor("res/interface/WonRecolectables.png", WIDTH * 0.5, HEIGHT * 0.5,
+						WIDTH, HEIGHT, 0, 0, getGame());
+					countMessages = 8;
+				}
+				else {
+					message = new Actor("res/interface/Won.png", WIDTH * 0.5, HEIGHT * 0.5,
+						WIDTH, HEIGHT, 0, 0, getGame());
+					countMessages = 8;
+				}
 			}
 				init();
 				return;
