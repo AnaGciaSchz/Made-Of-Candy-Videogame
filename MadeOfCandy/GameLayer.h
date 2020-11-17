@@ -159,6 +159,8 @@ private:
 	Actor* recolectableIcon;
 	Text* textRecolectable;
 
+	Actor* pausePlayIcon;
+
 	/**
 	* Icon and text for the lifes
 	*/

@@ -2,7 +2,7 @@
 
 
 GameLayer::GameLayer(Game* game) : Layer(game) {
-	textLifes = new Text("", WIDTH * 0.92, HEIGHT * 0.04, getGame());
+	textLifes = new Text("", WIDTH * 0.9, HEIGHT * 0.05, getGame());
 	lifes = new Actor("res/icons/heart.png",
 		WIDTH * 0.85, HEIGHT * 0.05, 24, 24, 0, 0, getGame());
 
@@ -254,6 +254,7 @@ void GameLayer::draw() {
 
 	rayIcon->draw();
 
+
 	recolectableIcon->draw();
 	textRecolectable->draw();
 
@@ -264,7 +265,15 @@ void GameLayer::draw() {
 	}
 
 	if (pause) {
+		pausePlayIcon = new Actor("res/icons/PlayIcon.png",
+			WIDTH * 0.95, HEIGHT * 0.05, 29, 26, 0, 0, getGame());
+		pausePlayIcon->draw();
 		message->draw();
+	}
+	else {
+		pausePlayIcon = new Actor("res/icons/PauseIcon.png",
+			WIDTH * 0.95, HEIGHT * 0.05, 29, 26, 0, 0, getGame());
+		pausePlayIcon->draw();
 	}
 
 	SDL_RenderPresent(getGame()->getRenderer()); 
@@ -301,6 +310,9 @@ void GameLayer::keysToControls(SDL_Event event) {
 		case SDLK_LSHIFT:
 			controlMoveElement = true;
 			break;
+		case SDLK_p:
+			pause = !pause;
+			break;
 		}
 	}
 }
@@ -313,6 +325,9 @@ void GameLayer::mouseToControls(SDL_Event event) {
 	if (event.type == SDL_MOUSEBUTTONDOWN) {
 		if (pause) {
 			controlContinue = true;
+		}
+		if (pausePlayIcon->containsPoint(motionX, motionY)) {
+			pause = !pause;
 		}
 		if (buttonShoot->containsPoint(motionX, motionY)) {
 			controlShoot = true;
