@@ -157,6 +157,7 @@
     <ClInclude Include="Audio.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="Blob.h" />
+    <ClInclude Include="BlobMinion.h" />
     <ClInclude Include="CelestialRay.h" />
     <ClInclude Include="Christmas.h" />
     <ClInclude Include="Cookie.h" />
@@ -182,6 +183,7 @@
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Blob.cpp" />
+    <ClCompile Include="BlobMinion.cpp" />
     <ClCompile Include="CelestialRay.cpp" />
     <ClCompile Include="Christmas.cpp" />
     <ClCompile Include="Cookie.cpp" />

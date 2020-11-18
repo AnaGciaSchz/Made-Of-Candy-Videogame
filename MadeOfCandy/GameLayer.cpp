@@ -590,6 +590,12 @@ void GameLayer::loadMapObject(char character, float x, float y) {
 		movables.push_back(enemy);
 		break;
 	}
+	case 'B': {
+		Enemy* enemy = new BlobMinion(x, y, getGame());
+		enemies.push_back(enemy);
+		movables.push_back(enemy);
+		break;
+	}
 	case 'C': {
 		Cookie* cookie = new Cookie(x, y, getGame());
 		cookies.push_back(cookie);

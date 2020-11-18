@@ -15,6 +15,7 @@ class MenuLayer;
 #include "Jasper.h"
 #include "Halloween.h"
 #include "Christmas.h"
+#include "BlobMinion.h"
 
 #include "Cookie.h"
 #include "Recolectable.h"
