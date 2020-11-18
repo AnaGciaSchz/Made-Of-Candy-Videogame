@@ -46,6 +46,7 @@ public:
 	* Method to iniciate the game
 	*/
 	void init() override;
+
 	/**
 	* Method to process the user's actions
 	*/
@@ -69,18 +70,6 @@ public:
 	*/
 	void mouseToControls(SDL_Event event);
 
-	/**
-	* Method to control colisions with enemies
-	*/
-	void enemyColisions();
-
-	void finalOfLevelCollision();
-
-	/**
-	* Method to control colisions with cookies
-	*/
-	void cookieColisions();
-
 	void setNumberGirl(int numberGirl);
 	void setNumberAngel(int numberAngel);
 	int getNumberGirl();
@@ -89,7 +78,6 @@ public:
 	void loadMap(string name);
 	void loadMapObject(char character, float x, float y);
 
-	Enemy* generateObstacle(int x, int y);
 
 
 private:
@@ -199,6 +187,84 @@ private:
 	int canProcessTime = 15;
 
 	bool controlFinish;
+
+	/**
+	* Method to generate a random obstacle
+	*/
+
+	Enemy* generateObstacle(int x, int y);
+
+	/**
+	* Method with the basics that need to be reinitialized when a new game starts
+	*/
+	void reinit();
+
+	/**
+	* Method to empty the lists
+	*/
+	void emptyLists();
+
+	/**
+	* Method to show the initial messages
+	*/
+	void showMessages();
+
+	/**
+	* Method to pass to the next message
+	*/
+	void continueMessage();
+
+	/**
+	* Method to initialize the controls
+	*/
+	void initializeControls();
+
+	/**
+	* Method to initialize the audio
+	*/
+	void initializeAudio();
+
+	/**
+	* Method to initialize the basic text and icons
+	*/
+	void initializeTextAndIcons();
+
+	/**
+	* Method to initialize the interface
+	*/
+	void initializeInterface();
+
+	/**
+	* Method to control the player
+	*/
+	void controlPlayer();
+
+	/**
+	* Method to wait to show a message 
+	*/
+
+	void waitMessage();
+
+	/**
+	* Method to update the recolectable of the level
+	*/
+	void updateRecolectable();
+
+/**
+* Method to control colisions with enemies
+*/
+void enemyColisions();
+
+
+/**
+* Method to control colisions with enemies
+*/
+void finalOfLevelCollision();
+
+/**
+* Method to control colisions with cookies
+*/
+void cookieColisions();
 
 };
 

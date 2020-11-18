@@ -2,101 +2,41 @@
 
 
 GameLayer::GameLayer(Game* game) : Layer(game) {
-	textLifes = new Text("", WIDTH * 0.9, HEIGHT * 0.05, getGame());
-	lifes = new Actor("res/icons/heart.png",
-		WIDTH * 0.85, HEIGHT * 0.05, 24, 24, 0, 0, getGame());
+	initializeTextAndIcons();
 
-	recolectableIcon = new Actor("res/icons/recolectableIcon.png",
-		WIDTH * 0.13, HEIGHT * 0.05, 25, 25, 0, 0, getGame());
-	textRecolectable = new Text("", WIDTH * 0.18, HEIGHT * 0.04, getGame());
-
-	textCaught = new Text("Element caught", WIDTH * 0.50, HEIGHT * 0.04, getGame());
-
-	audioBackground = new Audio("res/music/Candy.mp3", true);
-	audiogetRecolectable = new Audio("res/music/effects/Recolectable.wav", false);
-	audioReturnToMenu = new Audio("res/music/effects/Cancel.wav", false);
+	initializeAudio();
 	audioBackground->play();
 
-	gainedRecolectables = { false,false,false,false,false };
-	numberOfGainedRecolectables = 0;
-
-	pause = true;
-	controlContinue = false;
-	canProcess = false;
-	countMessages = 1;
-	message = new Actor("res/interface/howToPlay.png", WIDTH * 0.5, HEIGHT * 0.5,
-		WIDTH, HEIGHT,0,0, game);
-	controlFinish = false;
+	reinit();	
 	init();
 }
 
 void GameLayer::init() {
 	if (controlFinish) {
-		controlFinish = false;
-		controlContinue = false;
-		getGame()->setCurrentLevel(0);
-		pause = true;
-		canProcess = false;
-		gainedRecolectables = { false,false,false,false,false };
-		numberOfGainedRecolectables = 0;
-		countMessages = 1;
-		message = new Actor("res/interface/howToPlay.png", WIDTH * 0.5, HEIGHT * 0.5,
-			WIDTH, HEIGHT, 0, 0, getGame());
+		reinit();		
 		getGame()->setLayer(getGame()->getMenuLayer());
 	}
 	background = new Background("res/world/City.png", WIDTH * 0.5, HEIGHT * 0.5,-1, getGame());
 
 	menuLayer = (MenuLayer*)(getGame()->getMenuLayer());
 
-	buttonGrab = new Actor("res/interface/grab_button.png", WIDTH * 0.75, HEIGHT * 0.85,80,80,0, 0, getGame());
-	buttonShoot = new Actor("res/interface/shoot_button.png", WIDTH * 0.91, HEIGHT * 0.74,80,80, 0, 0, getGame());
-	pad = new Pad(WIDTH * 0.15, HEIGHT * 0.80, getGame());
+	initializeInterface();
+	
 
-	finals.clear();
-	enemies.clear();
-	movables.clear();
-	cookies.clear();
+	emptyLists();
 	loadMap("res/world/maps/" + to_string(getGame()->getCurrentLevel()) + ".txt");
 
 	rayIcon = new Actor("res/icons/CelestialRayIcon.png",
 		WIDTH * 0.05, HEIGHT * 0.05, 34, 31, 0, 0, getGame());
 
-	controlFinish = false;
-
-	controlShoot = false;
-	controlMoveElement = false;
-	controlMoveY = 0;
-	controlMoveX = 0;
+	initializeControls();
 
 	bool elementCaught = false; 
 
 	textRecolectable->content = "x" + to_string(numberOfGainedRecolectables);
 	textLifes->content = to_string(girl->getLife());
 
-	if (getGame()->getCurrentLevel() == 1 && countMessages == 3) {
-	message = new Actor("res/interface/EnemyMessage/JasperMessage.png", WIDTH * 0.5, HEIGHT * 0.5,
-		WIDTH, HEIGHT, 0, 0, getGame());
-	countMessages++;
-	controlContinue = false;
-		}
-	else if (getGame()->getCurrentLevel() == 2 && countMessages == 4) {
-	message = new Actor("res/interface/EnemyMessage/HalloweenMessage.png", WIDTH * 0.5, HEIGHT * 0.5,
-		WIDTH, HEIGHT, 0, 0, getGame());
-	countMessages++;
-	controlContinue = false;
-		}
-	else if (getGame()->getCurrentLevel() == 3 && countMessages == 5) {
-	message = new Actor("res/interface/EnemyMessage/ChristmasMessage.png", WIDTH * 0.5, HEIGHT * 0.5,
-		WIDTH, HEIGHT, 0, 0, getGame());
-	countMessages++;
-	controlContinue = false;
-		}
-	else if (getGame()->getCurrentLevel() == 4 && countMessages == 6) {
-	message = new Actor("res/interface/EnemyMessage/BlobMinionMessage.png", WIDTH * 0.5, HEIGHT * 0.5,
-		WIDTH, HEIGHT, 0, 0, getGame());
-	countMessages++;
-	controlContinue = false;
-		}
+	showMessages();
 
 }
 
@@ -121,67 +61,15 @@ void GameLayer::processControls() {
 			}
 		}
 
-		if (controlContinue) {
-			if (getGame()->getCurrentLevel() == 0) {
-				if (countMessages == 1) {
-					message = new Actor("res/interface/EnemyMessage/ObstacleMessage.png", WIDTH * 0.5, HEIGHT * 0.5,
-						WIDTH, HEIGHT, 0, 0, getGame());
-					countMessages++;
-					controlContinue = false;
-				}
-				else if (countMessages == 2) {
-					message = new Actor("res/interface/EnemyMessage/BlobMessage.png", WIDTH * 0.5, HEIGHT * 0.5,
-						WIDTH, HEIGHT, 0, 0, getGame());
-					countMessages++;
-					controlContinue = false;
-				}
-				else {
-					pause = false;
-					controlContinue = false;
-				}
-			}
-			else if (countMessages == 8) {
-				controlFinish = true;
-				pause = false;
-				controlContinue = false;
-				init();
-			}
-			else {
-				pause = false;
-				controlContinue = false;
-			}
-		}
+		continueMessage();
 
-		if (controlShoot) {
-			angel->shoot(controlShoot);
-			controlShoot = false;
-		}
-		if (controlMoveElement) {
-			elementCaught = angel->moveElement(controlMoveElement, movables);
-			controlMoveElement = false;
-		}
-		if (controlMoveX > 0 || controlMoveX < 0) {
-			angel->moveX(controlMoveX);
-			controlMoveX = 0;
-		}
-
-		if (controlMoveY > 0 || controlMoveY < 0) {
-			angel->moveY(controlMoveY);
-			controlMoveY = 0;
-		}
+		controlPlayer();
 
 	}//canProcess
 }
 
 void GameLayer::update() {
-
-	if (canProcess == false && canProcessTime !=0) {
-		canProcessTime--;
-	}
-	else if (canProcess == false && canProcessTime == 0) {
-		canProcess = true;
-		canProcessTime = 15;
-	}
+	waitMessage();
 	if (pause) {
 		return;
 	}
@@ -202,19 +90,9 @@ void GameLayer::update() {
 		f->update();
 	}
 
-	if (currentRecolectable != nullptr) {
-		currentRecolectable->update();
-		if (girl->isOverlap(currentRecolectable) && !currentRecolectable->getIsMoving()) {
-			audiogetRecolectable->play();
+	updateRecolectable();
 
-			numberOfGainedRecolectables++;
-			textRecolectable->content = "x" + to_string(numberOfGainedRecolectables);
-			gainedRecolectables[getGame()->getCurrentLevel()] = true;
-			delete currentRecolectable;
-			currentRecolectable = nullptr;
-		}
-	}
-
+	//We need to see if the icon of the angel is showing the correct information
 	if (!angel->getCanShoot()) {
 		rayIcon = new Actor("res/icons/NoCelestialRayIcon.png",
 			WIDTH * 0.05, HEIGHT * 0.05, 34, 31, 0, 0, getGame());
@@ -325,6 +203,7 @@ void GameLayer::mouseToControls(SDL_Event event) {
 
 	float motionX = event.motion.x;
 	float motionY = event.motion.y;
+
 	if (event.type == SDL_MOUSEBUTTONDOWN) {
 		if (pause) {
 			controlContinue = true;
@@ -394,116 +273,9 @@ void GameLayer::mouseToControls(SDL_Event event) {
 		}//if contains point
 	}
 		else {
-		pad->clicked = false; // han sacado el ratón del pad
+		pad->clicked = false; // the mouse is not in the pad
 			controlMoveX = 0;
 		}
-}
-
-
-
-void GameLayer::enemyColisions() {
-	list<Enemy*> deleteEnemies;
-
-	//girl and enemy
-	for (auto const& enemy : enemies) {
-		if (girl->isOverlap(enemy) && !enemy->getIsMoving()) {
-				enemy->attack(girl, angel);
-				enemy->beShoot();
-				textLifes->content = to_string(girl->getLife());
-				if (girl->isDead()) {
-					init();
-					break;
-				}
-			}
-		bool eInList = std::find(deleteEnemies.begin(),
-			deleteEnemies.end(),
-			enemy) != deleteEnemies.end();
-
-		if (!eInList) {
-			deleteEnemies.push_back(enemy);
-		}
-	}
-
-	//enemy and ray
-	if (angel->getRay() != nullptr) {
-		for (auto const& enemy : enemies) {
-			if (enemy->isOverlap(angel->getRay())) {
-				enemy->beShoot();
-			}
-			bool eInList = std::find(deleteEnemies.begin(),
-				deleteEnemies.end(),
-				enemy) != deleteEnemies.end();
-
-			if (!eInList) {
-				deleteEnemies.push_back(enemy);
-			}
-		}//for
-	}//if
-
-
-	for (auto const& delEnemy : deleteEnemies) {
-		if (delEnemy->beDeleted()) {
-			enemies.remove(delEnemy);
-		}
-	}
-	deleteEnemies.clear();
-
-}
-
-void GameLayer::cookieColisions() {
-	list<Cookie*> deleteCookies;
-
-	//girl and cookie
-	for (auto const& cookie : cookies) {
-		if (girl->isOverlap(cookie) && !cookie->getIsMoving()) {
-			cookie->addLife(girl);
-			textLifes->content = to_string(girl->getLife());
-
-			bool eInList = std::find(deleteCookies.begin(),
-				deleteCookies.end(),
-				cookie) != deleteCookies.end();
-
-			if (!eInList) {
-				deleteCookies.push_back(cookie);
-			}
-		}
-	}
-
-
-	for (auto const& delCookie : deleteCookies) {
-			cookies.remove(delCookie);
-			delete delCookie;
-	}
-	deleteCookies.clear();
-
-}
-
-void GameLayer::finalOfLevelCollision() {
-
-	for (auto const& f : finals) {
-		if (girl->isOverlap(f)) {
-			pause = true;
-			canProcess = false;
-			int newLevel = getGame()->getCurrentLevel() + 1;
-			getGame()->setCurrentLevel(newLevel);
-			if (newLevel == LEVELS) {
-				if (numberOfGainedRecolectables == 5) {
-					message = new Actor("res/interface/WonRecolectables.png", WIDTH * 0.5, HEIGHT * 0.5,
-						WIDTH, HEIGHT, 0, 0, getGame());
-					countMessages = 8;
-				}
-				else {
-					message = new Actor("res/interface/Won.png", WIDTH * 0.5, HEIGHT * 0.5,
-						WIDTH, HEIGHT, 0, 0, getGame());
-					countMessages = 8;
-				}
-			}
-				init();
-				return;
-		}
-	}
-
-
 }
 
 
@@ -528,25 +300,6 @@ void GameLayer::loadMap(string name) {
 		}
 	}
 	streamFile.close();
-}
-
-Enemy* GameLayer::generateObstacle(int x, int y) {
-	int number = (rand() % 5) + 1; 
-	if (number == 1) {
-		return new Obstacle("res/Enemies/Obstacle/box.png",11,17,x,y,getGame());
-	}
-	else if (number == 2) {
-		return new Obstacle("res/Enemies/Obstacle/ligth.png", 16, 46, x, y, getGame());
-	}
-	else if (number == 3) {
-		return new Obstacle("res/Enemies/Obstacle/plant.png", 16, 16, x, y, getGame());
-	}
-	else if (number == 4) {
-		return new Obstacle("res/Enemies/Obstacle/plug.png", 14, 15, x, y, getGame());
-	}
-	else {
-		return new Obstacle("res/Enemies/Obstacle/signal.png", 24, 23, x, y, getGame());
-	}
 }
 
 
@@ -632,6 +385,294 @@ int GameLayer::getNumberGirl() {
 int GameLayer::getNumberAngel() {
 	return numberAngel;
 }
+
+/////////////////////////////////////////////////////PRIVATE METHODS/////////////////////////////////////////////////////
+
+void GameLayer::reinit() {
+	controlFinish = false;
+	controlContinue = false;
+
+	getGame()->setCurrentLevel(0);
+
+	pause = true;
+	canProcess = false;
+
+	countMessages = 1;
+	message = new Actor("res/interface/howToPlay.png", WIDTH * 0.5, HEIGHT * 0.5,
+		WIDTH, HEIGHT, 0, 0, getGame());
+
+	gainedRecolectables = { false,false,false,false,false };
+	numberOfGainedRecolectables = 0;
+}
+
+void GameLayer::emptyLists() {
+	finals.clear();
+	enemies.clear();
+	movables.clear();
+	cookies.clear();
+}
+void GameLayer::showMessages() {
+	if (getGame()->getCurrentLevel() == 1 && countMessages == 3) {
+		message = new Actor("res/interface/EnemyMessage/JasperMessage.png", WIDTH * 0.5, HEIGHT * 0.5,
+			WIDTH, HEIGHT, 0, 0, getGame());
+		countMessages++;
+		controlContinue = false;
+	}
+	else if (getGame()->getCurrentLevel() == 2 && countMessages == 4) {
+		message = new Actor("res/interface/EnemyMessage/HalloweenMessage.png", WIDTH * 0.5, HEIGHT * 0.5,
+			WIDTH, HEIGHT, 0, 0, getGame());
+		countMessages++;
+		controlContinue = false;
+	}
+	else if (getGame()->getCurrentLevel() == 3 && countMessages == 5) {
+		message = new Actor("res/interface/EnemyMessage/ChristmasMessage.png", WIDTH * 0.5, HEIGHT * 0.5,
+			WIDTH, HEIGHT, 0, 0, getGame());
+		countMessages++;
+		controlContinue = false;
+	}
+	else if (getGame()->getCurrentLevel() == 4 && countMessages == 6) {
+		message = new Actor("res/interface/EnemyMessage/BlobMinionMessage.png", WIDTH * 0.5, HEIGHT * 0.5,
+			WIDTH, HEIGHT, 0, 0, getGame());
+		countMessages++;
+		controlContinue = false;
+	}
+}
+
+void GameLayer::initializeControls() {
+	controlFinish = false;
+	controlShoot = false;
+	controlMoveElement = false;
+	controlMoveY = 0;
+	controlMoveX = 0;
+}
+
+void GameLayer::initializeInterface() {
+	buttonGrab = new Actor("res/interface/grab_button.png", WIDTH * 0.75, HEIGHT * 0.85, 80, 80, 0, 0, getGame());
+	buttonShoot = new Actor("res/interface/shoot_button.png", WIDTH * 0.91, HEIGHT * 0.74, 80, 80, 0, 0, getGame());
+	pad = new Pad(WIDTH * 0.15, HEIGHT * 0.80, getGame());
+}
+
+Enemy* GameLayer::generateObstacle(int x, int y) {
+	int number = (rand() % 5) + 1;
+	if (number == 1) {
+		return new Obstacle("res/Enemies/Obstacle/box.png", 11, 17, x, y, getGame());
+	}
+	else if (number == 2) {
+		return new Obstacle("res/Enemies/Obstacle/ligth.png", 16, 46, x, y, getGame());
+	}
+	else if (number == 3) {
+		return new Obstacle("res/Enemies/Obstacle/plant.png", 16, 16, x, y, getGame());
+	}
+	else if (number == 4) {
+		return new Obstacle("res/Enemies/Obstacle/plug.png", 14, 15, x, y, getGame());
+	}
+	else {
+		return new Obstacle("res/Enemies/Obstacle/signal.png", 24, 23, x, y, getGame());
+	}
+}
+
+void GameLayer::continueMessage() {
+	if (controlContinue) {
+		if (getGame()->getCurrentLevel() == 0) {
+			if (countMessages == 1) {
+				message = new Actor("res/interface/EnemyMessage/ObstacleMessage.png", WIDTH * 0.5, HEIGHT * 0.5,
+					WIDTH, HEIGHT, 0, 0, getGame());
+				countMessages++;
+				controlContinue = false;
+			}
+			else if (countMessages == 2) {
+				message = new Actor("res/interface/EnemyMessage/BlobMessage.png", WIDTH * 0.5, HEIGHT * 0.5,
+					WIDTH, HEIGHT, 0, 0, getGame());
+				countMessages++;
+				controlContinue = false;
+			}
+			else {
+				pause = false;
+				controlContinue = false;
+			}
+		}
+		else if (countMessages == 8) {
+			controlFinish = true;
+			pause = false;
+			controlContinue = false;
+			init();
+		}
+		else {
+			pause = false;
+			controlContinue = false;
+		}
+	}
+}
+
+
+void GameLayer::controlPlayer() {
+	if (controlShoot) {
+		angel->shoot(controlShoot);
+		controlShoot = false;
+	}
+	if (controlMoveElement) {
+		elementCaught = angel->moveElement(controlMoveElement, movables);
+		controlMoveElement = false;
+	}
+	if (controlMoveX > 0 || controlMoveX < 0) {
+		angel->moveX(controlMoveX);
+		controlMoveX = 0;
+	}
+
+	if (controlMoveY > 0 || controlMoveY < 0) {
+		angel->moveY(controlMoveY);
+		controlMoveY = 0;
+	}
+}
+
+void GameLayer::initializeAudio() {
+	audioBackground = new Audio("res/music/Candy.mp3", true);
+	audiogetRecolectable = new Audio("res/music/effects/Recolectable.wav", false);
+	audioReturnToMenu = new Audio("res/music/effects/Cancel.wav", false);
+}
+
+void GameLayer::initializeTextAndIcons() {
+	textLifes = new Text("", WIDTH * 0.9, HEIGHT * 0.05, getGame());
+	lifes = new Actor("res/icons/heart.png",
+		WIDTH * 0.85, HEIGHT * 0.05, 24, 24, 0, 0, getGame());
+
+	recolectableIcon = new Actor("res/icons/recolectableIcon.png",
+		WIDTH * 0.13, HEIGHT * 0.05, 25, 25, 0, 0, getGame());
+	textRecolectable = new Text("", WIDTH * 0.18, HEIGHT * 0.04, getGame());
+
+	textCaught = new Text("Element caught", WIDTH * 0.50, HEIGHT * 0.04, getGame());
+}
+
+void GameLayer::waitMessage() {
+	if (canProcess == false && canProcessTime != 0) {
+		canProcessTime--;
+	}
+	else if (canProcess == false && canProcessTime == 0) {
+		canProcess = true;
+		canProcessTime = 15;
+	}
+}
+
+void GameLayer::updateRecolectable() {
+	if (currentRecolectable != nullptr) {
+		currentRecolectable->update();
+		if (girl->isOverlap(currentRecolectable) && !currentRecolectable->getIsMoving()) {
+			audiogetRecolectable->play();
+
+			numberOfGainedRecolectables++;
+			textRecolectable->content = "x" + to_string(numberOfGainedRecolectables);
+			gainedRecolectables[getGame()->getCurrentLevel()] = true;
+			delete currentRecolectable;
+			currentRecolectable = nullptr;
+		}
+	}
+}
+
+void GameLayer::enemyColisions() {
+	list<Enemy*> deleteEnemies;
+
+	//girl and enemy
+	for (auto const& enemy : enemies) {
+		if (girl->isOverlap(enemy) && !enemy->getIsMoving()) {
+			enemy->attack(girl, angel);
+			enemy->beShoot();
+			textLifes->content = to_string(girl->getLife());
+			if (girl->isDead()) {
+				init();
+				break;
+			}
+		}
+		bool eInList = std::find(deleteEnemies.begin(),
+			deleteEnemies.end(),
+			enemy) != deleteEnemies.end();
+
+		if (!eInList) {
+			deleteEnemies.push_back(enemy);
+		}
+	}
+
+	//enemy and ray
+	if (angel->getRay() != nullptr) {
+		for (auto const& enemy : enemies) {
+			if (enemy->isOverlap(angel->getRay())) {
+				enemy->beShoot();
+			}
+			bool eInList = std::find(deleteEnemies.begin(),
+				deleteEnemies.end(),
+				enemy) != deleteEnemies.end();
+
+			if (!eInList) {
+				deleteEnemies.push_back(enemy);
+			}
+		}//for
+	}//if
+
+
+	for (auto const& delEnemy : deleteEnemies) {
+		if (delEnemy->beDeleted()) {
+			enemies.remove(delEnemy);
+		}
+	}
+	deleteEnemies.clear();
+
+}
+
+void GameLayer::cookieColisions() {
+	list<Cookie*> deleteCookies;
+
+	//girl and cookie
+	for (auto const& cookie : cookies) {
+		if (girl->isOverlap(cookie) && !cookie->getIsMoving()) {
+			cookie->addLife(girl);
+			textLifes->content = to_string(girl->getLife());
+
+			bool eInList = std::find(deleteCookies.begin(),
+				deleteCookies.end(),
+				cookie) != deleteCookies.end();
+
+			if (!eInList) {
+				deleteCookies.push_back(cookie);
+			}
+		}
+	}
+
+
+	for (auto const& delCookie : deleteCookies) {
+		cookies.remove(delCookie);
+		delete delCookie;
+	}
+	deleteCookies.clear();
+
+}
+
+void GameLayer::finalOfLevelCollision() {
+
+	for (auto const& f : finals) {
+		if (girl->isOverlap(f)) {
+			pause = true;
+			canProcess = false;
+			int newLevel = getGame()->getCurrentLevel() + 1;
+			getGame()->setCurrentLevel(newLevel);
+			if (newLevel == LEVELS) {
+				if (numberOfGainedRecolectables == 5) {
+					message = new Actor("res/interface/WonRecolectables.png", WIDTH * 0.5, HEIGHT * 0.5,
+						WIDTH, HEIGHT, 0, 0, getGame());
+					countMessages = 8;
+				}
+				else {
+					message = new Actor("res/interface/Won.png", WIDTH * 0.5, HEIGHT * 0.5,
+						WIDTH, HEIGHT, 0, 0, getGame());
+					countMessages = 8;
+				}
+			}
+			init();
+			return;
+		}
+	}
+
+
+}
+
 
 
 
