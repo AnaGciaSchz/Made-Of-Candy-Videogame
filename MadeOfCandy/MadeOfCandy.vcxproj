@@ -163,6 +163,7 @@
     <ClInclude Include="FinalOfLevel.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameLayer.h" />
+    <ClInclude Include="Jasper.h" />
     <ClInclude Include="Layer.h" />
     <ClInclude Include="MenuLayer.h" />
     <ClInclude Include="Movable.h" />
@@ -185,6 +186,7 @@
     <ClCompile Include="FinalOfLevel.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameLayer.cpp" />
+    <ClCompile Include="Jasper.cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MenuLayer.cpp" />

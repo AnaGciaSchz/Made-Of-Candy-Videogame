@@ -108,6 +108,9 @@
     <ClCompile Include="Obstacle.cpp">
       <Filter>Archivos de origen\Actors\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Jasper.cpp">
+      <Filter>Archivos de origen\Actors\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -168,6 +171,9 @@
       <Filter>Archivos de encabezado\Layers</Filter>
     </ClInclude>
     <ClInclude Include="Obstacle.h">
+      <Filter>Archivos de encabezado\Actors\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Jasper.h">
       <Filter>Archivos de encabezado\Actors\Enemies</Filter>
     </ClInclude>
   </ItemGroup>

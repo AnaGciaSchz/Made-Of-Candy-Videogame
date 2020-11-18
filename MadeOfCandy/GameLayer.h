@@ -12,6 +12,7 @@ class MenuLayer;
 #include "Enemy.h"
 #include "Blob.h"
 #include "Obstacle.h"
+#include "Jasper.h"
 
 #include "Cookie.h"
 #include "Recolectable.h"

@@ -564,7 +564,13 @@ void GameLayer::loadMapObject(char character, float x, float y) {
 		break;
 	}
 	case 'o': {
-		Enemy* enemy = generateObstacle(x,y);
+		Enemy* enemy = generateObstacle(x, y);
+		enemies.push_back(enemy);
+		movables.push_back(enemy);
+		break;
+	}
+	case 'J': {
+		Enemy* enemy = new Jasper(x, y, getGame());
 		enemies.push_back(enemy);
 		movables.push_back(enemy);
 		break;
