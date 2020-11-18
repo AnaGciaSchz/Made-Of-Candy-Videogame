@@ -114,6 +114,9 @@
     <ClCompile Include="Halloween.cpp">
       <Filter>Archivos de origen\Actors\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Christmas.cpp">
+      <Filter>Archivos de origen\Actors\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -180,6 +183,9 @@
       <Filter>Archivos de encabezado\Actors\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Halloween.h">
+      <Filter>Archivos de encabezado\Actors\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Christmas.h">
       <Filter>Archivos de encabezado\Actors\Enemies</Filter>
     </ClInclude>
   </ItemGroup>

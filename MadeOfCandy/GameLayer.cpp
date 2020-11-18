@@ -154,10 +154,6 @@ void GameLayer::processControls() {
 
 		if (controlShoot) {
 			angel->shoot(controlShoot);
-			if (!angel->getCanShoot()) {
-				rayIcon = new Actor("res/icons/NoCelestialRayIcon.png",
-					WIDTH * 0.05, HEIGHT * 0.05, 34, 31, 0, 0, getGame());
-			}
 			controlShoot = false;
 		}
 		if (controlMoveElement) {
@@ -217,6 +213,11 @@ void GameLayer::update() {
 			delete currentRecolectable;
 			currentRecolectable = nullptr;
 		}
+	}
+
+	if (!angel->getCanShoot()) {
+		rayIcon = new Actor("res/icons/NoCelestialRayIcon.png",
+			WIDTH * 0.05, HEIGHT * 0.05, 34, 31, 0, 0, getGame());
 	}
 
 
@@ -552,11 +553,11 @@ Enemy* GameLayer::generateObstacle(int x, int y) {
 void GameLayer::loadMapObject(char character, float x, float y) {
 	switch (character) {
 	case '1': {
-		girl = new TheGirl(numberGirl,60, 0.2, x, y, getGame());
+		girl = new TheGirl(numberGirl, 60, 0.2, x, y, getGame());
 		break;
 	}
 	case '2': {
-		angel = new Angel(numberAngel,x, y, getGame());
+		angel = new Angel(numberAngel, x, y, getGame());
 		break;
 	}
 	case 'b': {
@@ -583,7 +584,13 @@ void GameLayer::loadMapObject(char character, float x, float y) {
 		movables.push_back(enemy);
 		break;
 	}
-	case 'C':{
+	case 'c': {
+		Enemy* enemy = new Christmas(x, y, getGame());
+		enemies.push_back(enemy);
+		movables.push_back(enemy);
+		break;
+	}
+	case 'C': {
 		Cookie* cookie = new Cookie(x, y, getGame());
 		cookies.push_back(cookie);
 		movables.push_back(cookie);
@@ -600,7 +607,7 @@ void GameLayer::loadMapObject(char character, float x, float y) {
 		break;
 	}
 	case 'F': {
-		finals.push_back(new FinalOfLevel(x,y,getGame()));
+		finals.push_back(new FinalOfLevel(x, y, getGame()));
 		break;
 	}
 	}
