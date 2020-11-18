@@ -13,6 +13,7 @@ class MenuLayer;
 #include "Blob.h"
 #include "Obstacle.h"
 #include "Jasper.h"
+#include "Halloween.h"
 
 #include "Cookie.h"
 #include "Recolectable.h"

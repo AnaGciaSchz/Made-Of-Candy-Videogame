@@ -35,81 +35,105 @@ Angel::Angel(int numberAngel,float pathX, float pathY, Game* game)
 	aRightUp = new Animation("res/characters/Angel/" + animationS + "/" + animationS + "_rightUp.png", getWidth(), getHeight(),
 		96, 50, 6, 3, true, game);
 	animation = aLeft;
+
+	paralyzedAngel = false;
+	paralizedTime = 60;
 }
 
 void Angel::update() {
-	animation->update();
+	if (!paralyzedAngel) {
+		animation->update();
 
-	if (ray != nullptr) {
-		ray->update();
-		deleteRay();
+		if (ray != nullptr) {
+			ray->update();
+			deleteRay();
+		}
+	}
+	else {
+		if (paralizedTime != 0) {
+			paralizedTime--;
+		}
+		else {
+			paralizedTime = 60;
+			paralyzedAngel = false;
+		}
 	}
 }
 
 void Angel::moveX(float axis) {
-	if (axis > 0 && getPathX() == PATHS_X-1) {
-		
-	}
-	else if (axis < 0 && getPathX() == 1) {
-		
-	}
-	else {
-		if (axis < 0) {
-			animation = aLeft;
+	if (!paralyzedAngel) {
+		if (axis > 0 && getPathX() == PATHS_X - 1) {
+
+		}
+		else if (axis < 0 && getPathX() == 1) {
+
 		}
 		else {
-			animation = aRight;
-		}
+			if (axis < 0) {
+				animation = aLeft;
+			}
+			else {
+				animation = aRight;
+			}
 
-		incrementX(axis);
-		if (isMoving) {
-			movedElement->move(axis, 0);
+			incrementX(axis);
+			if (isMoving) {
+				movedElement->move(axis, 0);
+			}
 		}
 	}
 	
 }
 
 void Angel::moveY(float axis) {
-	if (axis > 0 && getPathY() == PATHS_Y) {
-	}
-	else if (axis < 0 && getPathY() == 1) {
-	}
-	else {
-		if (axis < 0) {
-			if (getOrientation() == 1) {
-				animation = aRightUp;
-			}
-			else {
-				animation = aLeftUp;
-			}
+	if (!paralyzedAngel) {
+		if (axis > 0 && getPathY() == PATHS_Y) {
+		}
+		else if (axis < 0 && getPathY() == 1) {
 		}
 		else {
-			if (getOrientation() == 1) {
-				animation = aRight;
+			if (axis < 0) {
+				if (getOrientation() == 1) {
+					animation = aRightUp;
+				}
+				else {
+					animation = aLeftUp;
+				}
 			}
 			else {
-				animation = aLeft;
+				if (getOrientation() == 1) {
+					animation = aRight;
+				}
+				else {
+					animation = aLeft;
+				}
+
 			}
+			incrementY(axis);
 
-		}
-		incrementY(axis);
-
-		if(isMoving) {
-			movedElement->move(0, axis);
+			if (isMoving) {
+				movedElement->move(0, axis);
+			}
 		}
 	}
 	
 }
 
+void Angel::paralyzed() {
+	paralyzedAngel = true;
+}
+
 void Angel::shoot(bool shoot) {
-	if (shoot && canShoot) {
-		audioRay->play();
-		cantShoot();
-		if (getOrientation() == -1) {
-			ray = new CelestialRay(getPathX(), getPathY(), 30,true, getGame());
-		}
-		else {
-			ray = new CelestialRay(getPathX(), getPathY(), 30,false, getGame());
+	if (!paralyzedAngel) {
+		if (shoot && canShoot) {
+			audioRay->play();
+			cantShoot();
+			if (getOrientation() == -1) {
+				ray = new CelestialRay(getPathX(), getPathY(), 30, true, getGame());
+			}
+			else {
+				ray = new CelestialRay(getPathX(), getPathY(), 30, false, getGame());
+			}
 		}
 	}
 }
@@ -119,7 +143,13 @@ CelestialRay* Angel::getRay() {
 }
 
 void Angel::cantShoot() {
-	canShoot = false;
+	if (!paralyzedAngel) {
+		canShoot = false;
+	}
+}
+
+bool Angel::getCanShoot() {
+	return canShoot;
 }
 
 void Angel::deleteRay() {
@@ -130,15 +160,17 @@ void Angel::deleteRay() {
 }
 
 bool Angel::moveElement(bool move, list<Movable*> movables) {
-	if (move && !isMoving) {
+	if (!paralyzedAngel) {
+		if (move && !isMoving) {
 			findMovedElement(movables);
-	}
+		}
 
-	else if (move && isMoving) {
-		if (emptySlotForElement(movables)) {
-			isMoving = false;
-			movedElement->moveObject(false);
-			movedElement = nullptr;
+		else if (move && isMoving) {
+			if (emptySlotForElement(movables)) {
+				isMoving = false;
+				movedElement->moveObject(false);
+				movedElement = nullptr;
+			}
 		}
 	}
 	return isMoving;

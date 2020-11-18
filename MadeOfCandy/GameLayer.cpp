@@ -153,9 +153,11 @@ void GameLayer::processControls() {
 		}
 
 		if (controlShoot) {
-			rayIcon = new Actor("res/icons/NoCelestialRayIcon.png",
-				WIDTH * 0.05, HEIGHT * 0.05, 34, 31, 0, 0, getGame());
 			angel->shoot(controlShoot);
+			if (!angel->getCanShoot()) {
+				rayIcon = new Actor("res/icons/NoCelestialRayIcon.png",
+					WIDTH * 0.05, HEIGHT * 0.05, 34, 31, 0, 0, getGame());
+			}
 			controlShoot = false;
 		}
 		if (controlMoveElement) {
@@ -571,6 +573,12 @@ void GameLayer::loadMapObject(char character, float x, float y) {
 	}
 	case 'J': {
 		Enemy* enemy = new Jasper(x, y, getGame());
+		enemies.push_back(enemy);
+		movables.push_back(enemy);
+		break;
+	}
+	case 'h': {
+		Enemy* enemy = new Halloween(x, y, getGame());
 		enemies.push_back(enemy);
 		movables.push_back(enemy);
 		break;

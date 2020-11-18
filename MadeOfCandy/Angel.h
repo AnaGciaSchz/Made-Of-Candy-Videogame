@@ -26,7 +26,10 @@ public:
 	void cantShoot();
 	void deleteRay();
 
+	void paralyzed();
+
 	CelestialRay* getRay();
+	bool getCanShoot();
 
 private:
 	bool canShoot;
@@ -35,6 +38,9 @@ private:
 	bool isMoving;
 	Movable* movedElement;
 	void findMovedElement(list<Movable*> movables);
+
+	bool paralyzedAngel;
+	int paralizedTime;
 
 	Animation* aLeftUp;
 	Animation* aRightUp;
