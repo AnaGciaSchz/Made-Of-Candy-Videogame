@@ -527,6 +527,25 @@ void GameLayer::loadMap(string name) {
 	streamFile.close();
 }
 
+Enemy* GameLayer::generateObstacle(int x, int y) {
+	int number = (rand() % 5) + 1; 
+	if (number == 1) {
+		return new Obstacle("res/Enemies/Obstacle/box.png",11,17,x,y,getGame());
+	}
+	else if (number == 2) {
+		return new Obstacle("res/Enemies/Obstacle/ligth.png", 16, 46, x, y, getGame());
+	}
+	else if (number == 3) {
+		return new Obstacle("res/Enemies/Obstacle/plant.png", 16, 16, x, y, getGame());
+	}
+	else if (number == 4) {
+		return new Obstacle("res/Enemies/Obstacle/plug.png", 14, 15, x, y, getGame());
+	}
+	else {
+		return new Obstacle("res/Enemies/Obstacle/signal.png", 24, 23, x, y, getGame());
+	}
+}
+
 
 void GameLayer::loadMapObject(char character, float x, float y) {
 	switch (character) {
@@ -540,6 +559,12 @@ void GameLayer::loadMapObject(char character, float x, float y) {
 	}
 	case 'b': {
 		Enemy* enemy = new Blob(x, y, getGame());
+		enemies.push_back(enemy);
+		movables.push_back(enemy);
+		break;
+	}
+	case 'o': {
+		Enemy* enemy = generateObstacle(x,y);
 		enemies.push_back(enemy);
 		movables.push_back(enemy);
 		break;

@@ -11,6 +11,7 @@ class MenuLayer;
 
 #include "Enemy.h"
 #include "Blob.h"
+#include "Obstacle.h"
 
 #include "Cookie.h"
 #include "Recolectable.h"
@@ -83,6 +84,8 @@ public:
 
 	void loadMap(string name);
 	void loadMapObject(char character, float x, float y);
+
+	Enemy* generateObstacle(int x, int y);
 
 
 private:
