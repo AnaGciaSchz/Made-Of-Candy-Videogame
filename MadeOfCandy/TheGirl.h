@@ -21,6 +21,8 @@ public:
 	int getLife();
 	bool isDead();
 
+	bool isInvulnerable();
+
 private:
 	//time to wait until the girl moves in Y
 	int timeY;

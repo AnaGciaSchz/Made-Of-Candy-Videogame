@@ -559,7 +559,7 @@ void GameLayer::enemyColisions() {
 
 	//girl and enemy
 	for (auto const& enemy : enemies) {
-		if (girl->isOverlap(enemy) && !enemy->getIsMoving()) {
+		if (girl->isOverlap(enemy) && !enemy->getIsMoving() && !girl->isInvulnerable()) {
 			enemy->attack(girl, angel);
 			enemy->beShoot();
 			textLifes->content = to_string(girl->getLife());

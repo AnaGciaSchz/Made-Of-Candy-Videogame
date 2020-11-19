@@ -95,6 +95,10 @@ void TheGirl::addLife(int life) {
 	lifes+=life;
 }
 
+bool TheGirl::isInvulnerable() {
+	return invulnerableTime > 0;
+}
+
 void TheGirl::loseLife(int damage) {
 	if (invulnerableTime <= 0) {
 		audioDamage->play();
