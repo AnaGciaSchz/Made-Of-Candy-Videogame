@@ -75,9 +75,6 @@ public:
 	int getNumberGirl();
 	int getNumberAngel();
 
-	void loadMap(string name);
-	void loadMapObject(char character, float x, float y);
-
 
 
 private:
@@ -178,14 +175,35 @@ private:
 
 	int mapWidth;
 
+	/**
+	* Message shown in the level
+	*/
 	Actor* message;
+	/**
+	* Attibute to pause the game
+	*/
 	bool pause;
+	/**
+	* Attribute to know if the user wants to quit the message
+	*/
 	bool controlContinue;
 
+	/**
+	* Attribute to know the number os messaged that were shown
+	*/
 	int countMessages;
+	/**
+	* Attribute to know if the game can process controls
+	*/
 	bool canProcess;
+	/**
+	* Time that need to pass to process controls if canProcess == false
+	*/
 	int canProcessTime = 15;
 
+	/**
+	* Attibute to know when the game finished
+	*/
 	bool controlFinish;
 
 	/**
@@ -266,6 +284,18 @@ void finalOfLevelCollision();
 */
 void cookieColisions();
 
-};
+/**
+* Method to save an enemy
+*/
+void saveEnemy(Enemy* enemy);
 
+/**
+* Method to load the map
+*/
+void loadMap(string name);
+/**
+* Method to load the elements of the map
+*/
+void loadMapObject(char character, float x, float y);
+};
 

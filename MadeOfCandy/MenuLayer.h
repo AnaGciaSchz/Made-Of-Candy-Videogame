@@ -24,6 +24,8 @@ public:
 	void selectGirl(int numberGirl);
 	void selectAngel(int numberAngel);
 
+	void unlockEditMode();
+
 private:
 	Background* backgroundMenu;
 	Background* backgroundEdit;
@@ -48,6 +50,7 @@ private:
 
 	bool controlContinue;
 	bool editMode;
+	bool editBlocked;
 };
 
 

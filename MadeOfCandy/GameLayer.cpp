@@ -279,6 +279,21 @@ void GameLayer::mouseToControls(SDL_Event event) {
 }
 
 
+void GameLayer::setNumberGirl(int numberGirl) {
+	this->numberGirl = numberGirl;
+}
+void GameLayer::setNumberAngel(int numberAngel) {
+	this->numberAngel = numberAngel;
+}
+
+int GameLayer::getNumberGirl() {
+	return numberGirl;
+}
+int GameLayer::getNumberAngel() {
+	return numberAngel;
+}
+
+/////////////////////////////////////////////////////PRIVATE METHODS/////////////////////////////////////////////////////
 void GameLayer::loadMap(string name) {
 	char character;
 	string line;
@@ -302,7 +317,6 @@ void GameLayer::loadMap(string name) {
 	streamFile.close();
 }
 
-
 void GameLayer::loadMapObject(char character, float x, float y) {
 	switch (character) {
 	case '1': {
@@ -314,39 +328,27 @@ void GameLayer::loadMapObject(char character, float x, float y) {
 		break;
 	}
 	case 'b': {
-		Enemy* enemy = new Blob(x, y, getGame());
-		enemies.push_back(enemy);
-		movables.push_back(enemy);
+		saveEnemy(new Blob(x, y, getGame()));
 		break;
 	}
 	case 'o': {
-		Enemy* enemy = generateObstacle(x, y);
-		enemies.push_back(enemy);
-		movables.push_back(enemy);
+		saveEnemy(generateObstacle(x, y));
 		break;
 	}
 	case 'J': {
-		Enemy* enemy = new Jasper(x, y, getGame());
-		enemies.push_back(enemy);
-		movables.push_back(enemy);
+		saveEnemy(new Jasper(x, y, getGame()));
 		break;
 	}
 	case 'h': {
-		Enemy* enemy = new Halloween(x, y, getGame());
-		enemies.push_back(enemy);
-		movables.push_back(enemy);
+		saveEnemy(new Halloween(x, y, getGame()));
 		break;
 	}
 	case 'c': {
-		Enemy* enemy = new Christmas(x, y, getGame());
-		enemies.push_back(enemy);
-		movables.push_back(enemy);
+		saveEnemy(new Christmas(x, y, getGame()));
 		break;
 	}
 	case 'B': {
-		Enemy* enemy = new BlobMinion(x, y, getGame());
-		enemies.push_back(enemy);
-		movables.push_back(enemy);
+		saveEnemy(new BlobMinion(x, y, getGame()));
 		break;
 	}
 	case 'C': {
@@ -371,22 +373,6 @@ void GameLayer::loadMapObject(char character, float x, float y) {
 	}
 	}
 }
-
-void GameLayer::setNumberGirl(int numberGirl) {
-	this->numberGirl = numberGirl;
-}
-void GameLayer::setNumberAngel(int numberAngel) {
-	this->numberAngel = numberAngel;
-}
-
-int GameLayer::getNumberGirl() {
-	return numberGirl;
-}
-int GameLayer::getNumberAngel() {
-	return numberAngel;
-}
-
-/////////////////////////////////////////////////////PRIVATE METHODS/////////////////////////////////////////////////////
 
 void GameLayer::reinit() {
 	controlFinish = false;
@@ -658,6 +644,7 @@ void GameLayer::finalOfLevelCollision() {
 					message = new Actor("res/interface/WonRecolectables.png", WIDTH * 0.5, HEIGHT * 0.5,
 						WIDTH, HEIGHT, 0, 0, getGame());
 					countMessages = 8;
+					menuLayer->unlockEditMode();
 				}
 				else {
 					message = new Actor("res/interface/Won.png", WIDTH * 0.5, HEIGHT * 0.5,
@@ -670,6 +657,11 @@ void GameLayer::finalOfLevelCollision() {
 		}
 	}
 
+}
+
+void GameLayer::saveEnemy(Enemy* enemy) {
+	enemies.push_back(enemy);
+	movables.push_back(enemy);
 
 }
 
