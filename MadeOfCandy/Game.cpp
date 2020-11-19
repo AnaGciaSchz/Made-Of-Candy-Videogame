@@ -16,6 +16,11 @@ Game::Game() {
 	}
 	SDL_SetWindowTitle(window, "Made of Candy");
 
+	//set window icon
+	SDL_Surface* surface = IMG_Load("res/cookies/cookie_5.png");
+	SDL_SetWindowIcon(window, surface);
+	SDL_FreeSurface(surface);
+
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
 
 	gameLayer = new GameLayer(this);
@@ -97,10 +102,8 @@ void Game::changeFont(TTF_Font* font) {
 
 SDL_Texture* Game::getTexture(string filename) {
 	if (mapTextures.find(filename) != mapTextures.end()) {
-		cout << "Cached: " << filename << endl;
 	}
 	else {
-		cout << "Not cached: " << filename << endl;
 		SDL_Surface* surface = IMG_Load(filename.c_str());
 		SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
 		mapTextures[filename] = texture;
