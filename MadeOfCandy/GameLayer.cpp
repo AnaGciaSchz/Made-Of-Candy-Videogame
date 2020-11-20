@@ -165,6 +165,7 @@ void GameLayer::keysToControls(SDL_Event event) {
 	if (event.type == SDL_KEYDOWN) {
 		if (pause) {
 			controlContinue = true;
+			return;
 		}
 		int code = event.key.keysym.sym;
 
@@ -597,6 +598,8 @@ void GameLayer::enemyColisions() {
 	for (auto const& delEnemy : deleteEnemies) {
 		if (delEnemy->beDeleted()) {
 			enemies.remove(delEnemy);
+			movables.remove(delEnemy);
+			delete delEnemy;
 		}
 	}
 	deleteEnemies.clear();
@@ -618,6 +621,7 @@ void GameLayer::cookieColisions() {
 
 			if (!eInList) {
 				deleteCookies.push_back(cookie);
+				movables.remove(cookie);
 			}
 		}
 	}
