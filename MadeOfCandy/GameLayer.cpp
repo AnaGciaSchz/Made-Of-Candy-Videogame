@@ -24,6 +24,9 @@ void GameLayer::init() {
 	
 
 	emptyLists();
+	delete angel;
+	delete girl;
+
 	loadMap("res/world/maps/" + to_string(getGame()->getCurrentLevel()) + ".txt");
 
 	rayIcon = new Actor("res/icons/CelestialRayIcon.png",
