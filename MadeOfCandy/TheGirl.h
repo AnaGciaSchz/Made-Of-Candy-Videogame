@@ -11,6 +11,7 @@ class TheGirl : public Actor
 {
 public:
 	TheGirl(int numberGirl, int timeY, float v, int pathX, int pathY, Game* game);
+	~TheGirl();
 
 	void update();
 	void draw() override; 

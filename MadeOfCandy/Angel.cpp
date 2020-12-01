@@ -40,6 +40,10 @@ Angel::Angel(int numberAngel,float pathX, float pathY, Game* game)
 	paralizedTime = 60;
 }
 
+Angel::~Angel() {
+	delete audioRay;
+}
+
 void Angel::update() {
 	if (!paralyzedAngel) {
 		animation->update();

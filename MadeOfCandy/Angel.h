@@ -14,6 +14,7 @@ class Angel : public Actor
 {
 public:
 	Angel(int numberAngel,float pathX, float pathY, Game* game);
+	~Angel();
 
 	void update();
 	void draw() override;

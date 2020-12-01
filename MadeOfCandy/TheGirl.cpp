@@ -31,6 +31,11 @@ TheGirl::TheGirl(int numberGirl,int timeY,float v, int pathX, int pathY, Game* g
 
 }
 
+TheGirl::~TheGirl() {
+	delete audioDamage;
+	delete audioAddLife;
+}
+
 void TheGirl::update() {
 	aRight->update();
 	actualTimeY--;
